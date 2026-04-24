@@ -2,117 +2,107 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ismail Syed | Professional Writer</title>
+  <title>Ismail Syed | Professional Content Writer</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg:#0f172a; --card:#1e293b; --text:#e2e8f0; --muted:#94a3b8; --brand:#38bdf8; --border:#334155;
-    }
-    .light{
-      --bg:#f8fafc; --card:#ffffff; --text:#0f172a; --muted:#475569; --brand:#0284c7; --border:#e2e8f0;
-    }
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Poppins,system-ui,Arial;background:var(--bg);color:var(--text)}
-    header{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;padding:16px 28px;background:rgba(2,6,23,.8);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
-    header h1{margin:0;color:var(--brand);font-size:20px}
-    nav a{margin-left:16px;color:var(--muted);text-decoration:none;font-weight:500}
-    .btn{border:1px solid var(--border);padding:8px 12px;border-radius:10px;background:transparent;color:var(--text);cursor:pointer}
-    .btn.primary{background:var(--brand);color:#00131a;border:none}
-    .container{max-width:1100px;margin:auto;padding:0 20px}
-    .hero{padding:80px 0;text-align:center}
-    .hero h2{font-size:42px;margin:0 0 10px;color:var(--brand)}
-    .hero p{color:var(--muted);max-width:700px;margin:0 auto 20px}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
-    .card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;box-shadow:0 10px 25px rgba(0,0,0,.15)}
-    .card h3{margin:0 0 8px;color:var(--brand)}
-    .card p{color:var(--muted)}
-    .section{padding:40px 0}
-    footer{margin-top:30px;padding:20px;border-top:1px solid var(--border);text-align:center;color:var(--muted)}
-    .link{color:var(--brand);text-decoration:none;font-weight:600}
-    /* modal */
-    .modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;padding:20px}
-    .modal.open{display:flex}
-    .modal-content{max-width:800px;width:100%;background:var(--card);border-radius:16px;border:1px solid var(--border);padding:20px;max-height:80vh;overflow:auto}
-    .modal h2{margin-top:0;color:var(--brand)}
-    .top-actions{display:flex;gap:10px;align-items:center}
+    :root{--bg:#0f172a;--card:#1e293b;--text:#e2e8f0;--muted:#94a3b8;--brand:#38bdf8;--border:#334155}
+    .light{--bg:#f8fafc;--card:#ffffff;--text:#0f172a;--muted:#475569;--brand:#0284c7;--border:#e2e8f0}
+    body{margin:0;font-family:Poppins;background:var(--bg);color:var(--text)}
+    header{display:flex;justify-content:space-between;padding:15px 30px;border-bottom:1px solid var(--border)}
+    header h1{color:var(--brand)}
+    nav a{margin:0 10px;color:var(--muted);text-decoration:none}
+    .btn{padding:8px 12px;border-radius:8px;border:none;cursor:pointer}
+    .primary{background:var(--brand);color:black}
+    .section{padding:40px}
+    .hero{text-align:center}
+    .hero h2{font-size:42px;color:var(--brand)}
+    .hero p{color:var(--muted);max-width:700px;margin:auto}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+    .card{background:var(--card);padding:20px;border-radius:12px}
+    footer{text-align:center;padding:20px;color:var(--muted)}
   </style>
 </head>
 <body>
-  <header>
-    <h1>Ismail Writes</h1>
-    <div class="top-actions">
-      <nav>
-        <a href="#about">About</a>
-        <a href="#blogs">Blogs</a>
-        <a href="#contact">Contact</a>
-      </nav>
-      <button class="btn" onclick="toggleTheme()">Toggle Theme</button>
-      <a class="btn primary" href="resume.pdf" download>Download Resume</a>
-    </div>
-  </header>  <div class="container">
-    <section class="hero">
-      <h2>Professional Content Writer</h2>
-      <p>I create high-quality, SEO-optimized content that builds authority, engages readers, and delivers measurable results for brands.</p>
-      <a href="#blogs" class="btn primary">View My Work</a>
-    </section><section id="about" class="section">
+<header>
+  <h1>Ismail Writes</h1>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#blogs">Blogs</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header><section class="hero section">
+  <a href="mailto:mohammadismailsyed17@gmail.com" style="display:inline-block;margin-top:15px;padding:10px 18px;background:#38bdf8;color:black;border-radius:8px;text-decoration:none;font-weight:600;">Hire Me</a>
+  <a href="mailto:mohammadismailsyed17@gmail.com?subject=Hiring%20Inquiry&body=Hi%20Ismail,%20I%20would%20like%20to%20discuss%20a%20project%20with%20you." style="display:inline-block;margin-top:10px;margin-left:10px;padding:10px 18px;background:#22c55e;color:black;border-radius:8px;text-decoration:none;font-weight:600;">Email Me</a>
+  <h2>I Turn Ideas Into High-Impact Content That Drives Results</h2>
+  <p>Professional blog writing, SEO content, and strategic storytelling that helps brands grow, engage audiences, and build authority in competitive markets.</p>
+</section><section id="about" class="section">
   <div class="card">
     <h3>About Me</h3>
-    <p>I specialize in blog writing, SEO content, and long-form articles. My work focuses on clarity, research depth, and reader engagement. I write with purpose—every piece is structured to inform, rank, and convert.</p>
+    <p>I am a results-driven content writer specializing in creating clear, engaging, and SEO-optimized content. My focus is not just writing—but delivering value, improving visibility, and helping businesses communicate effectively with their audience.</p>
   </div>
-</section>
-
-<section id="blogs" class="section">
+</section><section id="services" class="section">
+  <h3>Services</h3>
+  <div class="grid">
+    <div class="card">
+      <h3>Blog Writing</h3>
+      <p>Well-researched, engaging blogs tailored to your audience and industry trends.</p>
+    </div>
+    <div class="card">
+      <h3>SEO Content</h3>
+      <p>Optimized content that improves search rankings and drives organic traffic.</p>
+    </div>
+    <div class="card">
+      <h3>Content Strategy</h3>
+      <p>Structured content planning to align with your business goals and audience needs.</p>
+    </div>
+  </div>
+</section><section id="blogs" class="section">
   <h3>Featured Blogs</h3>
   <div class="grid">
     <div class="card">
       <h3>The Future of AI in Everyday Life</h3>
-      <p>AI is transforming industries, workflows, and daily experiences. From automation to personalization, its impact is accelerating rapidly.</p>
-      <a href="#" class="link" onclick="openBlog('ai')">Read more →</a>
+      <p>Artificial Intelligence is no longer a futuristic concept—it is actively reshaping how we live and work. From voice assistants to predictive analytics, AI is improving efficiency and personalization across industries.Businesses are leveraging AI to automate processes, reduce costs, and enhance decision-making. In healthcare, AI helps in early diagnosis; in marketing, it predicts consumer behavior. However, with rapid adoption comes responsibility. Ethical concerns such as data privacy, bias, and transparency must be addressed.
+
+The future of AI lies in balanced integration—where innovation meets responsibility. Companies that adopt AI strategically while maintaining ethical standards will lead the next wave of transformation.</p> </div>
+
+<div class="card">
+  <h3>Why Personal Branding Matters More Than Ever</h3>
+  <p>In today’s digital-first world, personal branding is not optional—it is essential. Whether you are a student, professional, or entrepreneur, your online presence defines how others perceive your expertise.
+
+A strong personal brand builds credibility, trust, and visibility. It helps you stand out in competitive markets and opens doors to new opportunities. Consistent content creation, clarity in messaging, and authenticity are key elements of successful branding.
+
+Professionals who invest in their personal brand are more likely to attract clients, collaborations, and career growth. In a crowded digital space, your brand is your identity—and your strongest asset.</p> </div>
+
+<div class="card">
+  <h3>How Quality Content Drives Business Growth</h3>
+  <p>Content is one of the most powerful tools for business growth. It goes beyond marketing—it educates, informs, and builds trust with your audience.
+
+High-quality content improves SEO rankings, increases website traffic, and positions your brand as an authority in your niche. Businesses that focus on value-driven content see higher engagement and better conversion rates.
+
+Consistency is crucial. Regular publishing, audience-focused topics, and clear messaging create long-term impact. In a competitive market, businesses that invest in content don’t just survive—they lead.</p> </div>
+
+  </div>
+</section><section id="testimonials" class="section">
+  <h3>Testimonials</h3>
+  <div class="grid">
+    <div class="card">
+      <p>“Ismail delivered high-quality content that improved our blog traffic significantly. His writing is clear, engaging, and well-researched.”</p>
+      <strong>— Client, Tech Startup</strong>
     </div>
     <div class="card">
-      <h3>Why Personal Branding Matters</h3>
-      <p>Your personal brand defines how the world sees your expertise. Strong positioning creates long-term opportunities.</p>
-      <a href="#" class="link" onclick="openBlog('branding')">Read more →</a>
+      <p>“Professional and reliable. The articles were SEO-optimized and aligned perfectly with our brand voice.”</p>
+      <strong>— Marketing Manager</strong>
     </div>
     <div class="card">
-      <h3>How Content Drives Business Growth</h3>
-      <p>Strategic content improves visibility, trust, and conversions—making it a core business asset.</p>
-      <a href="#" class="link" onclick="openBlog('content')">Read more →</a>
+      <p>“Great communication and fast turnaround. The content helped us increase engagement and conversions.”</p>
+      <strong>— Small Business Owner</strong>
     </div>
   </div>
-</section>
-
-<section id="contact" class="section">
+</section><section id="contact" class="section"> class="section">
   <div class="card">
     <h3>Contact</h3>
-    <p>Email: <a class="link" href="mailto:mohammadismailsyed17@gmail.com">mohammadismailsyed17@gmail.com</a></p>
+    <p>Email: mohammadismailsyed17@gmail.com</p>
   </div>
-</section>
-
-  </div>  <footer>© 2026 Ismail Writes • All Rights Reserved</footer>  <!-- Blog Modal -->  <div id="modal" class="modal" onclick="closeModal(event)">
-    <div class="modal-content" id="modalContent"></div>
-  </div>  <script>
-    function toggleTheme(){ document.body.classList.toggle('light'); }
-
-    const blogs = {
-      ai: `<h2>The Future of AI in Everyday Life</h2>
-      <p>Artificial Intelligence is rapidly integrating into everyday systems—from smart assistants to predictive healthcare. Businesses leveraging AI gain efficiency and competitive advantage, while individuals benefit from personalization and automation.</p>
-      <p>However, responsible adoption is key. Ethical considerations, transparency, and data privacy will define how successfully AI scales in society.</p>`,
-
-      branding: `<h2>Why Personal Branding Matters</h2>
-      <p>In a digital-first world, personal branding is not optional. It communicates credibility, builds trust, and differentiates you in saturated markets.</p>
-      <p>Professionals who consistently create content and showcase expertise become industry authorities over time.</p>`,
-
-      content: `<h2>How Content Drives Business Growth</h2>
-      <p>Content marketing is one of the most cost-effective growth strategies. High-quality blogs improve SEO rankings, educate audiences, and guide purchasing decisions.</p>
-      <p>Brands investing in consistent, value-driven content see stronger engagement and long-term ROI.</p>`
-    };
-
-    function openBlog(key){
-      document.getElementById('modalContent').innerHTML = blogs[key];
-      document.getElementById('modal').classList.add('open');
-    }
-
-    function closeModal(e){ if(e.target.id==='modal'){ document.getElementById('modal').classList.remove('open'); }}
-  </script></body>
+</section><footer>© 2026 Ismail Writes</footer></body>
 </html>
