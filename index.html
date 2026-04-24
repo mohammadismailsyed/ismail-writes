@@ -1,108 +1,74 @@
 <!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ismail Syed | Professional Content Writer</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root{--bg:#0f172a;--card:#1e293b;--text:#e2e8f0;--muted:#94a3b8;--brand:#38bdf8;--border:#334155}
-    .light{--bg:#f8fafc;--card:#ffffff;--text:#0f172a;--muted:#475569;--brand:#0284c7;--border:#e2e8f0}
-    body{margin:0;font-family:Poppins;background:var(--bg);color:var(--text)}
-    header{display:flex;justify-content:space-between;padding:15px 30px;border-bottom:1px solid var(--border)}
-    header h1{color:var(--brand)}
-    nav a{margin:0 10px;color:var(--muted);text-decoration:none}
-    .btn{padding:8px 12px;border-radius:8px;border:none;cursor:pointer}
-    .primary{background:var(--brand);color:black}
-    .section{padding:40px}
-    .hero{text-align:center}
-    .hero h2{font-size:42px;color:var(--brand)}
-    .hero p{color:var(--muted);max-width:700px;margin:auto}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
-    .card{background:var(--card);padding:20px;border-radius:12px}
-    footer{text-align:center;padding:20px;color:var(--muted)}
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ismail Syed | Premium Content Writer</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b1120;--card:#111827;--text:#e5e7eb;--muted:#9ca3af;--brand:#22c55e}
+body{margin:0;font-family:Poppins;background:var(--bg);color:var(--text);scroll-behavior:smooth}
+header{display:flex;justify-content:space-between;padding:20px 40px;position:sticky;top:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(10px)}
+header h1{color:var(--brand)}
+nav a{margin:0 12px;color:var(--muted);text-decoration:none;transition:0.3s}
+nav a:hover{color:var(--brand)}
+.section{padding:60px 40px}
+.hero{text-align:center}
+.hero h2{font-size:48px;color:var(--brand);animation:fadeIn 1s ease}
+.hero p{color:var(--muted);max-width:700px;margin:auto}
+.btn{display:inline-block;margin-top:20px;padding:12px 22px;background:var(--brand);color:black;border-radius:10px;text-decoration:none;font-weight:600;transition:0.3s}
+.btn:hover{transform:scale(1.05);box-shadow:0 10px 25px rgba(0,0,0,0.3)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:25px}
+.card{background:var(--card);padding:25px;border-radius:16px;transition:0.3s}
+.card:hover{transform:translateY(-8px);box-shadow:0 15px 30px rgba(0,0,0,0.4)}
+footer{text-align:center;padding:20px;color:var(--muted)}
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+</style>
 </head>
 <body>
 <header>
-  <h1>Ismail Writes</h1>
-  <nav>
-    <a href="#about">About</a>
-    <a href="#services">Services</a>
-    <a href="#blogs">Blogs</a>
-    <a href="#contact">Contact</a>
-  </nav>
+<h1>Ismail Writes</h1>
+<nav>
+<a href="#about">About</a>
+<a href="#services">Services</a>
+<a href="#blogs">Blogs</a>
+<a href="#contact">Contact</a>
+</nav>
 </header><section class="hero section">
-  <a href="mailto:mohammadismailsyed17@gmail.com" style="display:inline-block;margin-top:15px;padding:10px 18px;background:#38bdf8;color:black;border-radius:8px;text-decoration:none;font-weight:600;">Hire Me</a>
-  <a href="mailto:mohammadismailsyed17@gmail.com?subject=Hiring%20Inquiry&body=Hi%20Ismail,%20I%20would%20like%20to%20discuss%20a%20project%20with%20you." style="display:inline-block;margin-top:10px;margin-left:10px;padding:10px 18px;background:#22c55e;color:black;border-radius:8px;text-decoration:none;font-weight:600;">Email Me</a>
-  <h2>I Turn Ideas Into High-Impact Content That Drives Results</h2>
-  <p>Professional blog writing, SEO content, and strategic storytelling that helps brands grow, engage audiences, and build authority in competitive markets.</p>
+<h2>Premium Content That Builds Authority & Drives Results</h2>
+<p>I help brands grow with high-quality blogs, SEO content, and strategic storytelling designed to convert readers into customers.</p>
+<a href="mailto:mohammadismailsyed17@gmail.com" class="btn">Hire Me</a>
 </section><section id="about" class="section">
-  <div class="card">
-    <h3>About Me</h3>
-    <p>I am a results-driven content writer specializing in creating clear, engaging, and SEO-optimized content. My focus is not just writing—but delivering value, improving visibility, and helping businesses communicate effectively with their audience.</p>
-  </div>
+<div class="card">
+<h3>About Me</h3>
+<p>I specialize in creating impactful, SEO-driven content that not only engages readers but also delivers measurable business results.</p>
+</div>
 </section><section id="services" class="section">
-  <h3>Services</h3>
-  <div class="grid">
-    <div class="card">
-      <h3>Blog Writing</h3>
-      <p>Well-researched, engaging blogs tailored to your audience and industry trends.</p>
-    </div>
-    <div class="card">
-      <h3>SEO Content</h3>
-      <p>Optimized content that improves search rankings and drives organic traffic.</p>
-    </div>
-    <div class="card">
-      <h3>Content Strategy</h3>
-      <p>Structured content planning to align with your business goals and audience needs.</p>
-    </div>
-  </div>
+<h2>Services</h2>
+<div class="grid">
+<div class="card"><h3>Blog Writing</h3><p>Engaging, research-backed blogs tailored to your audience.</p></div>
+<div class="card"><h3>SEO Content</h3><p>Optimized content designed to rank higher on search engines.</p></div>
+<div class="card"><h3>Content Strategy</h3><p>Strategic planning aligned with your brand goals.</p></div>
+</div>
 </section><section id="blogs" class="section">
-  <h3>Featured Blogs</h3>
-  <div class="grid">
-    <div class="card">
-      <h3>The Future of AI in Everyday Life</h3>
-      <p>Artificial Intelligence is no longer a futuristic concept—it is actively reshaping how we live and work. From voice assistants to predictive analytics, AI is improving efficiency and personalization across industries.Businesses are leveraging AI to automate processes, reduce costs, and enhance decision-making. In healthcare, AI helps in early diagnosis; in marketing, it predicts consumer behavior. However, with rapid adoption comes responsibility. Ethical concerns such as data privacy, bias, and transparency must be addressed.
-
-The future of AI lies in balanced integration—where innovation meets responsibility. Companies that adopt AI strategically while maintaining ethical standards will lead the next wave of transformation.</p> </div>
-
+<h2>Featured Blogs</h2>
+<div class="grid">
 <div class="card">
-  <h3>Why Personal Branding Matters More Than Ever</h3>
-  <p>In today’s digital-first world, personal branding is not optional—it is essential. Whether you are a student, professional, or entrepreneur, your online presence defines how others perceive your expertise.
-
-A strong personal brand builds credibility, trust, and visibility. It helps you stand out in competitive markets and opens doors to new opportunities. Consistent content creation, clarity in messaging, and authenticity are key elements of successful branding.
-
-Professionals who invest in their personal brand are more likely to attract clients, collaborations, and career growth. In a crowded digital space, your brand is your identity—and your strongest asset.</p> </div>
-
+<h3>The Future of AI</h3>
+<p>AI is transforming industries through automation, smarter decision-making, and personalization.</p>
+</div>
 <div class="card">
-  <h3>How Quality Content Drives Business Growth</h3>
-  <p>Content is one of the most powerful tools for business growth. It goes beyond marketing—it educates, informs, and builds trust with your audience.
-
-High-quality content improves SEO rankings, increases website traffic, and positions your brand as an authority in your niche. Businesses that focus on value-driven content see higher engagement and better conversion rates.
-
-Consistency is crucial. Regular publishing, audience-focused topics, and clear messaging create long-term impact. In a competitive market, businesses that invest in content don’t just survive—they lead.</p> </div>
-
-  </div>
-</section><section id="testimonials" class="section">
-  <h3>Testimonials</h3>
-  <div class="grid">
-    <div class="card">
-      <p>“Ismail delivered high-quality content that improved our blog traffic significantly. His writing is clear, engaging, and well-researched.”</p>
-      <strong>— Client, Tech Startup</strong>
-    </div>
-    <div class="card">
-      <p>“Professional and reliable. The articles were SEO-optimized and aligned perfectly with our brand voice.”</p>
-      <strong>— Marketing Manager</strong>
-    </div>
-    <div class="card">
-      <p>“Great communication and fast turnaround. The content helped us increase engagement and conversions.”</p>
-      <strong>— Small Business Owner</strong>
-    </div>
-  </div>
-</section><section id="contact" class="section"> class="section">
-  <div class="card">
-    <h3>Contact</h3>
-    <p>Email: mohammadismailsyed17@gmail.com</p>
-  </div>
+<h3>Personal Branding</h3>
+<p>Build authority and stand out with a strong personal brand.</p>
+</div>
+<div class="card">
+<h3>Content Growth</h3>
+<p>Quality content is the backbone of long-term business success.</p>
+</div>
+</div>
+</section><section id="contact" class="section">
+<div class="card">
+<h3>Contact</h3>
+<p>Email: mohammadismailsyed17@gmail.com</p>
+</div>
 </section><footer>© 2026 Ismail Writes</footer></body>
 </html>
