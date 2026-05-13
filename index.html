@@ -1,74 +1,658 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html><style>
+html{scroll-behavior:smooth;}
+
+.card{
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-8px);
+}
+
+.fadein{
+animation:fadeIn 2s ease;
+}
+
+@keyframes fadeIn{
+from{opacity:0;transform:translateY(20px);} 
+to{opacity:1;transform:translateY(0);}
+}
+
+.dark-mode{
+background:#111;
+color:white;
+}
+
+.dark-mode .card,
+.dark-mode .highlight{
+background:#222;
+color:white;
+}
+
+
+/* Desktop & Laptop Optimization */
+.container,
+section,
+nav,
+header,
+footer {
+  width: 100%;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+img,
+iframe,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+input,
+textarea,
+button {
+  font-size: 16px;
+}
+
+/* Large Desktop Screens */
+@media (min-width: 1200px) {
+  section {
+    max-width: 1300px;
+  }
+
+  header h1 {
+    font-size: 56px;
+  }
+
+  header p {
+    font-size: 22px;
+  }
+
+  .card {
+    padding: 25px;
+  }
+}
+
+/* Tablets */
+@media (max-width: 992px) {
+  header h1 {
+    font-size: 42px;
+  }
+
+  nav div {
+    justify-content: center;
+  }
+}
+
+/* Mobile Devices */
+@media (max-width: 768px) {
+  header {
+    padding: 40px 15px;
+  }
+
+  header h1 {
+    font-size: 32px;
+  }
+
+  header p {
+    font-size: 16px;
+  }
+
+  h2 {
+    font-size: 26px;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  nav a {
+    font-size: 14px;
+  }
+
+  #searchInput {
+    width: 100%;
+  }
+
+  iframe {
+    height: 250px;
+  }
+}
+
+/* Ultra Small Screens */
+@media (max-width: 480px) {
+  header h1 {
+    font-size: 26px;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+
+  .card,
+  .highlight {
+    padding: 15px;
+  }
+
+  button {
+    width: 100%;
+  }
+}
+</style><html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Ismail Syed | Premium Content Writer</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-<style>
-:root{--bg:#050505;--card:#0f172a;--text:#e5e7eb;--muted:#6b7280;--brand:#00ffcc;--accent:#00e5ff;--border:#111827}
-body{margin:0;font-family:Poppins;background:var(--bg);color:var(--text);scroll-behavior:smooth}
-header{display:flex;justify-content:space-between;padding:20px 40px;position:sticky;top:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(10px)}
-header h1{color:var(--brand)}
-nav a{margin:0 12px;color:var(--muted);text-decoration:none;transition:0.3s}
-nav a:hover{color:var(--brand)}
-.section{padding:60px 40px}
-.hero{text-align:center}
-.hero h2{font-size:48px;color:var(--brand);animation:fadeIn 1s ease}
-.hero p{color:var(--muted);max-width:700px;margin:auto}
-.btn{display:inline-block;margin-top:20px;padding:12px 22px;background:var(--brand);color:black;border-radius:10px;text-decoration:none;font-weight:600;transition:0.3s}
-.btn:hover{transform:scale(1.05);box-shadow:0 10px 25px rgba(0,0,0,0.3)}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:25px}
-.card{background:var(--card);padding:25px;border-radius:16px;transition:0.3s}
-.card:hover{transform:translateY(-8px);box-shadow:0 15px 30px rgba(0,0,0,0.4)}
-footer{text-align:center;padding:20px;color:var(--muted)}
-@keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-</style>
-</head>
-<body>
-<header>
-<h1>Ismail Writes</h1>
-<nav>
-<a href="#about">About</a>
-<a href="#services">Services</a>
-<a href="#blogs">Blogs</a>
-<a href="#contact">Contact</a>
-</nav>
-</header><section class="hero section">
-<h2>Premium Content That Builds Authority & Drives Results</h2>
-<p>I help brands grow with high-quality blogs, SEO content, and strategic storytelling designed to convert readers into customers.</p>
-<a href="mailto:mohammadismailsyed17@gmail.com" class="btn">Hire Me</a>
-</section><section id="about" class="section">
+<title>Organic Farming</title><style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #f4fff4;
+  color: #222;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+header {
+  background: linear-gradient(to right, #1b5e20, #4caf50);
+  color: white;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 42px;
+  margin-bottom: 15px;
+}
+
+header p {
+  font-size: 18px;
+  max-width: 700px;
+  margin: auto;
+}
+
+section {
+  padding: 50px 20px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+h2 {
+  color: #1b5e20;
+  margin-bottom: 20px;
+  font-size: 32px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.card h3 {
+  margin-bottom: 10px;
+  color: #2e7d32;
+}
+
+.highlight {
+  background: #e8f5e9;
+  padding: 20px;
+  border-left: 6px solid #2e7d32;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+footer {
+  background: #111;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  margin-top: 30px;
+}
+
+ul {
+  padding-left: 20px;
+}
+
+li {
+  margin-bottom: 10px;
+}
+</style></head><body><nav style="background:#145a32;padding:15px 20px;position:sticky;top:0;z-index:1000;box-shadow:0 2px 10px rgba(0,0,0,0.2);">
+<div style="max-width:1200px;margin:auto;margin-bottom:15px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:center;">
+  <input id="searchInput" type="text" placeholder="🔍 Search sections..." style="padding:12px;width:280px;border:none;border-radius:30px;outline:none;">
+  <button onclick="searchContent()" style="padding:12px 18px;background:white;color:#145a32;border:none;border-radius:30px;cursor:pointer;font-weight:bold;">
+    🔍 Search
+  </button>  <button onclick="voiceSearch()" style="padding:12px 18px;background:white;color:#145a32;border:none;border-radius:30px;cursor:pointer;font-weight:bold;">
+    🎙 Voice Search
+  </button>
+</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;max-width:1200px;margin:auto;">
+    <h2 style="color:white;font-size:28px;">🌱 Organic Farming</h2><div style="display:flex;gap:18px;flex-wrap:wrap;">
+  <a href="#about" style="color:white;text-decoration:none;font-weight:bold;">About</a>
+  <a href="#advantages" style="color:white;text-decoration:none;font-weight:bold;">Advantages</a>
+  <a href="#solutions" style="color:white;text-decoration:none;font-weight:bold;">Solutions</a>
+  <a href="#alternatives" style="color:white;text-decoration:none;font-weight:bold;">Alternatives</a>
+  <a href="#future" style="color:white;text-decoration:none;font-weight:bold;">Future</a>
+  <a href="#videos" style="color:white;text-decoration:none;font-weight:bold;">Videos</a>
+</div>
+
+  </div>
+</nav><div id="loader" style="background:#1b5e20;color:white;padding:15px;text-align:center;font-size:20px;">
+🌱 Loading Organic Farming Website...
+</div><button onclick="toggleDarkMode()" style="position:fixed;bottom:20px;right:20px;padding:12px 18px;border:none;border-radius:30px;background:#1b5e20;color:white;cursor:pointer;z-index:999;">
+🌙 Dark Mode
+</button><header class="fadein">
+  <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=1200&auto=format&fit=crop" alt="Organic Farming" style="width:100%;max-height:420px;object-fit:cover;border-radius:15px;margin-bottom:30px;box-shadow:0 6px 15px rgba(0,0,0,0.3);">
+  <h1>Organic Farming</h1>
+  <p>
+    Healthy Soil, Healthy Food, Healthy Future.
+    Sustainable farming for a greener world.
+  </p>
+</header><section id="about">
+  <h2>🌿 What is Organic Farming?</h2>
+  <p>
+    Organic farming is a natural farming method that avoids harmful chemicals,
+    pesticides, and synthetic fertilizers. It focuses on eco-friendly
+    agricultural practices like composting, crop rotation, and biological pest control.
+  </p>
+</section><section id="advantages">
+  <h2>✅ Advantages of Organic Farming</h2>  <div class="highlight">
+    <p>
+      <strong>Healthy Food:</strong> Organic farming produces food without harmful chemical pesticides and synthetic fertilizers. This helps consumers eat safer and healthier food.
+    </p><br>
+
+<p>
+  <strong>Better Soil Fertility:</strong> Organic farming improves soil quality naturally through composting, crop rotation, and natural nutrients. This keeps the land productive for future generations.
+</p>
+
+<br>
+
+<p>
+  <strong>Environment Protection:</strong> Organic farming reduces pollution in water and soil while protecting biodiversity, insects, birds, and other living organisms.
+</p>
+
+<br>
+
+<p>
+  <strong>Safer for Farmers:</strong> Farmers are less exposed to harmful chemicals, making farming healthier and safer for workers.
+</p>
+
+  </div>
+</section><section id="solutions">
+  <h2>⚠️ Disadvantages of Organic Farming</h2>  <div class="cards"><div class="card">
+  <h3>1. Low Initial Yield</h3>
+  <p>
+    Organic farms may produce lower crop yields during the beginning stages because the soil needs time to recover from chemical farming practices.
+  </p>
+</div>
+
 <div class="card">
-<h3>About Me</h3>
-<p>I specialize in creating impactful, SEO-driven content that not only engages readers but also delivers measurable business results.</p>
+  <h3>2. Pest Management Problems</h3>
+  <p>
+    Since chemical pesticides are avoided, controlling pests and insects becomes more difficult and time-consuming.
+  </p>
 </div>
-</section><section id="services" class="section">
-<h2>Services</h2>
-<div class="grid">
-<div class="card"><h3>Blog Writing</h3><p>Engaging, research-backed blogs tailored to your audience.</p></div>
-<div class="card"><h3>SEO Content</h3><p>Optimized content designed to rank higher on search engines.</p></div>
-<div class="card"><h3>Content Strategy</h3><p>Strategic planning aligned with your brand goals.</p></div>
-</div>
-</section><section id="blogs" class="section">
-<h2>Featured Blogs</h2>
-<div class="grid">
+
 <div class="card">
-<h3>The Future of AI</h3>
-<p>AI is transforming industries through automation, smarter decision-making, and personalization.</p>
+  <h3>3. Higher Production Cost</h3>
+  <p>
+    Organic farming often requires more labor, natural fertilizers, and manual monitoring, increasing production costs.
+  </p>
 </div>
+
 <div class="card">
-<h3>Personal Branding</h3>
-<p>Build authority and stand out with a strong personal brand.</p>
+  <h3>4. Lack of Awareness</h3>
+  <p>
+    Many farmers still lack knowledge about modern organic farming techniques and smart agriculture technologies.
+  </p>
 </div>
+
+  </div><br><br>
+
+  <h2>✅ Solutions for Organic Farming Problems</h2>  <div class="cards"><div class="card">
+  <h3>Solution for Low Yield</h3>
+  <p>
+    Farmers can improve productivity using compost, crop rotation, biofertilizers, vermicompost, and soil improvement techniques.
+  </p>
+</div>
+
 <div class="card">
-<h3>Content Growth</h3>
-<p>Quality content is the backbone of long-term business success.</p>
+  <h3>Solution for Pest Problems</h3>
+  <p>
+    Neem oil sprays, biological pest control, natural repellents, and companion planting can help manage pests naturally.
+  </p>
 </div>
-</div>
-</section><section id="contact" class="section">
+
 <div class="card">
-<h3>Contact</h3>
-<p>Email: mohammadismailsyed17@gmail.com</p>
+  <h3>Solution for High Cost</h3>
+  <p>
+    Government subsidies, online marketplaces, and direct farmer-to-customer selling can reduce financial pressure.
+  </p>
 </div>
-</section><footer>© 2026 Ismail Writes</footer></body>
-</html>
+
+<div class="card">
+  <h3>Solution for Lack of Awareness</h3>
+  <p>
+    Farmer workshops, agricultural training programs, AI guidance systems, and online education platforms can improve awareness.
+  </p>
+</div>
+
+  </div>
+</section><section id="alternatives">
+  <h2>💧 Alternative Modern Farming Methods</h2>  <div class="highlight"><p>
+  <strong>1. Hydroponics Farming:</strong>
+  Hydroponics is a modern farming method where plants are grown without soil by using nutrient-rich water solutions. 
+  The roots directly absorb essential minerals from water, helping plants grow faster and healthier.
+  This method saves large amounts of water compared to traditional farming and is widely used in urban farming,
+  indoor farming, and greenhouse agriculture.
+  
+  <br><br>
+
+  <strong>Advantages:</strong>
+  Faster crop growth, water conservation, less land usage, and reduced soil-borne diseases.
+
+  <br><br>
+
+  <strong>Disadvantages:</strong>
+  High setup cost and dependence on electricity and technology.
+
+  <br><br>
+
+  <strong>Solution:</strong>
+  Government support, affordable smart farming systems, and farmer training can improve hydroponic adoption.
+</p>
+
+<br><br>
+
+<p>
+  <strong>2. Aquaponics Farming:</strong>
+  Aquaponics combines fish farming (aquaculture) with hydroponics. Fish waste naturally provides nutrients for plants,
+  while plants help clean and filter the water for fish. This creates a sustainable ecosystem with minimal waste.
+
+  <br><br>
+
+  <strong>Advantages:</strong>
+  Efficient water recycling, dual income from fish and plants, eco-friendly farming system.
+
+  <br><br>
+
+  <strong>Disadvantages:</strong>
+  Requires technical knowledge and careful monitoring of water quality.
+
+  <br><br>
+
+  <strong>Solution:</strong>
+  AI monitoring systems, farmer education programs, and automated sensors can help maintain balance in the ecosystem.
+</p>
+
+<br><br>
+
+<p>
+  <strong>3. Vertical Farming:</strong>
+  Vertical farming involves growing crops in vertically stacked layers using controlled indoor environments.
+  Artificial lighting, smart irrigation, and climate control technologies help produce crops throughout the year.
+
+  <br><br>
+
+  <strong>Advantages:</strong>
+  Saves space, supports urban farming, reduces transportation costs, and allows year-round production.
+
+  <br><br>
+
+  <strong>Disadvantages:</strong>
+  High electricity usage and expensive infrastructure setup.
+
+  <br><br>
+
+  <strong>Solution:</strong>
+  Solar energy integration, smart LED systems, and government investment can reduce operational costs.
+</p>
+
+  </div>
+</section><section>
+  <h2>📉 Why Organic Farming is Backward?</h2>  <div class="highlight">
+    <ul>
+      <li>Lack of awareness among farmers</li>
+      <li>Slow transition from chemical farming</li>
+      <li>Weak supply chain and marketing</li>
+      <li>High product pricing</li>
+      <li>Limited access to modern technology</li>
+    </ul>
+  </div>
+</section><section>
+  <h2>🚀 How Organic Farming Can Make a Comeback</h2>  <div class="highlight">
+    <ul>
+      <li>Use AI and smart farming technologies</li>
+      <li>Provide farmer education programs</li>
+      <li>Increase government support and subsidies</li>
+      <li>Create better online marketplaces</li>
+      <li>Encourage youth participation in agriculture</li>
+    </ul>
+  </div>
+</section><section id="videos">
+  <h2>🎥 Educational Videos on Organic Farming</h2>  <div class="highlight">
+    <p>
+      <strong>Video 1: Organic Farming Techniques and Benefits</strong><br>
+      Watch here:
+      <a href="https://youtu.be/lRyXlvIJFWI?si=1rttGNcUmOWi_l20" target="_blank">
+        https://youtu.be/lRyXlvIJFWI?si=1rttGNcUmOWi_l20
+      </a>
+    </p><br>
+
+<p>
+  <strong>Video 2: Modern Organic Farming and Sustainable Agriculture</strong><br>
+  Watch here:
+  <a href="https://youtu.be/mDIVpJgjoXQ?si=_QegZOTu4J3wAFtZ" target="_blank">
+    https://youtu.be/mDIVpJgjoXQ?si=_QegZOTu4J3wAFtZ
+  </a>
+</p>
+
+  </div>
+</section><section id="future">
+  <h2>🤖 Future of Organic Farming</h2>  <div class="cards" style="margin-bottom:30px;">
+    <div class="card">
+      <h3>AI Crop Monitoring</h3>
+      <p>Artificial intelligence can monitor crop health and detect diseases early.</p>
+    </div><div class="card">
+  <h3>Smart Irrigation</h3>
+  <p>IoT-based irrigation systems reduce water waste and improve productivity.</p>
+</div>
+
+<div class="card">
+  <h3>Drone Technology</h3>
+  <p>Drones help farmers analyze farms faster and improve decision making.</p>
+</div>
+
+  </div>  <div class="cards" style="margin-bottom:30px;">
+    <div class="card">
+      <h3>📊 Soil Health</h3>
+      <p>Organic farming naturally improves long-term soil fertility.</p>
+    </div><div class="card">
+  <h3>🌍 Environmental Impact</h3>
+  <p>Reduces pollution and protects biodiversity.</p>
+</div>
+
+<div class="card">
+  <h3>📈 Market Demand</h3>
+  <p>Demand for organic products is increasing globally every year.</p>
+</div>
+
+  </div>  <div class="highlight">
+    <h3 style="margin-bottom:15px;color:#1b5e20;">Organic Farming vs Chemical Farming</h3><table style="width:100%;border-collapse:collapse;">
+  <tr style="background:#2e7d32;color:white;">
+    <th style="padding:12px;border:1px solid #ddd;">Organic Farming</th>
+    <th style="padding:12px;border:1px solid #ddd;">Chemical Farming</th>
+  </tr>
+
+  <tr>
+    <td style="padding:12px;border:1px solid #ddd;">Eco-friendly</td>
+    <td style="padding:12px;border:1px solid #ddd;">Causes pollution</td>
+  </tr>
+
+  <tr>
+    <td style="padding:12px;border:1px solid #ddd;">Healthy food</td>
+    <td style="padding:12px;border:1px solid #ddd;">Chemical residue</td>
+  </tr>
+
+  <tr>
+    <td style="padding:12px;border:1px solid #ddd;">Improves soil</td>
+    <td style="padding:12px;border:1px solid #ddd;">Damages soil over time</td>
+  </tr>
+</table>
+
+  </div>  <br>  <div class="highlight">
+    <h3 style="margin-bottom:15px;color:#1b5e20;">Why Organic Farming Matters</h3><p>
+  Organic farming is important because it helps reduce climate change effects, protects human health, preserves soil fertility, and ensures sustainable food production for future generations.
+</p>
+
+  </div>  <br>  <p style="font-size:18px;line-height:1.8;">  <p>
+    Organic farming has the potential to become a major solution for climate change,
+    healthy food production, and sustainable agriculture. With technology,
+    awareness, and proper support, it can shape the future of global farming.
+  </p>
+</section><section>
+  <h2>👨‍🌾 Farmer Success Stories</h2>  <div class="cards">
+    <div class="card">
+      <h3>Ramesh Kumar</h3>
+      <p>
+        After switching to organic farming, soil quality improved and production costs reduced significantly.
+      </p>
+    </div><div class="card">
+  <h3>Sita Devi</h3>
+  <p>
+    Organic farming helped increase demand for farm products and improved income stability.
+  </p>
+</div>
+
+  </div>
+</section><section>
+  <h2>🖼 Organic Farming Gallery</h2>  <div class="cards">
+    <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?q=80&w=600" style="width:100%;border-radius:15px;"><img src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=600" style="width:100%;border-radius:15px;">
+
+<img src="https://images.unsplash.com/photo-1471193945509-9ad0617afabf?q=80&w=600" style="width:100%;border-radius:15px;">
+
+  </div>
+</section><section>
+  <h2>📅 Evolution Timeline</h2>  <div class="highlight">
+    Traditional Farming → Chemical Farming → Organic Farming → AI Smart Farming
+  </div>
+</section><section>
+  <h2>📊 Organic Farming Impact</h2>  <div class="highlight">
+    <p>Soil Improvement</p>
+    <progress value="85" max="100" style="width:100%;height:25px;"></progress><br><br>
+
+<p>Pollution Reduction</p>
+<progress value="70" max="100" style="width:100%;height:25px;"></progress>
+
+<br><br>
+
+<p>Water Saving</p>
+<progress value="60" max="100" style="width:100%;height:25px;"></progress>
+
+  </div>
+</section><section>
+  <h2>❓ Frequently Asked Questions</h2>  <div class="highlight">
+    <p><strong>Is organic farming profitable?</strong><br>Yes, long-term organic farming can become profitable because of growing market demand.</p><br>
+
+<p><strong>Why are organic foods expensive?</strong><br>Organic farming requires more labor and natural farming methods.</p>
+
+<br>
+
+<p><strong>Does organic farming reduce yield?</strong><br>Initially yes, but soil quality improves over time.</p>
+
+  </div>
+</section><section>
+  <h2>🎥 Embedded Educational Videos</h2>  <div class="cards">
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/lRyXlvIJFWI" title="Organic Farming Video" frameborder="0" allowfullscreen style="border-radius:15px;"></iframe><iframe width="100%" height="315" src="https://www.youtube.com/embed/mDIVpJgjoXQ" title="Modern Organic Farming" frameborder="0" allowfullscreen style="border-radius:15px;"></iframe>
+
+  </div>
+</section><section>
+  <h2>💡 Daily Organic Farming Tips</h2>  <div class="highlight" id="tips">
+    Use compost regularly for better soil fertility.
+  </div>
+</section><section>
+  <h2>🌦 Live Farming Weather Info</h2>  <div class="cards">
+    <div class="card">
+      <h3>Temperature</h3>
+      <p>28°C</p>
+    </div><div class="card">
+  <h3>Humidity</h3>
+  <p>65%</p>
+</div>
+
+<div class="card">
+  <h3>Rain Chances</h3>
+  <p>40%</p>
+</div>
+
+  </div>
+</section><section>
+  <h2>🛒 Organic Marketplace Idea</h2>  <div class="highlight">
+    Farmers can directly sell vegetables, fruits, grains, and organic fertilizers to customers through online marketplaces.
+  </div>
+</section><section>
+  <h2>📜 Organic Certification</h2>  <div class="highlight">
+    Government organic certifications help farmers gain trust and increase product value in the market.
+  </div>
+</section><section>
+  <h2>🌐 Multi-language Support</h2>  <div class="highlight">
+    Future versions of this website can support English, Hindi, and Telugu for wider farmer accessibility.
+  </div>
+</section><section>
+  <h2>🤖 AI Farming Assistant</h2>  <div class="highlight">
+    Future AI chatbots can help farmers identify crop diseases, recommend fertilizers, and improve farming decisions.
+  </div>
+</section><section>
+  <h2>📩 Contact Us</h2>  <div class="card">
+    <input type="text" placeholder="Your Name" style="width:100%;padding:12px;margin-bottom:15px;border-radius:10px;border:1px solid #ccc;"><input type="email" placeholder="Your Email" style="width:100%;padding:12px;margin-bottom:15px;border-radius:10px;border:1px solid #ccc;">
+
+<textarea placeholder="Your Message" style="width:100%;padding:12px;height:120px;border-radius:10px;border:1px solid #ccc;"></textarea>
+
+<br><br>
+
+<button style="padding:12px 20px;background:#1b5e20;color:white;border:none;border-radius:10px;cursor:pointer;">
+  Submit
+</button>
+
+  </div>
+</section><section>
+  <h2>🌍 Join the Organic Movement</h2>  <div class="highlight">
+    Support sustainable agriculture, healthy food production, and environmental protection by encouraging organic farming practices.
+  </div>
+</section><section>
+  <h2>🎤 Voice Farming Assistant</h2>
+  <div class="highlight">
+    Farmers can use future voice assistants to ask farming questions in local languages for easier accessibility.
+  </div>
+</section><section>
+  <h2>🦠 AI Plant Disease Detection</h2>
+  <div class="card">
+    <p>Upload crop images in future versions to detect diseases and get organic treatment suggestions.</p>
+    <input type="file" style="margin-top:15px;">
+  </div>
+</section><section>
+  <h2>💰 Live Crop Prices</h2>
+  <div class="cards">
+    <div class="card"><h3>Rice</h3><p>₹2200 / Quintal</p></div>
+    <div class="card"><h3>Tomato</h3><p>₹35 / Kg</p></div>
+    <div class="card"><h3>Wheat</h3><p>₹2400 / Quintal</p></div>
+  </div>
+</section><section>
+  <h2>🧠 Organic Farming Quiz</h2>
+  <div class="highlight">
+    <p><strong>Question:</strong> Which natural product is commonly us
