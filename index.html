@@ -1,340 +1,571 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Organic Farming - AI Beta</title>
-<style>
-/* Smooth Scrolling & Base Styles */
-html { scroll-behavior: smooth; }
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Organic Farming Academy</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap');
 
-/* 🌟 ANIMATED BACKGROUND 🌟 */
-body {
-  background: linear-gradient(-45deg, #f4fff4, #d5edd6, #b7e4b9, #e8f5e9);
-  background-size: 400% 400%;
-  animation: gradientBG 15s ease infinite;
-  color: #222;
-  line-height: 1.6;
-  overflow-x: hidden;
-  position: relative;
-}
+        /* --- GLOBAL STYLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
 
-@keyframes gradientBG {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
+        body {
+            background-color: #f8faf8;
+            color: #333;
+            overflow-x: hidden;
+        }
 
-/* 🚧 INCOMPLETE BANNER 🚧 */
-.incomplete-banner {
-  background: #ffcc00;
-  color: #333;
-  text-align: center;
-  padding: 10px;
-  font-weight: bold;
-  font-size: 14px;
-  position: sticky;
-  top: 0;
-  z-index: 2000;
-  letter-spacing: 1px;
-  animation: flashWarning 2s infinite alternate;
-}
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
 
-@keyframes flashWarning {
-  from { background: #ffcc00; }
-  to { background: #ffaa00; }
-}
+        nav h2 {
+            color: #2e7d32;
+            font-weight: 800;
+        }
 
-/* Header & Nav */
-header {
-  background: linear-gradient(rgba(27, 94, 32, 0.8), rgba(76, 175, 80, 0.8)), url('https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=1200&auto=format&fit=crop') center/cover;
-  color: white;
-  padding: 80px 20px;
-  text-align: center;
-  border-bottom: 5px solid #ffcc00; /* Construction vibe */
-}
-header h1 { font-size: 48px; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
-header p { font-size: 20px; max-width: 700px; margin: auto; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
 
-nav {
-  background: #145a32;
-  padding: 15px 20px;
-  position: sticky;
-  top: 38px; /* Below banner */
-  z-index: 1000;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-}
-nav a { color: white; text-decoration: none; font-weight: bold; margin: 0 10px; transition: color 0.3s; }
-nav a:hover { color: #a5d6a7; }
+        .nav-links li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
 
-/* Sections & Cards */
-section { padding: 50px 20px; max-width: 1100px; margin: auto; position: relative; z-index: 10; }
-h2 { color: #1b5e20; margin-bottom: 20px; font-size: 32px; }
+        .nav-links li a:hover {
+            color: #2e7d32;
+        }
 
-.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-.card {
-  background: rgba(255, 255, 255, 0.9);
-  padding: 25px;
-  border-radius: 15px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  transition: 0.3s;
-  backdrop-filter: blur(5px);
-}
-.card:hover { transform: translateY(-8px); box-shadow: 0 8px 25px rgba(0,0,0,0.2); }
-.card h3 { margin-bottom: 10px; color: #2e7d32; }
+        .nav-btn {
+            background: #ff9800;
+            color: white !important;
+            padding: 10px 20px;
+            border-radius: 25px;
+        }
 
-.highlight {
-  background: rgba(232, 245, 233, 0.9);
-  padding: 25px;
-  border-left: 6px solid #2e7d32;
-  border-radius: 10px;
-  margin-top: 20px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-}
+        /* --- LANGUAGE SELECTOR --- */
+        .lang-selector {
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: 2px solid #2e7d32;
+            background: white;
+            color: #2e7d32;
+            font-weight: 600;
+            cursor: pointer;
+            outline: none;
+            transition: 0.3s;
+        }
 
-/* 🤖 ADVANCED AI UI ELEMENTS 🤖 */
-.ai-container {
-  border: 2px dashed #4caf50;
-  padding: 30px;
-  border-radius: 15px;
-  text-align: center;
-  background: rgba(255, 255, 255, 0.8);
-  position: relative;
-  overflow: hidden;
-}
+        .lang-selector:hover {
+            background: #2e7d32;
+            color: white;
+        }
 
-.ai-overlay-incomplete {
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(0,0,0,0.7);
-  color: #ff4444;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-size: 24px;
-  font-weight: bold;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.5s;
-  z-index: 20;
-}
+        /* --- HERO SECTION WITH CSS ANIMATED FARMER --- */
+        #hero {
+            position: relative;
+            height: 100vh;
+            background: linear-gradient(to bottom, #87CEEB 0%, #e0f7fa 60%, #81c784 60%, #2e7d32 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding-top: 80px;
+        }
 
-.scanner-box {
-  width: 100%;
-  height: 200px;
-  background: #222;
-  border-radius: 10px;
-  margin: 20px 0;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #888;
-}
+        .sun {
+            position: absolute;
+            top: 15%;
+            right: 10%;
+            width: 100px;
+            height: 100px;
+            background: #FFD700;
+            border-radius: 50%;
+            box-shadow: 0 0 50px #FFD700;
+            animation: pulseSun 4s infinite alternate;
+        }
 
-.scanner-line {
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 4px;
-  background: #00ff00;
-  box-shadow: 0 0 15px #00ff00;
-  animation: scan 2s linear infinite;
-  display: none;
-}
+        .cloud {
+            position: absolute;
+            background: white;
+            border-radius: 50px;
+            opacity: 0.8;
+            animation: moveClouds linear infinite;
+        }
+        .cloud::before, .cloud::after {
+            content: '';
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+        }
+        .c1 { width: 120px; height: 40px; top: 20%; left: -150px; animation-duration: 25s; }
+        .c1::before { width: 50px; height: 50px; top: -20px; left: 15px; }
+        .c1::after { width: 40px; height: 40px; top: -15px; right: 15px; }
+        
+        .c2 { width: 180px; height: 50px; top: 30%; left: -200px; animation-duration: 35s; animation-delay: 10s; }
+        .c2::before { width: 70px; height: 70px; top: -30px; left: 25px; }
+        .c2::after { width: 60px; height: 60px; top: -20px; right: 25px; }
 
-@keyframes scan {
-  0% { top: 0; }
-  50% { top: 100%; }
-  100% { top: 0; }
-}
+        .tractor-container {
+            position: absolute;
+            bottom: 25%;
+            left: -200px;
+            width: 150px;
+            height: 100px;
+            animation: driveTractor 15s linear infinite;
+            z-index: 2;
+        }
+        .tractor-body {
+            position: absolute;
+            bottom: 30px;
+            width: 90px;
+            height: 50px;
+            background: #d32f2f;
+            border-radius: 10px 10px 0 0;
+        }
+        .tractor-roof {
+            position: absolute;
+            bottom: 80px;
+            left: 10px;
+            width: 50px;
+            height: 40px;
+            background: #b71c1c;
+            border-radius: 5px 5px 0 0;
+        }
+        .tractor-exhaust {
+            position: absolute;
+            bottom: 80px;
+            right: 15px;
+            width: 5px;
+            height: 30px;
+            background: #555;
+        }
+        .smoke {
+            position: absolute;
+            bottom: 115px;
+            right: 10px;
+            width: 15px;
+            height: 15px;
+            background: rgba(100,100,100,0.5);
+            border-radius: 50%;
+            animation: smokeRise 2s infinite;
+        }
+        .wheel-back {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 50px;
+            background: #222;
+            border-radius: 50%;
+            border: 4px solid #fff;
+            animation: spinWheel 2s linear infinite;
+        }
+        .wheel-front {
+            position: absolute;
+            bottom: 0;
+            right: 50px;
+            width: 35px;
+            height: 35px;
+            background: #222;
+            border-radius: 50%;
+            border: 3px solid #fff;
+            animation: spinWheel 2s linear infinite;
+        }
 
-.ai-btn {
-  background: #1b5e20;
-  color: white;
-  border: none;
-  padding: 12px 25px;
-  border-radius: 30px;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
-  transition: 0.3s;
-  box-shadow: 0 0 15px rgba(27, 94, 32, 0.5);
-}
-.ai-btn:hover { background: #2e7d32; box-shadow: 0 0 25px rgba(46, 125, 50, 0.8); }
+        .hero-text {
+            position: relative;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 50px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 800px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            backdrop-filter: blur(5px);
+        }
 
-.voice-wave {
-  display: none;
-  margin: 20px auto;
-  gap: 5px;
-  justify-content: center;
-}
-.voice-wave span {
-  display: block;
-  width: 8px;
-  height: 20px;
-  background: #4caf50;
-  border-radius: 5px;
-  animation: wave 1s infinite ease-in-out;
-}
-.voice-wave span:nth-child(2) { animation-delay: 0.2s; }
-.voice-wave span:nth-child(3) { animation-delay: 0.4s; }
-.voice-wave span:nth-child(4) { animation-delay: 0.6s; }
+        .hero-text h1 {
+            font-size: 3.5rem;
+            color: #1b5e20;
+            margin-bottom: 20px;
+        }
 
-@keyframes wave {
-  0%, 100% { height: 20px; }
-  50% { height: 50px; background: #00ff00; }
-}
+        .hero-text p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: #555;
+        }
 
-/* Dark Mode */
-.dark-mode { background: #111; color: #ddd; }
-.dark-mode .card, .dark-mode .highlight, .dark-mode .ai-container { background: rgba(34, 34, 34, 0.9); color: white; border-color: #555; }
-.dark-mode h2 { color: #81c784; }
+        .btn-main {
+            display: inline-block;
+            padding: 15px 40px;
+            background: #2e7d32;
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 30px;
+            transition: 0.3s;
+        }
 
-/* Responsive */
-@media (max-width: 768px) {
-  header h1 { font-size: 32px; }
-  .cards { grid-template-columns: 1fr; }
-}
-</style>
+        .btn-main:hover {
+            background: #1b5e20;
+            transform: translateY(-5px);
+        }
+
+        /* --- CONTENT SECTIONS --- */
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #2e7d32;
+            margin-bottom: 50px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border-bottom: 5px solid #2e7d32;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            color: #1b5e20;
+            margin-bottom: 15px;
+        }
+
+        .card ul {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .card ul li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .card ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #2e7d32;
+            font-weight: bold;
+        }
+
+        /* --- AI SPECIFICATIONS SECTION --- */
+        #ai-specs {
+            background: #111827;
+            color: #e5e7eb;
+            padding: 100px 20px;
+        }
+
+        #ai-specs .section-title {
+            color: #10b981;
+            margin-bottom: 60px;
+        }
+
+        .ai-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .ai-card {
+            background: #1f2937;
+            padding: 35px;
+            border-radius: 15px;
+            border-left: 4px solid #10b981;
+        }
+
+        .ai-icon { font-size: 2.5rem; margin-bottom: 15px; }
+
+        .ai-card h3 {
+            color: #f3f4f6;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+
+        .tech-spec {
+            display: inline-block;
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+
+        /* --- CONTACT SECTION --- */
+        #contact {
+            background: #e8f5e9;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .contact-form button {
+            width: 100%;
+            padding: 15px;
+            background: #ff9800;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Animations */
+        @keyframes pulseSun { 0% { transform: scale(1); } 100% { transform: scale(1.05); } }
+        @keyframes moveClouds { 0% { left: -200px; } 100% { left: 100vw; } }
+        @keyframes driveTractor { 0% { left: -200px; } 100% { left: 100vw; } }
+        @keyframes spinWheel { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes smokeRise { 0% { opacity: 0.8; transform: translateY(0) scale(1); } 100% { opacity: 0; transform: translateY(-30px) scale(2); } }
+
+    </style>
 </head>
 <body>
 
-<div class="incomplete-banner">
-  🚧 V0.8 BETA - WEBSITE INCOMPLETE - AI MODULES UNDER CONSTRUCTION 🚧
-</div>
+    <nav>
+        <h2>OrganicPro</h2>
+        <ul class="nav-links">
+            <li><a href="#hero" data-lang="nav_home">Home</a></li>
+            <li><a href="#curriculum" data-lang="nav_curr">Curriculum</a></li>
+            <li><a href="#ai-specs" data-lang="nav_ai">AI & Smart Tech</a></li>
+            <li><a href="#contact" class="nav-btn" data-lang="nav_call">Call Me</a></li>
+            <li>
+                <select class="lang-selector" onchange="changeLanguage(this.value)">
+                    <option value="en">English</option>
+                    <option value="es">Español</option>
+                    <option value="hi">हिन्दी</option>
+                </select>
+            </li>
+        </ul>
+    </nav>
 
-<nav>
-  <div style="max-width:1200px; margin:auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap: 15px;">
-    <h2 style="color:white; font-size:24px; margin:0;">🌱 Organic AI (Beta)</h2>
-    <div style="display:flex; gap:15px; flex-wrap:wrap;">
-      <a href="#about">About</a>
-      <a href="#ai-disease-detection">AI Scanner</a>
-      <a href="#ai-voice">Voice Assistant</a>
-      <a href="#future">Future</a>
-    </div>
-  </div>
-</nav>
+    <section id="hero">
+        <div class="sun"></div>
+        <div class="cloud c1"></div>
+        <div class="cloud c2"></div>
+        <div class="tractor-container">
+            <div class="smoke"></div>
+            <div class="tractor-exhaust"></div>
+            <div class="tractor-roof"></div>
+            <div class="tractor-body"></div>
+            <div class="wheel-back"></div>
+            <div class="wheel-front"></div>
+        </div>
 
-<header>
-  <h1>Next-Gen Organic Farming</h1>
-  <p>Integrating traditional agriculture with Artificial Intelligence. <br>(Note: Database and API connections are currently incomplete).</p>
-</header>
+        <div class="hero-text">
+            <h1 data-lang="hero_title">Master Organic Farming</h1>
+            <p data-lang="hero_sub">Your complete journey from planting your first organic seed to designing highly advanced, AI-automated permaculture ecosystems.</p>
+            <a href="#curriculum" class="btn-main" data-lang="hero_btn">Start Exploring</a>
+        </div>
+    </section>
 
-<section id="about">
-  <h2>🌿 What is Organic Farming?</h2>
-  <div class="card">
-    <p>Organic farming is a natural farming method that avoids harmful chemicals, pesticides, and synthetic fertilizers. We are currently building a system to combine this with <strong>Advanced AI</strong> to maximize yield effortlessly.</p>
-  </div>
-</section>
+    <section id="curriculum" class="section-container">
+        <h2 class="section-title" data-lang="curr_title">Step-by-Step Growth</h2>
+        <div class="grid-3">
+            <div class="card">
+                <h3 data-lang="lvl1_title">Level 1: The Scratch Base</h3>
+                <p data-lang="lvl1_desc">Perfect for absolute beginners starting with bare land.</p>
+                <ul>
+                    <li data-lang="l1_1">Soil pH testing and natural amendments</li>
+                    <li data-lang="l1_2">Building thermophilic compost piles</li>
+                    <li data-lang="l1_3">Sourcing heirloom, non-GMO seeds</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3 data-lang="lvl2_title">Level 2: Intermediate Growth</h3>
+                <p data-lang="lvl2_desc">Transitioning into a sustainable biological ecosystem.</p>
+                <ul>
+                    <li data-lang="l2_1">Companion planting & crop rotation</li>
+                    <li data-lang="l2_2">Introducing beneficial predatory insects</li>
+                    <li data-lang="l2_3">Rainwater harvesting systems</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3 data-lang="lvl3_title">Level 3: Expert Cultivation</h3>
+                <p data-lang="lvl3_desc">Maximizing yield through holistic farm design.</p>
+                <ul>
+                    <li data-lang="l3_1">Permaculture food forest design</li>
+                    <li data-lang="l3_2">Silvopasture & holistic animal grazing</li>
+                    <li data-lang="l3_3">Mycorrhizal fungi inoculation</li>
+                </ul>
+            </div>
+        </div>
+    </section>
 
-<section id="ai-disease-detection">
-  <h2>🦠 AI Plant Disease Detection</h2>
-  <p style="margin-bottom: 20px; color: #555;">Upload a picture of a crop leaf, and our neural network will identify diseases instantly.</p>
-  
-  <div class="ai-container" id="scanner-container">
-    <div class="ai-overlay-incomplete" id="scanner-error">
-      <span>⚠️ SYSTEM INCOMPLETE</span>
-      <span style="font-size: 16px; font-weight: normal; margin-top: 10px;">Model 'LeafNet_v2' failed to load.</span>
-      <span style="font-size: 16px; font-weight: normal;">Database connection refused.</span>
-    </div>
+    <section id="ai-specs">
+        <h2 class="section-title" data-lang="ai_title">AI Specifications in Organic AgTech</h2>
+        <div class="ai-grid">
+            <div class="ai-card">
+                <div class="ai-icon">👁️</div>
+                <h3 data-lang="ai_1_title">Computer Vision Weed Detection</h3>
+                <p data-lang="ai_1_desc">Utilizing high-speed cameras to differentiate between crops and weeds, allowing targeted removal.</p>
+                <div><span class="tech-spec">YOLOv8</span> <span class="tech-spec">Edge Computing</span></div>
+            </div>
+            <div class="ai-card">
+                <div class="ai-icon">🤖</div>
+                <h3 data-lang="ai_2_title">Autonomous Farm Rovers</h3>
+                <p data-lang="ai_2_desc">Self-driving rovers that perform soil sampling and micro-dosing of organic compost teas.</p>
+                <div><span class="tech-spec">LiDAR</span> <span class="tech-spec">ROS 2</span></div>
+            </div>
+            <div class="ai-card">
+                <div class="ai-icon">📈</div>
+                <h3 data-lang="ai_3_title">Predictive ML Models</h3>
+                <p data-lang="ai_3_desc">Algorithms that ingest historical yield data and IoT sensor metrics to predict optimal harvest.</p>
+                <div><span class="tech-spec">Random Forest</span> <span class="tech-spec">IoT</span></div>
+            </div>
+        </div>
+    </section>
 
-    <input type="file" id="file-upload" style="display:none;" onchange="startScan()">
-    <button class="ai-btn" onclick="document.getElementById('file-upload').click()">📁 Upload Leaf Image</button>
-    
-    <div class="scanner-box" id="scanner-box">
-      <span id="scanner-text">Awaiting Image...</span>
-      <div class="scanner-line" id="scanner-line"></div>
-    </div>
-    <p id="scanner-status" style="font-weight: bold; color: #1b5e20;"></p>
-  </div>
-</section>
+    <section id="contact">
+        <div class="section-container" style="padding: 0;">
+            <h2 class="section-title" data-lang="contact_title">Ready to Transform Your Land?</h2>
+            <div class="contact-form">
+                <form id="callMeForm" onsubmit="handleFormSubmit(event)">
+                    <input type="text" placeholder="Your Full Name" required>
+                    <input type="tel" placeholder="Your Phone Number" required>
+                    <button type="submit" data-lang="contact_btn">Request a Call Now</button>
+                </form>
+            </div>
+        </div>
+    </section>
 
-<section id="ai-voice">
-  <h2>🎤 AI Farming Voice Assistant</h2>
-  <p style="margin-bottom: 20px; color: #555;">Ask questions about soil pH, weather patterns, and crop cycles in your local language.</p>
-  
-  <div class="ai-container" id="voice-container">
-    <div class="ai-overlay-incomplete" id="voice-error">
-      <span>⚠️ API DISCONNECTED</span>
-      <span style="font-size: 16px; font-weight: normal; margin-top: 10px;">Natural Language Processor is offline.</span>
-      <span style="font-size: 16px; font-weight: normal;">Awaiting developer API key.</span>
-    </div>
+    <footer style="background: #1b5e20; color: white; text-align: center; padding: 20px;">
+        <p>&copy; 2026 Advanced Organic Farming Academy.</p>
+    </footer>
 
-    <button class="ai-btn" onclick="startVoice()">🎙️ Start Listening</button>
-    
-    <div class="voice-wave" id="voice-wave">
-      <span></span><span></span><span></span><span></span>
-    </div>
-    
-    <p id="voice-status" style="margin-top: 20px; font-weight: bold;">Click the mic to speak...</p>
-  </div>
-</section>
+    <script>
+        // Dictionary containing all translations
+        const translations = {
+            en: {
+                nav_home: "Home", nav_curr: "Curriculum", nav_ai: "AI & Smart Tech", nav_call: "Call Me",
+                hero_title: "Master Organic Farming", hero_sub: "Your complete journey from planting your first organic seed to designing highly advanced, AI-automated permaculture ecosystems.", hero_btn: "Start Exploring",
+                curr_title: "Step-by-Step Growth",
+                lvl1_title: "Level 1: The Scratch Base", lvl1_desc: "Perfect for absolute beginners starting with bare land.",
+                l1_1: "Soil pH testing and natural amendments", l1_2: "Building thermophilic compost piles", l1_3: "Sourcing heirloom, non-GMO seeds",
+                lvl2_title: "Level 2: Intermediate Growth", lvl2_desc: "Transitioning into a sustainable biological ecosystem.",
+                l2_1: "Companion planting & crop rotation", l2_2: "Introducing beneficial predatory insects", l2_3: "Rainwater harvesting systems",
+                lvl3_title: "Level 3: Expert Cultivation", lvl3_desc: "Maximizing yield through holistic farm design.",
+                l3_1: "Permaculture food forest design", l3_2: "Silvopasture & holistic animal grazing", l3_3: "Mycorrhizal fungi inoculation",
+                ai_title: "AI Specifications in Organic AgTech",
+                ai_1_title: "Computer Vision Weed Detection", ai_1_desc: "Utilizing high-speed cameras to differentiate between crops and weeds, allowing targeted removal.",
+                ai_2_title: "Autonomous Farm Rovers", ai_2_desc: "Self-driving rovers that perform soil sampling and micro-dosing of organic compost teas.",
+                ai_3_title: "Predictive ML Models", ai_3_desc: "Algorithms that ingest historical yield data and IoT sensor metrics to predict optimal harvest.",
+                contact_title: "Ready to Transform Your Land?", contact_btn: "Request a Call Now"
+            },
+            es: {
+                nav_home: "Inicio", nav_curr: "Plan de estudios", nav_ai: "IA y Tecnología", nav_call: "Llámame",
+                hero_title: "Domina la Agricultura Orgánica", hero_sub: "Tu viaje completo desde plantar tu primera semilla hasta diseñar ecosistemas automatizados por IA.", hero_btn: "Empezar a Explorar",
+                curr_title: "Crecimiento Paso a Paso",
+                lvl1_title: "Nivel 1: Desde Cero", lvl1_desc: "Perfecto para principiantes absolutos.",
+                l1_1: "Pruebas de pH y enmiendas naturales", l1_2: "Construcción de compost termofílico", l1_3: "Semillas orgánicas tradicionales",
+                lvl2_title: "Nivel 2: Intermedio", lvl2_desc: "Transición a un ecosistema biológico sostenible.",
+                l2_1: "Rotación de cultivos y asociación", l2_2: "Introducción de insectos benéficos", l2_3: "Sistemas de recolección de lluvia",
+                lvl3_title: "Nivel 3: Cultivo Experto", lvl3_desc: "Maximizando el rendimiento con diseño holístico.",
+                l3_1: "Diseño de bosque de alimentos", l3_2: "Silvopastoreo y pastoreo holístico", l3_3: "Inoculación de hongos micorrícicos",
+                ai_title: "Especificaciones de IA en AgTech Orgánica",
+                ai_1_title: "Visión por Computadora", ai_1_desc: "Uso de cámaras de alta velocidad para diferenciar cultivos de malezas.",
+                ai_2_title: "Rovers Agrícolas Autónomos", ai_2_desc: "Rovers autónomos que realizan muestreo de suelo y microdosificación.",
+                ai_3_title: "Modelos Predictivos", ai_3_desc: "Algoritmos que analizan datos históricos y sensores IoT para predecir cosechas.",
+                contact_title: "¿Listo para Transformar tu Tierra?", contact_btn: "Solicitar una Llamada"
+            },
+            hi: {
+                nav_home: "होम", nav_curr: "पाठ्यक्रम", nav_ai: "एआई तकनीक", nav_call: "कॉल करें"
+              hero_title: "जैविक खेती में महारत", hero_sub: "पहला बीज बोने से लेकर उन्नत एआई-स्वचालित पारिस्थितिकी तंत्र डिजाइन करने तक की आपकी पूरी यात्रा।", hero_btn: "खोज शुरू करें",
+                curr_title: "चरण-दर-चरण विकास",
+                lvl1_title: "स्तर 1: बुनियादी ढांचा", lvl1_desc: "बिल्कुल नए लोगों के लिए एकदम सही।",
+                l1_1: "मिट्टी पीएच परीक्षण और प्राकृतिक सुधार", l1_2: "कम्पोस्ट बनाना", l1_3: "गैर-जीएमओ बीज प्राप्त करना",
+                lvl2_title: "स्तर 2: मध्यवर्ती विकास", lvl2_desc: "एक स्थायी जैविक पारिस्थितिकी तंत्र में संक्रमण।",
+                l2_1: "साथी रोपण और फसल चक्र", l2_2: "लाभकारी कीड़ों का परिचय", l2_3: "वर्षा जल संचयन प्रणाली",
+                lvl3_title: "स्तर 3: विशेषज्ञ खेती", lvl3_desc: "समग्र फार्म डिजाइन के माध्यम से उपज को अधिकतम करना।",
+                l3_1: "खाद्य वन डिजाइन", l3_2: "सिल्वोपाश्चर और पशु चराई", l3_3: "कवक टीकाकरण",
+                ai_title: "जैविक कृषि में एआई",
+                ai_1_title: "कंप्यूटर विजन से खरपतवार का पता लगाना", ai_1_desc: "फसलों और खरपतवारों के बीच अंतर करने के लिए हाई-स्पीड कैमरे।",
+                ai_2_title: "स्वायत्त फार्म रोवर्स", ai_2_desc: "स्वयं चलने वाले रोवर्स जो मिट्टी के नमूने लेते हैं।",
+                ai_3_title: "भविष्यवाणी करने वाले एआई मॉडल", ai_3_desc: "इष्टतम फसल की भविष्यवाणी करने के लिए सेंसर मेट्रिक्स एल्गोरिदम।",
+                contact_title: "क्या आप अपनी भूमि बदलने के लिए तैयार हैं?", contact_btn: "कॉल का अनुरोध करें"
+            }
+        };
 
-<section id="marketplace">
-  <h2>🛒 Organic Marketplace Idea (Coming Soon)</h2>
-  <div class="highlight" style="opacity: 0.6; pointer-events: none;">
-    <h3 style="color: #666;">🚧 Under Construction</h3>
-    <p>Farmers will directly sell vegetables, fruits, grains, and organic fertilizers to customers through online marketplaces. This module requires backend integration which is currently incomplete.</p>
-    <br>
-    <button disabled style="padding:10px; background:#ccc; border:none; border-radius:5px;">Buy Now (Disabled)</button>
-  </div>
-</section>
+        // Function to change language dynamically
+        function changeLanguage(lang) {
+            const elements = document.querySelectorAll('[data-lang]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-lang');
+                if (translations[lang] && translations[lang][key]) {
+                    el.innerText = translations[lang][key];
+                }
+            });
+        }
 
-<button onclick="toggleDarkMode()" style="position:fixed; bottom:20px; right:20px; padding:12px 18px; border:none; border-radius:30px; background:#1b5e20; color:white; cursor:pointer; z-index:999; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
-  🌙 Toggle Dark Mode
-</button>
-
-<footer style="background: #111; color: white; text-align: center; padding: 30px; margin-top: 40px;">
-  <p>© 2026 Organic AI Project | <strong>Status: Beta / Incomplete</strong></p>
-  <p style="font-size: 12px; color: #888; margin-top: 10px;">Modules 4 through 9 are currently unwritten.</p>
-</footer>
-
-<script>
-  // Dark Mode Toggle
-  function toggleDarkMode() {
-    document.body.classList.toggle('dark-mode');
-  }
-
-  // AI Scanner Simulation (Intentional Failure to show it's incomplete)
-  function startScan() {
-    const scannerText = document.getElementById('scanner-text');
-    const scannerLine = document.getElementById('scanner-line');
-    const scannerStatus = document.getElementById('scanner-status');
-    const scannerError = document.getElementById('scanner-error');
-    
-    scannerText.style.display = 'none';
-    scannerLine.style.display = 'block';
-    scannerStatus.innerText = "Analyzing neural patterns... Extracting chlorophyll data...";
-    
-    // Simulate loading, then fail
-    setTimeout(() => {
-      scannerLine.style.display = 'none';
-      scannerStatus.innerText = "";
-      scannerError.style.opacity = '1';
-      scannerError.style.pointerEvents = 'auto';
-    }, 3000);
-  }
-
-  // Voice Assistant Simulation (Intentional Failure to show it's incomplete)
-  function startVoice() {
-    const voiceWave = document.getElementById('voice-wave');
-    const voiceStatus = document.getElementById('voice-status');
-    const voiceError = document.getElementById('voice-error');
-    
-    voiceWave.style.display = 'flex';
-    voiceStatus.innerText = "Listening... Processing natural language...";
-    
-    // Simulate listening, then fail
-    setTimeout(() => {
-      voiceWave.style.display = 'none';
-      voiceStatus.innerText = "";
-      voiceError.style.opacity = '1';
-      voiceError.style.pointerEvents = 'auto';
-    }, 3500);
-  }
-</script>
-
+        // Simple form submission handler
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            alert("Thank you! Your request has been received. Our expert farmers will call you shortly.");
+            document.getElementById("callMeForm").reset();
+        }
+    </script>
 </body>
 </html>
