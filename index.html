@@ -3,109 +3,173 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Organic Farming Pro Dashboard</title>
+<title>AgriNova AI | Organic Farming Platform</title>
 
-<!-- 📊 CHART LIBRARY -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-* {
+*{
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family:Arial;
+  font-family:'Poppins', sans-serif;
 }
 
-body {
-  background:#06150e;
+body{
+  background:#050b07;
   color:white;
   overflow-x:hidden;
 }
 
-/* 🌿 BACKGROUND CANVAS */
-canvas#bg {
+/* BACKGROUND CANVAS */
+#bg{
   position:fixed;
   top:0;
   left:0;
-  z-index:-2;
+  z-index:-3;
 }
 
-/* DARK GLOW OVERLAY */
-body::before {
-  content:"";
+/* NAVBAR */
+nav{
   position:fixed;
+  top:0;
   width:100%;
-  height:100%;
-  background:radial-gradient(circle at top,#2ecc7130,transparent 60%),
-             radial-gradient(circle at bottom,#00a86b20,transparent 60%);
-  z-index:-1;
-}
-
-/* HEADER */
-header {
+  padding:15px 30px;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:15px;
-  background:rgba(18,53,36,0.6);
-  backdrop-filter:blur(10px);
+  background:rgba(0,0,0,0.4);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  z-index:100;
 }
 
-/* GRID */
-.container {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:15px;
+.logo{
+  font-size:20px;
+  font-weight:700;
+  color:#7CFC00;
+}
+
+.controls{
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+
+input,select{
+  padding:8px 10px;
+  border:none;
+  border-radius:8px;
+  background:rgba(255,255,255,0.08);
+  color:white;
+  outline:none;
+}
+
+button{
+  padding:8px 12px;
+  border:none;
+  border-radius:8px;
+  background:linear-gradient(135deg,#2ecc71,#27ae60);
+  color:white;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+button:hover{
+  transform:scale(1.05);
+}
+
+/* HERO */
+.hero{
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
   padding:20px;
 }
 
-/* CARDS */
-.card {
-  background:rgba(22,61,42,0.75);
-  padding:15px;
-  border-radius:12px;
+.hero-box{
+  max-width:800px;
+  padding:40px;
+  background:rgba(255,255,255,0.05);
+  border-radius:20px;
+  backdrop-filter:blur(15px);
+  border:1px solid rgba(255,255,255,0.08);
+  box-shadow:0 0 40px rgba(0,255,100,0.12);
+}
+
+.hero-box h1{
+  font-size:42px;
+  color:#7CFC00;
+  margin-bottom:10px;
+}
+
+.hero-box p{
+  opacity:0.8;
+  line-height:1.6;
+}
+
+/* SECTIONS */
+section{
+  padding:80px 10%;
+}
+
+.title{
+  font-size:26px;
+  margin-bottom:20px;
+  color:#7CFC00;
+}
+
+/* GRID CARDS */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+}
+
+.card{
+  background:rgba(255,255,255,0.05);
+  padding:20px;
+  border-radius:15px;
+  border:1px solid rgba(255,255,255,0.08);
+  backdrop-filter:blur(10px);
   transition:0.3s;
-  box-shadow:0 8px 20px rgba(0,0,0,0.4);
 }
 
-.card:hover {
-  transform:translateY(-5px);
+.card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 10px 30px rgba(0,255,100,0.15);
 }
 
-/* FULL WIDTH */
-.full {
-  grid-column:span 2;
+/* PRICE */
+.price{
+  display:flex;
+  justify-content:space-between;
+  padding:8px 0;
+  border-bottom:1px solid rgba(255,255,255,0.08);
 }
 
-/* BUTTONS */
-button {
-  padding:8px;
-  background:#2ecc71;
-  border:none;
-  border-radius:6px;
-  cursor:pointer;
+/* TRACTOR */
+.tractor{
+  position:absolute;
+  bottom:40px;
+  width:140px;
+  animation:move 18s linear infinite;
+  z-index:1;
 }
 
-/* CHAT BOX */
-#chatBox {
-  height:120px;
-  overflow:auto;
-  background:rgba(0,0,0,0.3);
-  padding:8px;
-  border-radius:8px;
-  margin-top:10px;
+@keyframes move{
+  from{left:-200px;}
+  to{left:110%;}
 }
 
-/* CANVAS CHARTS */
-canvas.chart {
-  background:rgba(0,0,0,0.2);
-  border-radius:10px;
-  padding:10px;
-}
-
-/* RESPONSIVE */
-@media(max-width:800px){
-  .container{grid-template-columns:1fr;}
+/* FOOTER */
+footer{
+  text-align:center;
+  padding:30px;
+  opacity:0.6;
+  border-top:1px solid rgba(255,255,255,0.08);
 }
 </style>
 </head>
@@ -114,183 +178,160 @@ canvas.chart {
 
 <canvas id="bg"></canvas>
 
-<header>
-  <h2>🌱 AI Farming Pro Dashboard</h2>
-</header>
+<!-- NAV -->
+<nav>
+  <div class="logo">🌿 AgriNova AI</div>
 
-<div class="container">
+  <div class="controls">
+    <input id="search" placeholder="Search topics...">
 
-  <!-- WEATHER -->
-  <div class="card">
-    <h3>🌦 Weather</h3>
-    <p id="weather">Loading...</p>
+    <select id="lang" onchange="translateText()">
+      <option value="en">EN</option>
+      <option value="hi">HI</option>
+    </select>
+
+    <button onclick="voice()">🎙</button>
   </div>
+</nav>
 
-  <!-- MARKET -->
-  <div class="card">
-    <h3>💰 Market Prices</h3>
-    <p>Tomato: ₹20-45</p>
-    <p>Rice: ₹40-90</p>
-    <p>Wheat: ₹25-55</p>
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-box">
+    <h1>Smart Organic Farming Platform</h1>
+    <p>
+      Learn organic farming from basics to advanced level with AI tools,
+      crop detection, and real-time agricultural insights.
+    </p>
   </div>
-
-  <!-- CHATBOT -->
-  <div class="card full">
-    <h3>🤖 AI Chatbot</h3>
-    <input id="msg" placeholder="Ask farming question">
-    <button onclick="chat()">Ask</button>
-    <div id="chatBox"></div>
-  </div>
-
-  <!-- CROP -->
-  <div class="card">
-    <h3>🌾 Crop AI</h3>
-    <input id="soil" placeholder="soil">
-    <input id="season" placeholder="season">
-    <input id="water" placeholder="water">
-    <button onclick="crop()">Suggest</button>
-    <p id="cropOut"></p>
-  </div>
-
-  <!-- ANALYTICS -->
-  <div class="card">
-    <h3>📊 Farming Analytics</h3>
-    <canvas id="analyticsChart"></canvas>
-  </div>
-
-  <!-- PRICE CHART -->
-  <div class="card">
-    <h3>💰 Price Trends</h3>
-    <canvas id="priceChart"></canvas>
-  </div>
-
-  <!-- WEATHER CHART -->
-  <div class="card full">
-    <h3>🌡 Weather Trend</h3>
-    <canvas id="weatherChart"></canvas>
-  </div>
-
 </div>
+
+<!-- LEARNING -->
+<section>
+  <div class="title">🌱 Farming Knowledge Levels</div>
+
+  <div class="grid">
+
+    <div class="card topic">
+      <h3>Basic Farming</h3>
+      <p>Soil preparation, composting, natural fertilizers.</p>
+    </div>
+
+    <div class="card topic">
+      <h3>Intermediate</h3>
+      <p>Pest control, irrigation systems, crop rotation.</p>
+    </div>
+
+    <div class="card topic">
+      <h3>Advanced Farming</h3>
+      <p>AI monitoring, precision farming, smart agriculture systems.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- PRICES -->
+<section>
+  <div class="title">🛒 Organic Market Prices</div>
+
+  <div class="card">
+    <div class="price"><span>Rice</span><span>₹90/kg</span></div>
+    <div class="price"><span>Wheat</span><span>₹60/kg</span></div>
+    <div class="price"><span>Tomato</span><span>₹30/kg</span></div>
+    <div class="price"><span>Milk</span><span>₹65/L</span></div>
+  </div>
+</section>
+
+<!-- AI DETECTOR -->
+<section>
+  <div class="title">🤖 Crop Health Detector</div>
+
+  <div class="card">
+    <input type="file" onchange="detectCrop()">
+    <p id="result" style="margin-top:10px;opacity:0.8;">
+      Upload crop image for analysis
+    </p>
+  </div>
+</section>
+
+<footer>
+  © 2026 AgriNova AI | Smart Organic Farming System
+</footer>
+
+<!-- Tractor -->
+<img src="https://i.imgur.com/4NJlQ6U.png" class="tractor">
 
 <script>
 
-/* ================= BACKGROUND ANIMATION ================= */
-const canvas = document.getElementById("bg");
-const ctx = canvas.getContext("2d");
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+/* SEARCH */
+document.getElementById("search").addEventListener("input",e=>{
+  document.querySelectorAll(".topic").forEach(c=>{
+    c.style.display = c.innerText.toLowerCase().includes(e.target.value.toLowerCase())
+    ? "block":"none";
+  });
+});
 
-let particles = [];
+/* VOICE */
+function voice(){
+  let msg = new SpeechSynthesisUtterance(
+    "Welcome to AgriNova AI smart organic farming platform."
+  );
+  speechSynthesis.speak(msg);
+}
 
-for(let i=0;i<100;i++){
-  particles.push({
+/* LANGUAGE */
+function translateText(){
+  let lang = document.getElementById("lang").value;
+  let p = document.querySelectorAll(".topic p");
+
+  if(lang==="hi"){
+    p[0].innerText="मिट्टी तैयार करना और जैविक खाद।";
+    p[1].innerText="कीट नियंत्रण और सिंचाई।";
+    p[2].innerText="एआई आधारित स्मार्ट खेती तकनीक।";
+  }
+}
+
+/* CROP DETECTOR (MOCK AI) */
+function detectCrop(){
+  let res=[
+    "Healthy Crop 🌿",
+    "Pest Attack Detected 🐛",
+    "Low Soil Moisture 💧",
+    "Nitrogen Deficiency ⚠️"
+  ];
+  document.getElementById("result").innerText =
+    res[Math.floor(Math.random()*res.length)];
+}
+
+/* BACKGROUND ANIMATION */
+const canvas=document.getElementById("bg");
+const ctx=canvas.getContext("2d");
+
+canvas.width=innerWidth;
+canvas.height=innerHeight;
+
+let dots=[];
+for(let i=0;i<90;i++){
+  dots.push({
     x:Math.random()*canvas.width,
-    y:Math.random()*canvas.height,
-    r:Math.random()*2,
-    dx:(Math.random()-0.5),
-    dy:(Math.random()-0.5)
+    y:Math.random()*canvas.height
   });
 }
 
 function animate(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle="rgba(0,255,120,0.25)";
 
-  particles.forEach(p=>{
-    p.x+=p.dx;
-    p.y+=p.dy;
-
-    if(p.x<0||p.x>canvas.width) p.dx*=-1;
-    if(p.y<0||p.y>canvas.height) p.dy*=-1;
-
+  dots.forEach(d=>{
     ctx.beginPath();
-    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx.fillStyle="rgba(46,204,113,0.5)";
+    ctx.arc(d.x,d.y,2,0,Math.PI*2);
     ctx.fill();
+    d.y+=0.6;
+    if(d.y>canvas.height)d.y=0;
   });
 
   requestAnimationFrame(animate);
 }
 animate();
-
-/* ================= WEATHER ================= */
-navigator.geolocation.getCurrentPosition(async pos=>{
-  let url=`https://api.open-meteo.com/v1/forecast?latitude=${pos.coords.latitude}&longitude=${pos.coords.longitude}&current_weather=true`;
-
-  let res=await fetch(url);
-  let data=await res.json();
-
-  document.getElementById("weather").innerText=
-  `Temp: ${data.current_weather.temperature}°C`;
-});
-
-/* ================= CHATBOT ================= */
-function chat(){
-  let m=document.getElementById("msg").value.toLowerCase();
-  let r="Ask farming questions.";
-
-  if(m.includes("pest")) r="Use neem oil spray.";
-  if(m.includes("fertilizer")) r="Use compost & organic manure.";
-
-  document.getElementById("chatBox").innerHTML +=
-  `<p><b>You:</b> ${m}</p><p><b>AI:</b> ${r}</p>`;
-}
-
-/* ================= CROP ================= */
-function crop(){
-  let soil=document.getElementById("soil").value;
-  let season=document.getElementById("season").value;
-  let water=document.getElementById("water").value;
-
-  let crops=[];
-  if(soil.includes("black")) crops.push("Cotton");
-  if(season==="summer") crops.push("Maize");
-  if(water==="low") crops.push("Millets");
-
-  document.getElementById("cropOut").innerText=crops.join(", ");
-}
-
-/* ================= CHARTS ================= */
-
-// Farming Analytics
-new Chart(document.getElementById("analyticsChart"), {
-  type:"bar",
-  data:{
-    labels:["Rice","Wheat","Maize","Millets"],
-    datasets:[{
-      label:"Yield (tons)",
-      data:[30,25,20,35],
-      backgroundColor:"#2ecc71"
-    }]
-  }
-});
-
-// Price Chart
-new Chart(document.getElementById("priceChart"), {
-  type:"line",
-  data:{
-    labels:["Jan","Feb","Mar","Apr","May"],
-    datasets:[{
-      label:"Tomato Price",
-      data:[20,25,30,40,35],
-      borderColor:"#2ecc71",
-      fill:false
-    }]
-  }
-});
-
-// Weather Chart
-new Chart(document.getElementById("weatherChart"), {
-  type:"line",
-  data:{
-    labels:["Mon","Tue","Wed","Thu","Fri"],
-    datasets:[{
-      label:"Temperature",
-      data:[30,32,31,33,29],
-      borderColor:"#00ff88",
-      fill:false
-    }]
-  }
-});
 
 </script>
 
