@@ -3,100 +3,95 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>3D Organic AI Farming Platform</title>
+<title>Ultimate AI Organic Farm</title>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
-body{
-background:#061a12;
-color:white;
-overflow:hidden;
-}
+body{overflow:hidden;background:#061a12;color:white}
 
-/* 🌍 3D CANVAS */
+/* 🌍 3D SCENE */
 #scene{
 position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
+top:0;left:0;
+width:100%;height:100%;
 z-index:-3;
 }
 
-/* 🌧️ RAIN LAYER */
-.rain{
+/* 🌧️ RAIN */
+#rain{
 position:fixed;
-width:100%;
-height:100%;
-pointer-events:none;
+top:0;left:0;
+width:100%;height:100%;
 z-index:-2;
-overflow:hidden;
-}
-
-.drop{
-position:absolute;
-width:2px;
-height:20px;
-background:rgba(255,255,255,0.5);
-animation:fall linear infinite;
-}
-
-@keyframes fall{
-0%{transform:translateY(-10vh)}
-100%{transform:translateY(110vh)}
+pointer-events:none;
 }
 
 /* ⚡ FLASH */
-.flash{
+#flash{
 position:fixed;
+top:0;left:0;
 width:100%;
 height:100%;
 background:white;
 opacity:0;
 z-index:-1;
+transition:opacity 0.1s;
 pointer-events:none;
 }
 
-/* NAV */
-.navbar{
+/* 🌿 FLOATING BACKGROUND ANIMATION */
+.leaf{
 position:fixed;
-top:0;
-width:100%;
-display:flex;
-justify-content:space-between;
-padding:12px 6%;
-background:rgba(0,0,0,0.4);
-backdrop-filter:blur(10px);
-z-index:10;
+width:8px;
+height:8px;
+background:#2ecc71;
+opacity:0.3;
+border-radius:50%;
+animation:float 12s linear infinite;
+z-index:-2;
+}
+
+@keyframes float{
+0%{transform:translateY(100vh)}
+100%{transform:translateY(-10vh)}
 }
 
 /* UI */
-.hero{
+.ui{
+position:relative;
+z-index:5;
 height:100vh;
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
 text-align:center;
-position:relative;
-z-index:5;
+background:linear-gradient(rgba(0,0,0,0.35),rgba(0,0,0,0.65));
 }
 
-.btn{
-padding:10px 20px;
-margin:5px;
+h1{font-size:3rem;color:#7dffb2}
+p{color:#cfeedd;margin:10px}
+
+button,input,select{
+padding:10px;
 border:none;
-border-radius:25px;
+border-radius:20px;
+margin:5px;
+}
+
+button{
 background:#2ecc71;
 color:white;
 cursor:pointer;
+transition:0.3s;
 }
+button:hover{transform:scale(1.05)}
 
 section{
-padding:80px 8%;
+padding:60px;
 position:relative;
 z-index:5;
 }
@@ -105,142 +100,236 @@ z-index:5;
 background:rgba(255,255,255,0.08);
 padding:15px;
 border-radius:12px;
-backdrop-filter:blur(10px);
-margin:10px 0;
+margin:10px;
+backdrop-filter:blur(8px);
 }
 </style>
 </head>
 
 <body>
 
-<!-- 🌍 3D FARM SCENE -->
+<!-- 🌍 3D FARM -->
 <canvas id="scene"></canvas>
 
 <!-- 🌧️ RAIN -->
-<div class="rain" id="rain"></div>
+<canvas id="rain"></canvas>
 
 <!-- ⚡ FLASH -->
-<div class="flash" id="flash"></div>
+<div id="flash"></div>
 
-<!-- NAV -->
-<div class="navbar">
-<h2>🌿 AI 3D Farm</h2>
-<button onclick="toggleStorm()">⚡ Storm Mode</button>
+<!-- 🌿 FLOATING LEAVES -->
+<div id="leaves"></div>
+
+<!-- UI -->
+<div class="ui">
+<h1>🌿 Ultimate AI Organic Farm</h1>
+<p>3D Farming + AI + Weather + Real Simulation System</p>
+<button onclick="toggleStorm()">⚡ Weather Mode</button>
+<button onclick="scrollToSection()">Explore System</button>
 </div>
 
-<!-- HERO -->
-<div class="hero">
-<h1>3D Smart Organic Farming</h1>
-<p>AI + Weather + Real-Time Environment Simulation</p>
-<button class="btn" onclick="startStorm()">Activate Weather System</button>
-</div>
+<!-- FEATURES -->
+<section id="system">
 
-<!-- INFO -->
-<section>
 <div class="card">
-🌱 This system simulates real farming environment using:
-<br><br>
-✔ 3D terrain visualization<br>
-✔ Rain particle system<br>
-✔ Thunder lightning simulation<br>
-✔ Smart AI farming tools (expandable)
+<h3>🤖 AI Farming Assistant</h3>
+<input id="msg" placeholder="Ask farming question">
+<button onclick="askAI()">Ask</button>
+<p id="aiReply"></p>
 </div>
+
+<div class="card">
+<h3>🌱 Crop Recommendation</h3>
+<select id="season">
+<option>Summer</option>
+<option>Rainy</option>
+<option>Winter</option>
+</select>
+<input id="soil" placeholder="Soil type">
+<button onclick="crop()">Suggest</button>
+<p id="cropOut"></p>
+</div>
+
+<div class="card">
+<h3>🧪 Soil Analyzer</h3>
+<input id="ph" placeholder="pH">
+<button onclick="soil()">Analyze</button>
+<p id="soilOut"></p>
+</div>
+
+<div class="card">
+<h3>📊 Market Prices</h3>
+<canvas id="chart"></canvas>
+</div>
+
 </section>
 
 <script>
 
 /* =========================
-   🌍 THREE.JS 3D FARM
+   🌍 THREE JS FARM
 ========================= */
-const canvas = document.getElementById("scene");
-const scene = new THREE.Scene();
-scene.fog = new THREE.Fog(0x0b2e1a, 10, 100);
+const scene=new THREE.Scene();
+scene.fog=new THREE.Fog(0x0b2e1a,5,50);
 
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
-camera.position.z = 5;
+const camera=new THREE.PerspectiveCamera(60,innerWidth/innerHeight,0.1,1000);
+camera.position.set(0,4,8);
 
-const renderer = new THREE.WebGLRenderer({canvas});
-renderer.setSize(window.innerWidth, window.innerHeight);
+const renderer=new THREE.WebGLRenderer({canvas:document.getElementById("scene")});
+renderer.setSize(innerWidth,innerHeight);
 
-/* 🌱 FARM GROUND */
-const geometry = new THREE.PlaneGeometry(50, 50);
-const material = new THREE.MeshBasicMaterial({color:0x145a32, wireframe:false});
-const ground = new THREE.Mesh(geometry, material);
-ground.rotation.x = -Math.PI/2;
+const light=new THREE.DirectionalLight(0xffffff,1);
+light.position.set(5,10,5);
+scene.add(light);
+
+const ground=new THREE.Mesh(
+new THREE.PlaneGeometry(50,50),
+new THREE.MeshStandardMaterial({color:0x145a32})
+);
+ground.rotation.x=-Math.PI/2;
 scene.add(ground);
 
-/* 🌿 SIMPLE FARM OBJECTS */
-for(let i=0;i<30;i++){
-let box = new THREE.Mesh(
-new THREE.BoxGeometry(0.2, Math.random()*2, 0.2),
-new THREE.MeshBasicMaterial({color:0x2ecc71})
+/* 🌾 CROPS GRID */
+for(let x=-8;x<=8;x++){
+for(let z=-8;z<=8;z++){
+let c=new THREE.Mesh(
+new THREE.CylinderGeometry(0.05,0.05,0.5),
+new THREE.MeshStandardMaterial({color:0x2ecc71})
 );
-box.position.set(
-(Math.random()-0.5)*20,
-0,
-(Math.random()-0.5)*20
-);
-scene.add(box);
+c.position.set(x*0.6,0.25,z*0.6);
+scene.add(c);
 }
-
-/* ANIMATE 3D */
-function animate(){
-requestAnimationFrame(animate);
-ground.rotation.z += 0.001;
-renderer.render(scene,camera);
 }
-animate();
 
 /* =========================
    🌧️ RAIN SYSTEM
 ========================= */
-const rain = document.getElementById("rain");
+const rain=document.getElementById("rain");
+const ctx=rain.getContext("2d");
+rain.width=innerWidth;
+rain.height=innerHeight;
 
-function createRain(){
-for(let i=0;i<80;i++){
-let drop=document.createElement("div");
-drop.className="drop";
-drop.style.left=Math.random()*100+"vw";
-drop.style.animationDuration=(0.5+Math.random()*1.5)+"s";
-drop.style.opacity=Math.random();
-rain.appendChild(drop);
+let drops=[];
+for(let i=0;i<150;i++){
+drops.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,l:10+Math.random()*10,s:3+Math.random()*5});
+}
+
+function drawRain(){
+ctx.clearRect(0,0,rain.width,rain.height);
+ctx.strokeStyle="rgba(255,255,255,0.5)";
+for(let d of drops){
+ctx.beginPath();
+ctx.moveTo(d.x,d.y);
+ctx.lineTo(d.x,d.y+d.l);
+ctx.stroke();
+d.y+=d.s;
+if(d.y>rain.height){d.y=-10;d.x=Math.random()*rain.width;}
 }
 }
-createRain();
 
 /* =========================
-   ⚡ THUNDER SYSTEM
+   ⚡ LIGHTNING
 ========================= */
 const flash=document.getElementById("flash");
 
 function lightning(){
-flash.style.opacity="0.8";
-setTimeout(()=>flash.style.opacity="0",100);
+flash.style.opacity=0.9;
+setTimeout(()=>flash.style.opacity=0,120);
 }
 
-function startStorm(){
-setInterval(()=>{
-createRain();
-if(Math.random()>0.7) lightning();
-},2000);
-}
-
-/* toggle storm */
+/* =========================
+   🌦️ WEATHER MODE
+========================= */
 let storm=false;
+
 function toggleStorm(){
 storm=!storm;
+
+setInterval(()=>{
 if(storm){
-startStorm();
+for(let i=0;i<10;i++){
+drops.push({x:Math.random()*innerWidth,y:-10,l:15,s:5});
 }
+if(Math.random()>0.6) lightning();
+light.intensity=0.4;
+}else{
+light.intensity=1;
+}
+},800);
 }
 
-/* resize */
-window.addEventListener("resize",()=>{
-camera.aspect=window.innerWidth/window.innerHeight;
-camera.updateProjectionMatrix();
-renderer.setSize(window.innerWidth,window.innerHeight);
+/* =========================
+   🌿 FLOATING LEAVES
+========================= */
+for(let i=0;i<20;i++){
+let l=document.createElement("div");
+l.className="leaf";
+l.style.left=Math.random()*100+"vw";
+l.style.animationDuration=(8+Math.random()*10)+"s";
+document.body.appendChild(l);
+}
+
+/* =========================
+   🤖 AI SYSTEM
+========================= */
+function askAI(){
+let m=document.getElementById("msg").value.toLowerCase();
+let r="Use compost and organic farming 🌱";
+
+if(m.includes("rice"))r="Rice needs water-rich soil 🌾";
+if(m.includes("soil"))r="Add compost + organic manure 🧪";
+
+document.getElementById("aiReply").innerText=r;
+}
+
+/* 🌱 CROP */
+function crop(){
+let s=document.getElementById("season").value;
+let soil=document.getElementById("soil").value;
+
+let r="Wheat recommended";
+if(s=="Rainy")r="Rice + Sugarcane 🌾";
+if(soil.includes("sandy"))r="Millets + Groundnut 🌱";
+
+document.getElementById("cropOut").innerText=r;
+}
+
+/* 🧪 SOIL */
+function soil(){
+let ph=document.getElementById("ph").value;
+let r="Balanced soil 🌿";
+
+if(ph<6)r="Acidic soil → add lime";
+if(ph>8)r="Alkaline soil → add compost";
+
+document.getElementById("soilOut").innerText=r;
+}
+
+/* 📊 CHART */
+new Chart(document.getElementById("chart"),{
+type:"line",
+data:{
+labels:["Rice","Wheat","Corn","Tomato"],
+datasets:[{data:[30,28,25,40],borderWidth:2}]
+}
 });
 
+/* 🎥 LOOP */
+function animate(){
+requestAnimationFrame(animate);
+drawRain();
+renderer.render(scene,camera);
+}
+animate();
+
+/* resize */
+addEventListener("resize",()=>{
+renderer.setSize(innerWidth,innerHeight);
+camera.aspect=innerWidth/innerHeight;
+camera.updateProjectionMatrix();
+rain.width=innerWidth;
+rain.height=innerHeight;
+});
 </script>
 
 </body>
