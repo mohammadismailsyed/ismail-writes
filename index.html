@@ -1,386 +1,397 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Smart Organic Farming Hub</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AgriSmart Startup OS</title>
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Arial, sans-serif;
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+    color: white;
 }
 
-body{
-  background:#f4fff4;
-  color:#1b3a1b;
-  overflow-x:hidden;
-  scroll-behavior:smooth;
+/* 🌄 BACKGROUND */
+#bg {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
 }
 
-/* 🌿 BACKGROUND ANIMATION */
-.particles{
-  position:fixed;
-  width:100%;
-  height:100%;
-  top:0;
-  left:0;
-  z-index:-1;
-  overflow:hidden;
+/* LAYOUT */
+.container {
+    display: flex;
+    height: 100vh;
 }
 
-.particles span{
-  position:absolute;
-  width:10px;
-  height:10px;
-  background:#66bb6a;
-  border-radius:50%;
-  opacity:0.25;
-  animation:floatUp linear infinite;
+/* SIDEBAR */
+.sidebar {
+    width: 220px;
+    background: rgba(0,0,0,0.65);
+    padding: 15px;
 }
 
-@keyframes floatUp{
-  0%{transform:translateY(100vh);}
-  100%{transform:translateY(-10vh);}
+.sidebar h2 {
+    color: #22c55e;
 }
 
-/* HEADER */
-header{
-  background:#2e7d32;
-  color:white;
-  padding:15px 20px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  position:sticky;
-  top:0;
-  z-index:1000;
+.sidebar button {
+    width: 100%;
+    margin: 6px 0;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background: rgba(255,255,255,0.1);
+    color: white;
 }
 
-nav a{
-  color:white;
-  margin:0 10px;
-  text-decoration:none;
-  transition:0.3s;
+.sidebar button:hover {
+    background: #22c55e;
+    color: black;
 }
 
-nav a:hover{
-  text-decoration:underline;
+/* MAIN */
+.main {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
 }
 
-/* HERO */
-.hero{
-  height:90vh;
-  background:
-  linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),
-  url('https://images.unsplash.com/photo-1523348837708-15d4a09cfac2')
-  center/cover;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  color:white;
-  text-align:center;
-  padding:20px;
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
 }
 
-.hero h1{
-  font-size:40px;
-  animation:fadeIn 1.5s ease;
+input {
+    width: 55%;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
 }
 
-/* SEARCH */
-.search-box{
-  margin-top:20px;
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  justify-content:center;
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 12px;
 }
 
-.search-box input{
-  padding:10px;
-  border:none;
-  border-radius:6px;
-  width:250px;
+.card {
+    background: rgba(0,0,0,0.55);
+    padding: 12px;
+    border-radius: 10px;
 }
 
-.search-box button{
-  padding:10px 15px;
-  border:none;
-  background:#66bb6a;
-  color:white;
-  border-radius:6px;
-  cursor:pointer;
-  position:relative;
-  overflow:hidden;
-  transition:0.3s;
+/* CHAT */
+.chat {
+    height: 180px;
+    overflow-y: auto;
+    background: rgba(0,0,0,0.6);
+    padding: 8px;
+    border-radius: 8px;
 }
 
-.search-box button:hover{
-  transform:scale(1.05);
-  background:#43a047;
-}
+.user { color: #38bdf8; }
+.bot { color: #22c55e; }
 
-/* RIPPLE */
-.search-box button::after{
-  content:"";
-  position:absolute;
-  width:100px;
-  height:100px;
-  background:rgba(255,255,255,0.3);
-  border-radius:50%;
-  transform:scale(0);
-  animation:ripple 0.6s linear;
-}
-
-@keyframes ripple{
-  to{transform:scale(4);opacity:0;}
-}
-
-/* SECTIONS */
-section{
-  padding:50px 20px;
-  opacity:0;
-  transform:translateY(40px);
-  transition:1s ease;
-}
-
-section.show{
-  opacity:1;
-  transform:translateY(0);
-}
-
-/* CARDS */
-.card-container{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:20px;
-}
-
-.card{
-  background:white;
-  padding:20px;
-  border-radius:12px;
-  box-shadow:0 5px 15px rgba(0,0,0,0.1);
-  transition:0.4s;
-}
-
-.card:hover{
-  transform:translateY(-10px) scale(1.03);
-}
-
-/* AI BOX */
-#aiBox{
-  margin-top:10px;
-  display:none;
-}
-
-#aiChat{
-  height:160px;
-  overflow:auto;
-  background:#f1f1f1;
-  padding:10px;
-  border-radius:8px;
-}
-
-/* FOOTER */
-footer{
-  background:#1b3a1b;
-  color:white;
-  text-align:center;
-  padding:20px;
-}
-
-/* FADE */
-@keyframes fadeIn{
-  from{opacity:0; transform:translateY(20px);}
-  to{opacity:1; transform:translateY(0);}
+button.action {
+    margin-top: 6px;
+    padding: 8px;
+    border: none;
+    border-radius: 6px;
+    background: #22c55e;
+    color: black;
+    font-weight: bold;
 }
 </style>
 </head>
 
 <body>
 
-<!-- 🌿 PARTICLES -->
-<div class="particles" id="particles"></div>
+<canvas id="bg"></canvas>
 
-<header>
-  <div>🌱 Smart Farming Hub</div>
-  <nav>
-    <a href="#home">Home</a>
-    <a href="#tips">Tips</a>
-    <a href="#market">Market</a>
-    <a href="#ai">AI</a>
-  </nav>
-</header>
+<div class="container">
 
-<!-- HERO -->
-<section class="hero" id="home">
-  <h1>Grow Naturally, Live Better 🌱</h1>
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <h2 id="title">🌱 AgriSmart</h2>
 
-  <div class="search-box">
-    <input id="searchInput" placeholder="Search farming topics..." />
-    <button onclick="searchSite(event)">Search</button>
-    <button onclick="startVoice()">🎤 Voice</button>
-  </div>
-</section>
+        <button onclick="setLang('en')">English</button>
+        <button onclick="setLang('hi')">हिंदी</button>
 
-<!-- TIPS -->
-<section id="tips">
-  <h2>🌾 Farming Tips</h2>
-  <div class="card-container">
-    <div class="card">Use compost for soil health</div>
-    <div class="card">Rotate crops regularly</div>
-    <div class="card">Use drip irrigation</div>
-  </div>
-</section>
+        <hr>
 
-<!-- MARKET -->
-<section id="market">
-  <h2>🛒 Organic Market</h2>
-  <div class="card-container">
-    <div class="card">Tomatoes</div>
-    <div class="card">Organic Fertilizer</div>
-  </div>
-</section>
-
-<!-- AI SECTION -->
-<section id="ai">
-  <h2>🤖 AI Farming Assistant</h2>
-
-  <div class="card">
-    <button onclick="openAI()">Open AI Chat</button>
-
-    <div id="aiBox">
-      <div id="aiChat"></div>
-
-      <input id="aiInput" placeholder="Ask farming question..." />
-      <button onclick="sendMessage()">Send</button>
+        <button onclick="show('dashboard')">Dashboard</button>
+        <button onclick="show('weather')">Weather</button>
+        <button onclick="show('market')">Market</button>
+        <button onclick="show('ai')">AI</button>
     </div>
-  </div>
 
-  <br>
+    <!-- MAIN -->
+    <div class="main">
 
-  <div class="card">
-    <h3>🌍 Translator</h3>
-    <input id="text" placeholder="Enter text..." />
+        <div class="topbar">
+            <h3 id="subtitle">Startup Agri Dashboard</h3>
 
-    <select id="lang">
-      <option value="en">English</option>
-      <option value="hi">Hindi</option>
-      <option value="te">Telugu</option>
-    </select>
+            <input id="search" placeholder="Search..." onkeyup="globalSearch()">
 
-    <button onclick="translateText()">Translate</button>
-    <p id="out"></p>
-  </div>
+            <button class="action" onclick="startVoice()">🎤</button>
+        </div>
 
-  <br>
+        <!-- DASHBOARD -->
+        <div id="dashboard">
+            <div class="grid">
+                <div class="card">🌾 Wheat Health: 82%</div>
+                <div class="card">🌱 Soil pH: 6.8</div>
+                <div class="card">💧 Irrigation: Efficient</div>
+            </div>
+        </div>
 
-  <div class="card">
-    <h3>🌾 Crop Suggestion</h3>
-    <select id="season">
-      <option value="">Select Season</option>
-      <option value="summer">Summer</option>
-      <option value="winter">Winter</option>
-      <option value="rainy">Rainy</option>
-    </select>
+        <!-- WEATHER -->
+        <div id="weather" style="display:none;">
+            <div class="card">
+                <h3>🌦️ Weather</h3>
+                <button class="action" onclick="getWeather()">Load</button>
+                <p id="w"></p>
+            </div>
+        </div>
 
-    <button onclick="suggestCrop()">Suggest</button>
-    <p id="cropOut"></p>
-  </div>
-</section>
+        <!-- MARKET -->
+        <div id="market" style="display:none;">
+            <div class="card">
+                <h3>📡 Market Prices</h3>
+                <button class="action" onclick="loadMarket()">Refresh</button>
+                <p id="status"></p>
+            </div>
 
-<footer>
-© 2026 Smart Organic Farming Hub 🌱
-</footer>
+            <div class="grid" id="marketGrid"></div>
+        </div>
+
+        <!-- AI -->
+        <div id="ai" style="display:none;">
+            <div class="card">
+                <h3>🤖 Agri AI</h3>
+                <div class="chat" id="chat"></div>
+                <input id="msg" placeholder="Ask question...">
+                <button class="action" onclick="send()">Send</button>
+            </div>
+        </div>
+
+    </div>
+</div>
 
 <script>
 
-/* 🌿 PARTICLES */
-const p=document.getElementById("particles");
-for(let i=0;i<35;i++){
-  let s=document.createElement("span");
-  s.style.left=Math.random()*100+"%";
-  s.style.animationDuration=(5+Math.random()*10)+"s";
-  s.style.width=5+Math.random()*10+"px";
-  s.style.height=5+Math.random()*10+"px";
-  p.appendChild(s);
-}
+/* =========================
+   🌍 LANGUAGE SYSTEM
+========================= */
 
-/* SCROLL ANIMATION */
-const sections=document.querySelectorAll("section");
+let lang = "en";
 
-window.addEventListener("scroll",()=>{
-  sections.forEach(sec=>{
-    if(sec.getBoundingClientRect().top<500){
-      sec.classList.add("show");
+const dict = {
+    en: {
+        title: "🌱 AgriSmart",
+        subtitle: "Startup Agri Dashboard"
+    },
+    hi: {
+        title: "🌱 कृषि स्मार्ट",
+        subtitle: "स्टार्टअप कृषि डैशबोर्ड"
     }
-  });
-});
+};
 
-/* SEARCH */
-function searchSite(e){
-  alert("Searching: "+document.getElementById("searchInput").value);
+function setLang(l){
+    lang = l;
+    document.getElementById("title").innerText = dict[l].title;
+    document.getElementById("subtitle").innerText = dict[l].subtitle;
 }
 
-/* VOICE */
+/* =========================
+   PAGE SWITCH
+========================= */
+
+function show(id){
+    document.querySelectorAll('.main > div').forEach(d=>d.style.display='none');
+    document.getElementById(id).style.display='block';
+}
+
+/* =========================
+   🔎 GLOBAL SEARCH
+========================= */
+
+function globalSearch(){
+    let q = document.getElementById("search").value.toLowerCase();
+
+    document.querySelectorAll(".card").forEach(c=>{
+        c.style.display = c.innerText.toLowerCase().includes(q)
+        ? "block":"none";
+    });
+}
+
+/* =========================
+   🎤 VOICE SEARCH
+========================= */
+
 function startVoice(){
-  let r=new webkitSpeechRecognition();
-  r.lang="en-US";
-  r.onresult=e=>{
-    document.getElementById("searchInput").value=e.results[0][0].transcript;
-  };
-  r.start();
+    let SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if(!SpeechRecognition){
+        alert("Voice not supported");
+        return;
+    }
+
+    let rec = new SpeechRecognition();
+    rec.lang = lang === "hi" ? "hi-IN" : "en-IN";
+    rec.start();
+
+    rec.onresult = (e)=>{
+        let text = e.results[0][0].transcript;
+        document.getElementById("search").value = text;
+        globalSearch();
+    };
 }
 
-/* AI CHAT */
-function openAI(){
-  document.getElementById("aiBox").style.display="block";
+/* =========================
+   🌦️ WEATHER
+========================= */
+
+function getWeather(){
+    navigator.geolocation.getCurrentPosition(async pos=>{
+        let url = `https://api.open-meteo.com/v1/forecast?latitude=${pos.coords.latitude}&longitude=${pos.coords.longitude}&current_weather=true`;
+        let r = await fetch(url);
+        let d = await r.json();
+
+        document.getElementById("w").innerText =
+        `Temp: ${d.current_weather.temperature}°C | Wind: ${d.current_weather.windspeed} km/h`;
+    });
 }
 
-function sendMessage(){
-  let input=document.getElementById("aiInput").value.toLowerCase();
-  let chat=document.getElementById("aiChat");
+/* =========================
+   📡 MARKET API + FALLBACK
+========================= */
 
-  let res="Ask about soil, water, crops.";
+const API = "https://api.example.com/crops";
 
-  if(input.includes("soil")) res="Use compost 🌱";
-  else if(input.includes("water")) res="Use drip irrigation 💧";
-  else if(input.includes("crop")) res="Rotate crops 🌾";
+const fallback = [
+    {crop:"Wheat",price:2300,unit:"Quintal"},
+    {crop:"Rice",price:3100,unit:"Quintal"},
+    {crop:"Maize",price:1800,unit:"Quintal"}
+];
 
-  chat.innerHTML+="<p><b>You:</b> "+input+"</p><p><b>AI:</b> "+res+"</p>";
+async function loadMarket(){
+    let status = document.getElementById("status");
+    let grid = document.getElementById("marketGrid");
 
-  document.getElementById("aiInput").value="";
+    status.innerText = "Loading market...";
+
+    try{
+        let res = await fetch(API);
+        if(!res.ok) throw new Error();
+
+        let data = await res.json();
+        renderMarket(data);
+
+        status.innerText = "Live data loaded";
+
+    }catch(e){
+        status.innerText = "Fallback data loaded";
+        renderMarket(fallback);
+    }
 }
 
-/* TRANSLATOR */
-function translateText(){
-  let t=document.getElementById("text").value;
-  let l=document.getElementById("lang").value;
+function renderMarket(data){
+    let grid = document.getElementById("marketGrid");
+    grid.innerHTML = "";
 
-  let o=t;
-
-  if(l=="hi") o="Hindi: "+t.replace("water","पानी");
-  if(l=="te") o="Telugu: "+t.replace("water","నీరు");
-
-  document.getElementById("out").innerText=o;
+    data.forEach(i=>{
+        grid.innerHTML += `
+        <div class="card">
+            <h3>🌾 ${i.crop}</h3>
+            <p>₹${i.price} / ${i.unit}</p>
+        </div>`;
+    });
 }
 
-/* CROP */
-function suggestCrop(){
-  let s=document.getElementById("season").value;
-  let r="";
+/* =========================
+   🤖 AI CHAT
+========================= */
 
-  if(s=="summer") r="Maize, Millets 🌞";
-  if(s=="winter") r="Wheat, Peas ❄️";
-  if(s=="rainy") r="Rice, Cotton 🌧️";
+function send(){
+    let m = document.getElementById("msg");
+    if(!m.value) return;
 
-  document.getElementById("cropOut").innerText=r;
+    chat.innerHTML += `<div class='user'>You: ${m.value}</div>`;
+
+    let r =
+    m.value.includes("soil") ? "Keep pH 6-7.5"
+    : m.value.includes("pest") ? "Use neem oil"
+    : "Ask about crops, soil, market";
+
+    chat.innerHTML += `<div class='bot'>AI: ${r}</div>`;
+    m.value="";
 }
+
+/* =========================
+   🌄 REALISTIC FARM ANIMATION
+========================= */
+
+const c = document.getElementById("bg");
+const x = c.getContext("2d");
+
+c.width = window.innerWidth;
+c.height = window.innerHeight;
+
+let clouds = [{x:100,y:80},{x:300,y:120},{x:600,y:90}];
+let t = 0;
+
+function draw(){
+    x.clearRect(0,0,c.width,c.height);
+
+    let g = x.createLinearGradient(0,0,0,c.height);
+    g.addColorStop(0,"#0b3d91");
+    g.addColorStop(1,"#2e7d32");
+
+    x.fillStyle = g;
+    x.fillRect(0,0,c.width,c.height);
+
+    // sun
+    x.fillStyle="yellow";
+    x.beginPath();
+    x.arc(c.width-120,100,50,0,Math.PI*2);
+    x.fill();
+
+    // field waves
+    for(let i=0;i<c.width;i+=20){
+        let w = Math.sin((i+t)/50)*10;
+        x.fillStyle="#1b5e20";
+        x.fillRect(i,c.height-140+w,20,140);
+    }
+
+    // clouds
+    clouds.forEach(cl=>{
+        cl.x += 0.4;
+        if(cl.x>c.width+100) cl.x=-100;
+
+        x.fillStyle="rgba(255,255,255,0.7)";
+        x.beginPath();
+        x.arc(cl.x,cl.y,50,0,Math.PI*2);
+        x.fill();
+    });
+
+    t += 2;
+    requestAnimationFrame(draw);
+}
+
+draw();
+
+window.onresize=()=>{
+    c.width = window.innerWidth;
+    c.height = window.innerHeight;
+};
 
 </script>
 
