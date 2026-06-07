@@ -1,282 +1,273 @@
-const express = require("express");
-const app = express();
-
-app.use(express.json());
-
-// ===============================
-// 🌿 FRONTEND (UI + ANIMATION)
-// ===============================
-app.get("/", (req, res) => {
-res.send(`
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>AgriTech AI Platform</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Organic Farming AI Platform</title>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-body {
-  margin:0;
-  font-family:Arial;
-  color:white;
-  overflow:hidden;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
 }
 
-/* 🌄 SKY */
-.sky {
-  position:fixed;
-  width:100%;
-  height:100%;
-  background: linear-gradient(#4facfe, #00f2fe);
-  z-index:-3;
+body{
+    background:#0b1f14;
+    color:white;
+    overflow-x:hidden;
 }
 
-/* ☀ SUN */
-.sun {
-  position:fixed;
-  top:50px;
-  right:80px;
-  width:80px;
-  height:80px;
-  background:yellow;
-  border-radius:50%;
-  box-shadow:0 0 50px yellow;
-  animation: glow 3s infinite alternate;
+/* HERO */
+.hero{
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
+    url('https://images.unsplash.com/photo-1501004318641-b39e6451bec6');
+    background-size:cover;
+    background-position:center;
 }
 
-@keyframes glow {
-  from { transform:scale(1); }
-  to { transform:scale(1.15); }
+.hero h1{
+    font-size:3rem;
+    animation:fadeIn 2s ease-in;
 }
 
-/* ☁ CLOUDS */
-.cloud {
-  position:fixed;
-  background:white;
-  border-radius:50px;
-  opacity:0.8;
-  animation: move 25s linear infinite;
+.hero p{
+    margin:15px;
+    font-size:1.2rem;
+    color:#c8ffd4;
 }
 
-.cloud1 { width:120px;height:60px; top:80px; left:-150px; }
-.cloud2 { width:160px;height:70px; top:150px; left:-200px; animation-delay:5s; }
-.cloud3 { width:100px;height:50px; top:220px; left:-180px; animation-delay:10s; }
-
-@keyframes move {
-  from { transform:translateX(0); }
-  to { transform:translateX(140vw); }
+.btn{
+    padding:12px 25px;
+    margin:10px;
+    border:none;
+    border-radius:30px;
+    cursor:pointer;
+    background:#2ecc71;
+    color:white;
+    transition:0.3s;
 }
 
-/* 🌱 GROUND */
-.ground {
-  position:fixed;
-  bottom:0;
-  width:100%;
-  height:40%;
-  background:linear-gradient(#2e7d32,#1b5e20);
-  z-index:-2;
+.btn:hover{
+    transform:scale(1.1);
+    background:#27ae60;
 }
 
-/* 🌾 CROPS */
-.crops {
-  position:fixed;
-  bottom:80px;
-  width:100%;
-  height:100px;
-  background: repeating-linear-gradient(
-    90deg,
-    #4caf50,
-    #4caf50 20px,
-    #388e3c 20px,
-    #388e3c 40px
-  );
-  animation: wind 4s infinite ease-in-out;
-  z-index:-1;
+/* SECTIONS */
+section{
+    padding:80px 10%;
 }
 
-@keyframes wind {
-  0%,100% { transform:skewX(0deg); }
-  50% { transform:skewX(2deg); }
+.title{
+    text-align:center;
+    font-size:2rem;
+    margin-bottom:40px;
+    color:#7dffb2;
 }
 
-/* ✨ UI */
-header {
-  padding:20px;
-  background:rgba(0,0,0,0.4);
+/* ABOUT */
+.about{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
 }
 
-section {
-  padding:20px;
+.card{
+    background:rgba(255,255,255,0.05);
+    padding:20px;
+    border-radius:15px;
+    backdrop-filter:blur(10px);
+    transition:0.3s;
 }
 
-.card {
-  background:rgba(0,0,0,0.5);
-  padding:15px;
-  border-radius:10px;
-  margin-top:10px;
-  backdrop-filter:blur(10px);
+.card:hover{
+    transform:translateY(-10px);
 }
 
-input, button {
-  padding:10px;
-  width:100%;
-  margin-top:10px;
-  border:none;
-  border-radius:8px;
+/* CHATBOT */
+.chatbox{
+    background:rgba(255,255,255,0.05);
+    padding:20px;
+    border-radius:15px;
 }
 
-button {
-  background:#00ff88;
-  cursor:pointer;
+.chatlog{
+    height:200px;
+    overflow-y:auto;
+    margin-bottom:10px;
 }
 
-button:hover {
-  background:#00cc6a;
+input{
+    width:80%;
+    padding:10px;
+    border:none;
+    border-radius:10px;
+}
+
+button{
+    padding:10px;
+    border:none;
+    background:#2ecc71;
+    color:white;
+    border-radius:10px;
+}
+
+/* CHART */
+canvas{
+    background:rgba(255,255,255,0.05);
+    padding:20px;
+    border-radius:15px;
+}
+
+/* COUNTERS */
+.counter{
+    display:flex;
+    justify-content:space-around;
+    text-align:center;
+}
+
+.counter div{
+    font-size:1.5rem;
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:20px;
+    background:#06140d;
+}
+
+/* ANIMATION */
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(-20px);}
+    to{opacity:1; transform:translateY(0);}
 }
 </style>
 </head>
 
 <body>
 
-<div class="sky"></div>
-<div class="sun"></div>
+<!-- HERO -->
+<div class="hero">
+    <h1>Grow Naturally. Harvest Healthier.</h1>
+    <p>AI-powered Organic Farming Platform for a Sustainable Future</p>
+    <button class="btn">Explore Farming</button>
+    <button class="btn">Market Prices</button>
+</div>
 
-<div class="cloud cloud1"></div>
-<div class="cloud cloud2"></div>
-<div class="cloud cloud3"></div>
-
-<div class="ground"></div>
-<div class="crops"></div>
-
-<header>
-<h2>🌿 AgriTech AI Platform</h2>
-</header>
-
+<!-- ABOUT -->
 <section>
-<h2>🤖 AI Farming Assistant</h2>
-<input id="msg" placeholder="Ask farming question...">
-<button onclick="askAI()">Ask AI</button>
-<div class="card" id="aiRes"></div>
+<h2 class="title">Why Organic Farming?</h2>
+<div class="about">
+    <div class="card">🌱 Chemical-free farming improves soil health.</div>
+    <div class="card">💧 Saves water and improves sustainability.</div>
+    <div class="card">🌍 Reduces pollution and carbon footprint.</div>
+</div>
 </section>
 
+<!-- AI CHATBOT -->
 <section>
-<h2>🌦 Weather → Crop Suggestion</h2>
-<input id="temp" placeholder="Enter temperature">
-<button onclick="weather()">Get Crops</button>
-<div class="card" id="weatherRes"></div>
+<h2 class="title">AI Farming Assistant</h2>
+<div class="chatbox">
+    <div class="chatlog" id="chatlog"></div>
+    <input id="msg" placeholder="Ask about crops, soil, fertilizers...">
+    <button onclick="sendMsg()">Send</button>
+</div>
 </section>
 
+<!-- MARKET -->
 <section>
-<h2>🌿 Crop Disease Detection</h2>
-<input id="img" placeholder="Type: leaf / spot / healthy">
-<button onclick="detect()">Detect</button>
-<div class="card" id="diseaseRes"></div>
+<h2 class="title">Crop Market Prices</h2>
+<canvas id="chart"></canvas>
 </section>
+
+<!-- COUNTERS -->
+<section>
+<h2 class="title">Sustainability Impact</h2>
+<div class="counter">
+    <div>
+        <div id="c1">0</div>
+        Farmers
+    </div>
+    <div>
+        <div id="c2">0</div>
+        Acres Saved
+    </div>
+    <div>
+        <div id="c3">0</div>
+        CO₂ Reduced
+    </div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+© 2026 Organic Farming AI | Built for Sustainability 🌿
+</footer>
 
 <script>
-async function askAI(){
-let message = document.getElementById("msg").value;
+// CHATBOT SIMPLE AI
+function sendMsg(){
+    let msg = document.getElementById("msg").value;
+    let chatlog = document.getElementById("chatlog");
 
-let res = await fetch("/api/ai",{
-method:"POST",
-headers:{"Content-Type":"application/json"},
-body:JSON.stringify({message})
-});
+    chatlog.innerHTML += "<p><b>You:</b> " + msg + "</p>";
 
-let data = await res.json();
-document.getElementById("aiRes").innerText = data.reply;
+    let reply = "I recommend organic compost and crop rotation for better yield 🌱";
+
+    if(msg.toLowerCase().includes("rice")){
+        reply = "Rice grows best in clay soil with good water supply 🌾";
+    }
+    if(msg.toLowerCase().includes("soil")){
+        reply = "Use compost + cow dung manure for healthy soil 🌱";
+    }
+
+    chatlog.innerHTML += "<p><b>AI:</b> " + reply + "</p>";
+
+    document.getElementById("msg").value="";
+    chatlog.scrollTop = chatlog.scrollHeight;
 }
 
-async function weather(){
-let temp = document.getElementById("temp").value;
+// CHART
+const ctx = document.getElementById('chart');
 
-let res = await fetch("/api/weather",{
-method:"POST",
-headers:{"Content-Type":"application/json"},
-body:JSON.stringify({temp})
+new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: ['Rice', 'Wheat', 'Corn', 'Tomato', 'Potato'],
+        datasets: [{
+            label: 'Price (₹ per kg)',
+            data: [30, 28, 25, 40, 20],
+            borderWidth: 2
+        }]
+    }
 });
 
-let data = await res.json();
-document.getElementById("weatherRes").innerText =
-"Best Crops: " + data.crops.join(", ");
+// COUNTERS ANIMATION
+function animate(id, end){
+    let el = document.getElementById(id);
+    let count = 0;
+    let interval = setInterval(()=>{
+        count++;
+        el.innerText = count;
+        if(count >= end) clearInterval(interval);
+    }, 20);
 }
 
-async function detect(){
-let imageName = document.getElementById("img").value;
-
-let res = await fetch("/api/disease",{
-method:"POST",
-headers:{"Content-Type":"application/json"},
-body:JSON.stringify({imageName})
-});
-
-let data = await res.json();
-document.getElementById("diseaseRes").innerText =
-"Disease: " + data.disease + " | Cure: " + data.cure;
-}
+animate("c1", 1200);
+animate("c2", 5400);
+animate("c3", 3200);
 </script>
 
 </body>
 </html>
-`);
-});
-
-// ===============================
-// 🤖 AI ASSISTANT API
-// ===============================
-app.post("/api/ai", (req,res)=>{
-let msg = req.body.message.toLowerCase();
-
-if(msg.includes("soil"))
-return res.json({reply:"Use compost and organic manure for healthy soil."});
-
-if(msg.includes("pest"))
-return res.json({reply:"Use neem oil spray and biological pest control."});
-
-if(msg.includes("fertilizer"))
-return res.json({reply:"Organic fertilizers like cow dung compost are best."});
-
-res.json({reply:"Organic farming improves soil health and sustainability."});
-});
-
-// ===============================
-// 🌦 WEATHER → CROPS
-// ===============================
-app.post("/api/weather",(req,res)=>{
-let temp = Number(req.body.temp);
-
-let crops =
-temp > 30 ? ["Millets","Cotton"] :
-temp > 20 ? ["Wheat","Vegetables"] :
-["Potato","Peas"];
-
-res.json({crops});
-});
-
-// ===============================
-// 🌿 DISEASE DETECTION
-// ===============================
-app.post("/api/disease",(req,res)=>{
-let img = req.body.imageName.toLowerCase();
-
-if(img.includes("leaf"))
-return res.json({
-disease:"Leaf Blight",
-cure:"Use copper-based fungicide and remove infected leaves"
-});
-
-if(img.includes("spot"))
-return res.json({
-disease:"Leaf Spot",
-cure:"Spray neem oil and maintain spacing"
-});
-
-return res.json({
-disease:"Healthy Plant",
-cure:"No treatment required"
-});
-});
-
-// ===============================
-app.listen(5000,()=>{
-console.log("🌿 AgriTech running on http://localhost:5000");
-});
