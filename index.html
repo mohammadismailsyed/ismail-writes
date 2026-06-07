@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AgroAI - Smart Organic Farming Platform</title>
+<title>AgroAI - Full Smart Farming System</title>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -95,30 +95,17 @@ body{
     color:white;
 }
 
-/* SECTION SYSTEM */
+/* SECTION */
 section{
     padding:80px 10%;
 }
 
-.section-title{
-    margin-bottom:20px;
-}
-
-.section-title h2{
+.title{
     font-size:1.7rem;
+    margin-bottom:20px;
+    color:#bfffd6;
 }
 
-.badge{
-    display:inline-block;
-    padding:4px 10px;
-    background:rgba(46,204,113,0.15);
-    color:#7dffb2;
-    border-radius:20px;
-    font-size:12px;
-    margin-top:6px;
-}
-
-/* CARDS */
 .card{
     background:var(--card);
     padding:16px;
@@ -127,19 +114,26 @@ section{
     border:1px solid rgba(255,255,255,0.06);
 }
 
-/* GRID */
 .grid{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
     gap:15px;
 }
 
-/* BOX */
-.box{
+input, select{
+    padding:10px;
+    border-radius:8px;
+    border:none;
+    width:100%;
+    margin-top:8px;
+}
+
+/* ALERT STYLE */
+.alert{
     background:rgba(255,255,255,0.04);
-    padding:18px;
-    border-radius:12px;
-    border:1px solid rgba(255,255,255,0.06);
+    padding:14px;
+    border-left:4px solid #2ecc71;
+    border-radius:10px;
 }
 
 /* FOOTER */
@@ -166,128 +160,92 @@ footer{
 <!-- HERO -->
 <div class="hero">
 <div class="hero-content">
-<h1>Smart Organic Farming System</h1>
-<p>Learn • Implement • Grow • Profit</p>
+<h1>AI Smart Farming System</h1>
+<p>Plan • Predict • Protect • Profit</p>
 </div>
 </div>
 
-<!-- ================= INTELLIGENCE ================= -->
+<!-- ================= AI ================= -->
 <section id="ai">
-<div class="section-title">
-<h2>🤖 AI Farming Assistant</h2>
-<span class="badge">Smart Guidance System</span>
-</div>
-<div class="box">
+<h2 class="title">🤖 AI Farming Assistant</h2>
+<div class="card">
 <input id="msg" placeholder="Ask farming question">
-<button class="btn" onclick="sendMsg()">Ask</button>
+<button class="btn" onclick="sendMsg()">Ask AI</button>
 <div id="chatlog"></div>
 </div>
 </section>
 
-<!-- ================= HISTORY SECTION (NEW) ================= -->
-<section id="history">
-<div class="section-title">
-<h2>📜 Organic Farming: Ancient → Modern Evolution</h2>
-<span class="badge">Knowledge Base</span>
-</div>
-
-<div class="box">
+<!-- ================= 1. PROFIT PREDICTOR ================= -->
+<section id="profit">
+<h2 class="title">🌾 Crop Profit Predictor</h2>
 
 <div class="card">
-<b>🌱 Ancient Farming (Before Chemicals)</b><br>
-Farmers used natural compost, cow dung, crop rotation, and rain-dependent farming.
-Soil fertility was maintained naturally without synthetic inputs.
-</div>
-
-<div class="card">
-<b>🏺 Traditional Era (India, Egypt, China)</b><br>
-Mixed cropping, seasonal farming, and organic manure systems were widely used.
-Knowledge was passed through generations based on observation.
-</div>
-
-<div class="card">
-<b>⚙️ Green Revolution Era</b><br>
-Chemical fertilizers and high-yield seeds increased production but reduced soil health over time.
-Dependency on external inputs increased.
-</div>
-
-<div class="card">
-<b>🤖 Modern AI Farming Era</b><br>
-Today farming uses AI, sensors, drones, and data analytics to optimize yield while returning to organic sustainability.
-</div>
-
+<input id="cropName" placeholder="Crop name">
+<input id="land" placeholder="Land size (acres)">
+<input id="cost" placeholder="Total cost (₹)">
+<button class="btn" onclick="predictProfit()">Predict Profit</button>
+<p id="profitResult"></p>
 </div>
 </section>
 
-<!-- ================= ADVANCED TECHNIQUES (NEW IMPLEMENTATION STYLE) ================= -->
-<section id="advanced">
-<div class="section-title">
-<h2>🚀 Advanced Farming Techniques (How to Apply)</h2>
-<span class="badge">Practical Guide</span>
-</div>
+<!-- ================= 2. WEATHER ACTION ================= -->
+<section id="weather">
+<h2 class="title">🌧️ Weather Action System</h2>
 
-<div class="grid">
-
-<div class="card">
-<b>📡 Precision Farming</b><br>
-👉 Use soil sensors or apps to measure moisture and nutrients.<br>
-👉 Apply water/fertilizer only where needed.<br>
-✔ Saves cost + increases yield.
-</div>
-
-<div class="card">
-<b>🌾 Regenerative Agriculture</b><br>
-👉 Rotate crops every season.<br>
-👉 Add compost and avoid chemical fertilizers.<br>
-✔ Restores soil naturally over time.
-</div>
-
-<div class="card">
-<b>💧 Smart Irrigation</b><br>
-👉 Water crops early morning or evening.<br>
-👉 Use drip irrigation if possible.<br>
-✔ Reduces water waste by 50%.
-</div>
-
-<div class="card">
-<b>🧪 Bio-Fertilizers</b><br>
-👉 Use neem cake, vermicompost, cow dung compost.<br>
-👉 Mix into soil before planting.<br>
-✔ Improves soil microbes.
-</div>
-
-<div class="card">
-<b>🛰️ Drone Farming</b><br>
-👉 Use drones to detect crop health issues early.<br>
-👉 Spray pesticides only on affected areas.<br>
-✔ Reduces chemical use.
-</div>
-
+<div class="card alert">
+🌡️ Temp: 30°C <br>
+🌧️ Rain: Expected in 2 days <br><br>
+👉 Action: Do NOT spray pesticides. Delay irrigation fertilization.
 </div>
 </section>
 
-<!-- ================= MARKET ================= -->
-<section id="market">
-<div class="section-title">
-<h2>📊 Market Intelligence</h2>
-</div>
+<!-- ================= 3. DISEASE DETECTOR ================= -->
+<section id="disease">
+<h2 class="title">🐛 Crop Disease Detector</h2>
 
-<canvas id="chart"></canvas>
+<div class="card">
+<input id="plant" placeholder="Enter crop name (e.g. tomato)">
+<button class="btn" onclick="detectDisease()">Check Disease</button>
+<p id="diseaseResult"></p>
+</div>
 </section>
 
-<!-- ================= COMMUNITY ================= -->
-<section id="community">
-<div class="section-title">
-<h2>👨‍🌾 Farmer Community</h2>
-</div>
+<!-- ================= 4. LOCATION ADVISOR ================= -->
+<section id="location">
+<h2 class="title">📍 Location-Based Crop Advisor</h2>
 
-<div class="box">
-Share farming experience, ask questions, and learn from other farmers 🌱
+<div class="card">
+<select id="region">
+<option>North India</option>
+<option>South India</option>
+<option>West India</option>
+<option>East India</option>
+</select>
+
+<button class="btn" onclick="locationAdvice()">Get Crops</button>
+<p id="locationResult"></p>
+</div>
+</section>
+
+<!-- ================= 5. FARMING PLANNER ================= -->
+<section id="planner">
+<h2 class="title">🧠 AI Farming Planner</h2>
+
+<div class="card">
+<input id="budget" placeholder="Budget (₹)">
+<select id="season">
+<option>Summer</option>
+<option>Rainy</option>
+<option>Winter</option>
+</select>
+
+<button class="btn" onclick="planFarm()">Generate Plan</button>
+<p id="planResult"></p>
 </div>
 </section>
 
 <footer>
-© 2026 AgroAI Farming Platform
+© 2026 AgroAI Advanced Farming System
 </footer>
 
 <script>
@@ -302,30 +260,75 @@ s.scrollIntoView({behavior:"smooth"});
 });
 }
 
-/* AI */
+/* AI CHAT */
 function sendMsg(){
 let msg=document.getElementById("msg").value;
 let chat=document.getElementById("chatlog");
 
 chat.innerHTML+=`<div><b>You:</b> ${msg}</div>`;
 
-let reply="Use compost + natural farming methods.";
+let reply="Use organic compost + crop rotation.";
 
-if(msg.includes("rice")) reply="Rice needs water-rich soil.";
-if(msg.includes("pest")) reply="Use neem oil spray.";
+if(msg.includes("rice")) reply="Rice needs clay soil and high water.";
+if(msg.includes("pest")) reply="Use neem oil bio pesticide.";
 
 chat.innerHTML+=`<div><b>AI:</b> ${reply}</div>`;
 }
 
-/* CHART */
-new Chart(document.getElementById("chart"),{
-type:"line",
-data:{
-labels:["Rice","Wheat","Corn","Tomato","Potato"],
-datasets:[{data:[30,28,35,40,25]}]
-},
-options:{plugins:{legend:{display:false}}}
-});
+/* 1. PROFIT PREDICTOR */
+function predictProfit(){
+let crop=document.getElementById("cropName").value;
+let land=parseFloat(document.getElementById("land").value);
+let cost=parseFloat(document.getElementById("cost").value);
+
+let yieldRate=land*10000;
+let profit=yieldRate-cost;
+
+document.getElementById("profitResult").innerText=
+"Estimated Profit for "+crop+": ₹"+profit;
+}
+
+/* 2. DISEASE DETECTOR */
+function detectDisease(){
+let plant=document.getElementById("plant").value.toLowerCase();
+
+let res="No major disease detected";
+
+if(plant==="tomato") res="Possible: Leaf Curl Disease → Use neem spray";
+if(plant==="rice") res="Possible: Blast disease → Use organic fungicide";
+
+document.getElementById("diseaseResult").innerText=res;
+}
+
+/* 3. LOCATION ADVISOR */
+function locationAdvice(){
+let r=document.getElementById("region").value;
+
+let res="Wheat, Vegetables";
+
+if(r==="South India") res="Rice, Coconut, Banana";
+if(r==="North India") res="Wheat, Mustard";
+if(r==="West India") res="Cotton, Groundnut";
+if(r==="East India") res="Rice, Jute";
+
+document.getElementById("locationResult").innerText=res;
+}
+
+/* 4. FARMING PLANNER */
+function planFarm(){
+let budget=parseFloat(document.getElementById("budget").value);
+let season=document.getElementById("season").value;
+
+let plan="Basic crop farming plan";
+
+if(budget>50000 && season==="Rainy")
+plan="Rice + Fertilizer plan + irrigation setup";
+
+if(budget<20000)
+plan="Small scale vegetables + compost farming";
+
+document.getElementById("planResult").innerText=plan;
+}
 
 </script>
 
