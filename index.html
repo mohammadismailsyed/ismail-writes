@@ -8,72 +8,20 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
-body{
-background:#061a12;
-color:white;
-overflow-x:hidden;
-}
+body{background:#071a12;color:white}
 
-/* 🌿 ANIMATED BACKGROUND LAYER */
-.background {
-position:fixed;
-width:100%;
-height:100%;
-z-index:-2;
-overflow:hidden;
-}
-
-/* moving gradient */
-.gradient {
-position:absolute;
-width:200%;
-height:200%;
-background:linear-gradient(45deg,#0b3d2e,#071a12,#0e4d34,#0a2a1d);
-animation:moveBg 12s linear infinite;
-opacity:0.6;
-}
-
-@keyframes moveBg{
-0%{transform:translate(0,0)}
-50%{transform:translate(-25px,-25px)}
-100%{transform:translate(0,0)}
-}
-
-/* floating leaves */
-.leaf {
-position:absolute;
-width:20px;
-height:20px;
-background:#2ecc71;
-opacity:0.3;
-border-radius:50% 0 50% 0;
-animation:floatLeaf 10s linear infinite;
-}
-
-@keyframes floatLeaf{
-0%{transform:translateY(100vh) rotate(0deg)}
-100%{transform:translateY(-10vh) rotate(360deg)}
-}
-
-/* NAV */
+/* NAVBAR */
 .navbar{
-position:fixed;
-top:0;
-width:100%;
-display:flex;
-justify-content:space-between;
+position:fixed;top:0;width:100%;
+display:flex;justify-content:space-between;
 padding:12px 6%;
 background:rgba(0,0,0,0.4);
-backdrop-filter:blur(10px);
-z-index:1000;
+backdrop-filter:blur(10px);z-index:1000
 }
-
 .navbar h2{color:#7dffb2}
-
 .navbar input{
 padding:6px;border-radius:20px;border:none;width:180px
 }
-
 .navbar button{
 padding:6px 10px;border:none;border-radius:20px;
 background:#2ecc71;color:white;cursor:pointer
@@ -82,14 +30,13 @@ background:#2ecc71;color:white;cursor:pointer
 /* HERO */
 .hero{
 height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
+display:flex;flex-direction:column;
+justify-content:center;align-items:center;
 text-align:center;
-background:linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.55));
+background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
+url('https://images.unsplash.com/photo-1501004318641-b39e6451bec6');
+background-size:cover
 }
-
 .hero h1{font-size:3rem}
 .btn{
 padding:10px 20px;margin:5px;
@@ -102,43 +49,33 @@ section{padding:80px 8%}
 .title{text-align:center;color:#7dffb2;margin-bottom:30px}
 
 /* GRID */
-.grid{
-display:grid;
+.grid{display:grid;
 grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
 gap:15px}
 
 /* CARDS */
 .card{
-background:rgba(255,255,255,0.07);
-padding:15px;
-border-radius:12px;
-backdrop-filter:blur(8px);
-transition:0.3s;
+background:rgba(255,255,255,0.06);
+padding:15px;border-radius:12px;
+backdrop-filter:blur(10px)
 }
-.card:hover{transform:translateY(-6px)}
 
 /* CHAT */
-.chatbox{
-background:rgba(255,255,255,0.07);
+.chatbox{background:rgba(255,255,255,0.06);
 padding:15px;border-radius:12px}
 .chatlog{height:150px;overflow:auto;margin-bottom:10px}
 
+/* INPUT */
 input,select{
 padding:8px;border:none;border-radius:10px;margin:5px
 }
 
+/* FOOTER */
 footer{text-align:center;padding:20px;background:#06140d}
-
-canvas{background:rgba(255,255,255,0.05);padding:10px;border-radius:12px}
 </style>
 </head>
 
 <body>
-
-<!-- 🌿 BACKGROUND -->
-<div class="background">
-<div class="gradient"></div>
-</div>
 
 <!-- NAV -->
 <div class="navbar">
@@ -159,79 +96,101 @@ canvas{background:rgba(255,255,255,0.05);padding:10px;border-radius:12px}
 
 <!-- WEATHER -->
 <section id="weather">
-<h2 class="title">🌧️ Weather Intelligence</h2>
+<h2 class="title">🌧️ Live Weather Intelligence</h2>
 <div class="card">
-<p>🌦️ Today: 28°C | Humidity: 70% | Light Rain Expected</p>
+<p id="weatherData">Loading weather...</p>
 </div>
 </section>
 
-<!-- AI -->
+<!-- AI ASSISTANT -->
 <section id="ai">
-<h2 class="title">🤖 AI Assistant</h2>
+<h2 class="title">🤖 AI Farming Assistant</h2>
 <div class="chatbox">
 <div class="chatlog" id="chat"></div>
-<input id="msg" placeholder="Ask farming question">
+<input id="msg" placeholder="Ask anything about farming">
 <button onclick="send()">Send</button>
 <button onclick="voiceInput()">🎤 Speak</button>
 </div>
 </section>
 
-<!-- CROP -->
-<section>
-<h2 class="title">🌱 Crop Recommendation</h2>
+<!-- CROP RECOMMENDATION -->
+<section id="crop">
+<h2 class="title">🌱 Crop Recommendation Engine</h2>
 <div class="card">
 <select id="season">
 <option>Summer</option>
 <option>Rainy</option>
 <option>Winter</option>
 </select>
-<input id="soil" placeholder="Soil type">
-<button onclick="recommend()">Suggest</button>
-<p id="cropRes"></p>
+
+<input id="soil" placeholder="Soil type (clay/sandy/loam)">
+<button onclick="recommendCrop()">Suggest Crop</button>
+<p id="cropResult"></p>
+</div>
+</section>
+
+<!-- SOIL ANALYZER -->
+<section id="soil">
+<h2 class="title">🧪 Soil Health Analyzer</h2>
+<div class="card">
+<input id="ph" placeholder="pH level">
+<input id="moisture" placeholder="Moisture %">
+<button onclick="analyzeSoil()">Analyze</button>
+<p id="soilResult"></p>
 </div>
 </section>
 
 <!-- MARKET -->
-<section>
+<section id="market">
 <h2 class="title">📊 Market Prices</h2>
 <canvas id="chart"></canvas>
 </section>
 
-<!-- ADVANCED -->
-<section id="advanced">
-<h2 class="title">🚜 Advanced Farming</h2>
+<!-- MARKETPLACE -->
+<section id="shop">
+<h2 class="title">🛒 Organic Marketplace</h2>
 <div class="grid">
-<div class="card">🌿 Precision AI Farming</div>
-<div class="card">🛰️ Drone Monitoring</div>
-<div class="card">💧 Smart Irrigation</div>
-<div class="card">🧪 Bio Fertilizers</div>
+<div class="card">🥕 Organic Carrot - ₹40/kg</div>
+<div class="card">🍅 Organic Tomato - ₹30/kg</div>
+<div class="card">🌾 Organic Rice - ₹60/kg</div>
+<div class="card">🥦 Organic Broccoli - ₹80/kg</div>
 </div>
 </section>
 
-<footer>© 2026 Organic AI Farming</footer>
+<!-- ALERTS -->
+<section>
+<h2 class="title">🔔 Smart Alerts</h2>
+<div class="card" id="alerts">Checking alerts...</div>
+</section>
+
+<!-- ADVANCED -->
+<section id="advanced">
+<h2 class="title">🚜 Advanced Farming Techniques</h2>
+<div class="grid">
+<div class="card">🌿 Precision Farming with AI sensors</div>
+<div class="card">🛰️ Drone crop monitoring</div>
+<div class="card">💧 Smart irrigation automation</div>
+<div class="card">🧪 Bio-fertilizers technology</div>
+<div class="card">📊 Data-driven agriculture</div>
+<div class="card">🌱 Regenerative farming systems</div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer>© 2026 Organic AI Farming Platform</footer>
 
 <script>
 
-/* 🌿 CREATE FLOATING LEAVES */
-function createLeaves(){
-for(let i=0;i<15;i++){
-let leaf=document.createElement("div");
-leaf.className="leaf";
-leaf.style.left=Math.random()*100+"vw";
-leaf.style.animationDuration=(5+Math.random()*10)+"s";
-leaf.style.opacity=Math.random();
-document.body.appendChild(leaf);
+/* NAV SCROLL */
+function scrollTo(id){
+document.getElementById(id).scrollIntoView({behavior:"smooth"})
 }
-}
-createLeaves();
 
 /* SEARCH */
 function searchPage(){
 let val=document.getElementById("search").value.toLowerCase();
 document.querySelectorAll("section").forEach(s=>{
-if(s.innerText.toLowerCase().includes(val)){
-s.scrollIntoView({behavior:"smooth"})
-}
+if(s.innerText.toLowerCase().includes(val)) s.scrollIntoView({behavior:"smooth"})
 })
 }
 
@@ -246,38 +205,70 @@ send();
 r.start();
 }
 
-/* AI */
+/* SPEECH OUTPUT */
+function speak(text){
+let s=new SpeechSynthesisUtterance(text);
+speechSynthesis.speak(s);
+}
+
+/* AI CHAT */
 function send(){
 let msg=document.getElementById("msg").value;
 let chat=document.getElementById("chat");
 
-let reply="Use compost and organic farming 🌱";
-if(msg.includes("rice")) reply="Rice needs water-rich soil 🌾";
-if(msg.includes("soil")) reply="Use compost + manure 🌿";
+let reply="Use compost and organic manure for better yield 🌱";
+
+if(msg.includes("rice")) reply="Rice needs water-rich soil and warm climate 🌾";
+if(msg.includes("weather")) reply="Weather affects irrigation and crop cycles 🌧️";
 
 chat.innerHTML+=`<p><b>You:</b> ${msg}</p>`;
 chat.innerHTML+=`<p><b>AI:</b> ${reply}</p>`;
-speechSynthesis.speak(new SpeechSynthesisUtterance(reply));
+speak(reply);
 }
 
-/* CROP */
-function recommend(){
-let s=document.getElementById("season").value;
+/* CROP RECOMMEND */
+function recommendCrop(){
+let season=document.getElementById("season").value;
 let soil=document.getElementById("soil").value;
 
-let res="Wheat recommended";
-if(s=="Rainy") res="Rice + Sugarcane 🌾";
-if(soil.includes("sandy")) res="Millets + Groundnut 🌱";
+let result="Wheat is recommended";
 
-document.getElementById("cropRes").innerText=res;
+if(season=="Rainy") result="Rice + Sugarcane recommended 🌾";
+if(soil.includes("sandy")) result="Groundnut + Millets recommended 🌱";
+
+document.getElementById("cropResult").innerText=result;
 }
 
-/* CHART */
+/* SOIL ANALYZER */
+function analyzeSoil(){
+let ph=document.getElementById("ph").value;
+let m=document.getElementById("moisture").value;
+
+let result="Soil is balanced 🌱";
+
+if(ph<6) result="Soil is acidic - add lime 🧪";
+if(ph>8) result="Soil is alkaline - add compost 🌿";
+
+document.getElementById("soilResult").innerText=result;
+}
+
+/* WEATHER MOCK */
+document.getElementById("weatherData").innerText=
+"🌧️ Today: 28°C | Humidity: 70% | Rain expected tomorrow";
+
+/* ALERT SYSTEM */
+document.getElementById("alerts").innerText=
+"⚠️ Heavy rain expected this week. Delay fertilizer spraying.";
+
+/* MARKET CHART */
 new Chart(document.getElementById("chart"),{
 type:"line",
 data:{
 labels:["Rice","Wheat","Corn","Tomato"],
-datasets:[{data:[30,28,25,40],borderWidth:2}]
+datasets:[{
+data:[30,28,25,40],
+borderWidth:2
+}]
 }
 });
 </script>
