@@ -1,263 +1,282 @@
+const express = require("express");
+const app = express();
+
+app.use(express.json());
+
+// ===============================
+// 🌿 FRONTEND (UI + ANIMATION)
+// ===============================
+app.get("/", (req, res) => {
+res.send(`
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OrganicFarm Tech - The Future of Farming</title>
-    <style>
-        /* CSS: Styling and Background Animations */
-        body, html {
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #333;
-            scroll-behavior: smooth;
-        }
+<title>AgriTech AI Platform</title>
 
-        /* Animated Background */
-        .hero {
-            background: linear-gradient(-45deg, #a8e063, #56ab2f, #2ecc71, #27ae60);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-            color: white;
-            padding: 100px 20px;
-            text-align: center;
-        }
+<style>
+body {
+  margin:0;
+  font-family:Arial;
+  color:white;
+  overflow:hidden;
+}
 
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+/* 🌄 SKY */
+.sky {
+  position:fixed;
+  width:100%;
+  height:100%;
+  background: linear-gradient(#4facfe, #00f2fe);
+  z-index:-3;
+}
 
-        /* Navigation */
-        nav {
-            background-color: #2c3e50;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: white;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
+/* ☀ SUN */
+.sun {
+  position:fixed;
+  top:50px;
+  right:80px;
+  width:80px;
+  height:80px;
+  background:yellow;
+  border-radius:50%;
+  box-shadow:0 0 50px yellow;
+  animation: glow 3s infinite alternate;
+}
 
-        nav a { color: white; text-decoration: none; margin: 0 10px; }
-        
-        .nav-tools { display: flex; gap: 10px; }
-        .nav-tools input { padding: 5px; border-radius: 5px; border: none; }
-        .nav-tools select { padding: 5px; border-radius: 5px; }
+@keyframes glow {
+  from { transform:scale(1); }
+  to { transform:scale(1.15); }
+}
 
-        /* Sections */
-        section { padding: 60px 20px; max-width: 1000px; margin: auto; }
-        h2 { color: #27ae60; border-bottom: 2px solid #27ae60; padding-bottom: 10px; }
-        
-        .grid-container { display: flex; gap: 20px; flex-wrap: wrap; }
-        .card {
-            background: #f9f9f9;
-            padding: 20px;
-            border-radius: 8px;
-            flex: 1;
-            min-width: 250px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
+/* ☁ CLOUDS */
+.cloud {
+  position:fixed;
+  background:white;
+  border-radius:50px;
+  opacity:0.8;
+  animation: move 25s linear infinite;
+}
 
-        /* Interactive Elements */
-        button {
-            background-color: #27ae60;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-        button:hover { background-color: #219150; }
+.cloud1 { width:120px;height:60px; top:80px; left:-150px; }
+.cloud2 { width:160px;height:70px; top:150px; left:-200px; animation-delay:5s; }
+.cloud3 { width:100px;height:50px; top:220px; left:-180px; animation-delay:10s; }
 
-        .form-group { margin-bottom: 15px; }
-        .form-group input, .form-group textarea {
-            width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;
-        }
+@keyframes move {
+  from { transform:translateX(0); }
+  to { transform:translateX(140vw); }
+}
 
-        /* Map Placeholder */
-        .map-placeholder {
-            width: 100%; height: 300px; background-color: #e0e0e0;
-            display: flex; align-items: center; justify-content: center;
-            border-radius: 8px; color: #666; font-style: italic;
-        }
-    </style>
+/* 🌱 GROUND */
+.ground {
+  position:fixed;
+  bottom:0;
+  width:100%;
+  height:40%;
+  background:linear-gradient(#2e7d32,#1b5e20);
+  z-index:-2;
+}
+
+/* 🌾 CROPS */
+.crops {
+  position:fixed;
+  bottom:80px;
+  width:100%;
+  height:100px;
+  background: repeating-linear-gradient(
+    90deg,
+    #4caf50,
+    #4caf50 20px,
+    #388e3c 20px,
+    #388e3c 40px
+  );
+  animation: wind 4s infinite ease-in-out;
+  z-index:-1;
+}
+
+@keyframes wind {
+  0%,100% { transform:skewX(0deg); }
+  50% { transform:skewX(2deg); }
+}
+
+/* ✨ UI */
+header {
+  padding:20px;
+  background:rgba(0,0,0,0.4);
+}
+
+section {
+  padding:20px;
+}
+
+.card {
+  background:rgba(0,0,0,0.5);
+  padding:15px;
+  border-radius:10px;
+  margin-top:10px;
+  backdrop-filter:blur(10px);
+}
+
+input, button {
+  padding:10px;
+  width:100%;
+  margin-top:10px;
+  border:none;
+  border-radius:8px;
+}
+
+button {
+  background:#00ff88;
+  cursor:pointer;
+}
+
+button:hover {
+  background:#00cc6a;
+}
+</style>
 </head>
+
 <body>
 
-    <nav>
-        <div><strong>OrganicFarm Tech</strong></div>
-        <div>
-            <a href="#about">About</a>
-            <a href="#prices">Market Prices</a>
-            <a href="#detector">AI Detector</a>
-            <a href="#contact">Contact</a>
-        </div>
-        <div class="nav-tools">
-            <input type="text" placeholder="Search...">
-            <select id="language-select">
-                <option value="en">English</option>
-                <option value="es">Español</option>
-                <option value="hi">हिन्दी</option>
-            </select>
-        </div>
-    </nav>
+<div class="sky"></div>
+<div class="sun"></div>
 
-    <div class="hero">
-        <h1>The Evolution of Organic Farming</h1>
-        <p>Bridging the gap between traditional wisdom and modern technology.</p>
-        <br>
-        <button onclick="startVoiceAssistant()">🎙️ Click to Ask Voice Assistant</button>
-        <p id="voice-response" style="margin-top: 15px; font-weight: bold;"></p>
-    </div>
+<div class="cloud cloud1"></div>
+<div class="cloud cloud2"></div>
+<div class="cloud cloud3"></div>
 
-    <section id="about">
-        <h2>Organic Farming: Then and Now</h2>
-        <div class="grid-container">
-            <div class="card">
-                <h3>Old Methods (Traditional)</h3>
-                <ul>
-                    <li><strong>Crop Rotation:</strong> Natural soil recovery.</li>
-                    <li><strong>Composting:</strong> Using animal and plant waste.</li>
-                    <li><strong>Hand Weeding:</strong> Manual labor to protect crops.</li>
-                </ul>
-            </div>
-            <div class="card">
-                <h3>New Methods (Advanced)</h3>
-                <ul>
-                    <li><strong>Precision IoT Sensors:</strong> Monitoring soil moisture 24/7.</li>
-                    <li><strong>Drone Surveillance:</strong> Scanning for pest outbreaks.</li>
-                    <li><strong>Bio-Pesticides:</strong> Targeted, eco-friendly protection.</li>
-                </ul>
-            </div>
-        </div>
-    </section>
+<div class="ground"></div>
+<div class="crops"></div>
 
-    <section id="prices">
-        <h2>Live Crop Prices (Market Dashboard)</h2>
-        <button onclick="fetchPrices()">Refresh Prices</button>
-        <div class="grid-container" id="price-board" style="margin-top: 20px;">
-            <p>Click 'Refresh Prices' to load live data...</p>
-        </div>
-    </section>
+<header>
+<h2>🌿 AgriTech AI Platform</h2>
+</header>
 
-    <section id="detector">
-        <h2>AI Crop Disease Detector</h2>
-        <p>Upload a photo of your plant leaf to detect diseases.</p>
-        <div class="card" style="text-align: center;">
-            <input type="file" id="crop-image" accept="image/*">
-            <br><br>
-            <button onclick="analyzeCrop()">Analyze Image</button>
-            <h3 id="ai-result" style="color: #d35400; margin-top: 20px;"></h3>
-        </div>
-    </section>
+<section>
+<h2>🤖 AI Farming Assistant</h2>
+<input id="msg" placeholder="Ask farming question...">
+<button onclick="askAI()">Ask AI</button>
+<div class="card" id="aiRes"></div>
+</section>
 
-    <section id="locations">
-        <h2>Organic Farming Land Locations</h2>
-        <p>Explore verified organic farms in our network.</p>
-        <div class="map-placeholder">
-            [ Interactive Google Map Integration Goes Here ]
-        </div>
-    </section>
+<section>
+<h2>🌦 Weather → Crop Suggestion</h2>
+<input id="temp" placeholder="Enter temperature">
+<button onclick="weather()">Get Crops</button>
+<div class="card" id="weatherRes"></div>
+</section>
 
-    <section id="contact">
-        <h2>Contact Us</h2>
-        <div class="card">
-            <div class="form-group">
-                <input type="text" placeholder="Your Name">
-            </div>
-            <div class="form-group">
-                <input type="email" placeholder="Your Email">
-            </div>
-            <div class="form-group">
-                <textarea rows="4" placeholder="How can we help you?"></textarea>
-            </div>
-            <button onclick="alert('Message sent successfully!')">Send Message</button>
-        </div>
-    </section>
+<section>
+<h2>🌿 Crop Disease Detection</h2>
+<input id="img" placeholder="Type: leaf / spot / healthy">
+<button onclick="detect()">Detect</button>
+<div class="card" id="diseaseRes"></div>
+</section>
 
-    <script>
-        // 1. Voice Assistant Logic (Using Web Speech API)
-        function startVoiceAssistant() {
-            const responseText = document.getElementById('voice-response');
-            
-            if (!('webkitSpeechRecognition' in window)) {
-                responseText.innerText = "Sorry, your browser doesn't support the voice assistant.";
-                return;
-            }
+<script>
+async function askAI(){
+let message = document.getElementById("msg").value;
 
-            const recognition = new webkitSpeechRecognition();
-            recognition.lang = document.getElementById('language-select').value;
-            recognition.interimResults = false;
+let res = await fetch("/api/ai",{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({message})
+});
 
-            recognition.onstart = function() {
-                responseText.innerText = "Listening... Speak now.";
-            };
+let data = await res.json();
+document.getElementById("aiRes").innerText = data.reply;
+}
 
-            recognition.onresult = function(event) {
-                const speechToText = event.results[0][0].transcript;
-                responseText.innerText = "You asked: '" + speechToText + "'. (AI processing coming soon!)";
-            };
+async function weather(){
+let temp = document.getElementById("temp").value;
 
-            recognition.start();
-        }
+let res = await fetch("/api/weather",{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({temp})
+});
 
-        // 2. Mock Real-Time Price Fetcher
-        function fetchPrices() {
-            const board = document.getElementById('price-board');
-            board.innerHTML = "<em>Loading live data...</em>";
-            
-            // Simulating a network request with a 1 second delay
-            setTimeout(() => {
-                const mockData = [
-                    { crop: "Wheat", price: "$280 / ton", trend: "up" },
-                    { crop: "Organic Rice", price: "$450 / ton", trend: "stable" },
-                    { crop: "Tomatoes", price: "$1,200 / ton", trend: "down" }
-                ];
+let data = await res.json();
+document.getElementById("weatherRes").innerText =
+"Best Crops: " + data.crops.join(", ");
+}
 
-                board.innerHTML = ""; // Clear loading text
-                
-                mockData.forEach(item => {
-                    board.innerHTML += `
-                        <div class="card" style="text-align: center;">
-                            <h3>${item.crop}</h3>
-                            <p style="font-size: 24px; font-weight: bold; margin: 10px 0;">${item.price}</p>
-                            <p style="color: gray;">Trend: ${item.trend}</p>
-                        </div>
-                    `;
-                });
-            }, 1000);
-        }
+async function detect(){
+let imageName = document.getElementById("img").value;
 
-        // 3. Mock AI Crop Detector
-        function analyzeCrop() {
-            const fileInput = document.getElementById('crop-image');
-            const resultText = document.getElementById('ai-result');
+let res = await fetch("/api/disease",{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({imageName})
+});
 
-            if (fileInput.files.length === 0) {
-                resultText.innerText = "Please upload an image first.";
-                return;
-            }
+let data = await res.json();
+document.getElementById("diseaseRes").innerText =
+"Disease: " + data.disease + " | Cure: " + data.cure;
+}
+</script>
 
-            resultText.innerText = "Analyzing pixels using AI...";
-            
-            // Simulating AI processing time
-            setTimeout(() => {
-                const randomResults = [
-                    "Status: Healthy 🌱", 
-                    "Warning: Early signs of Nitrogen deficiency detected.", 
-                    "Alert: Powdery Mildew detected. Apply organic bio-fungicide."
-                ];
-                // Pick a random mock result
-                const result = randomResults[Math.floor(Math.random() * randomResults.length)];
-                resultText.innerText = result;
-            }, 2000);
-        }
-    </script>
 </body>
 </html>
+`);
+});
+
+// ===============================
+// 🤖 AI ASSISTANT API
+// ===============================
+app.post("/api/ai", (req,res)=>{
+let msg = req.body.message.toLowerCase();
+
+if(msg.includes("soil"))
+return res.json({reply:"Use compost and organic manure for healthy soil."});
+
+if(msg.includes("pest"))
+return res.json({reply:"Use neem oil spray and biological pest control."});
+
+if(msg.includes("fertilizer"))
+return res.json({reply:"Organic fertilizers like cow dung compost are best."});
+
+res.json({reply:"Organic farming improves soil health and sustainability."});
+});
+
+// ===============================
+// 🌦 WEATHER → CROPS
+// ===============================
+app.post("/api/weather",(req,res)=>{
+let temp = Number(req.body.temp);
+
+let crops =
+temp > 30 ? ["Millets","Cotton"] :
+temp > 20 ? ["Wheat","Vegetables"] :
+["Potato","Peas"];
+
+res.json({crops});
+});
+
+// ===============================
+// 🌿 DISEASE DETECTION
+// ===============================
+app.post("/api/disease",(req,res)=>{
+let img = req.body.imageName.toLowerCase();
+
+if(img.includes("leaf"))
+return res.json({
+disease:"Leaf Blight",
+cure:"Use copper-based fungicide and remove infected leaves"
+});
+
+if(img.includes("spot"))
+return res.json({
+disease:"Leaf Spot",
+cure:"Spray neem oil and maintain spacing"
+});
+
+return res.json({
+disease:"Healthy Plant",
+cure:"No treatment required"
+});
+});
+
+// ===============================
+app.listen(5000,()=>{
+console.log("🌿 AgriTech running on http://localhost:5000");
+});
