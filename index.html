@@ -1,571 +1,1078 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Organic Farming Academy</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap');
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        /* --- GLOBAL STYLES --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-            scroll-behavior: smooth;
-        }
+<title>Smart Organic Farming Management System</title>
 
-        body {
-            background-color: #f8faf8;
-            color: #333;
-            overflow-x: hidden;
-        }
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-        /* --- NAVIGATION --- */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 15px 50px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            z-index: 1000;
-        }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-        nav h2 {
-            color: #2e7d32;
-            font-weight: 800;
-        }
+<style>
 
-        .nav-links {
-            list-style: none;
-            display: flex;
-            gap: 25px;
-            align-items: center;
-        }
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
 
-        .nav-links li a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 600;
-            transition: color 0.3s;
-        }
+html{
+scroll-behavior:smooth;
+}
 
-        .nav-links li a:hover {
-            color: #2e7d32;
-        }
+body{
+background:#f7fff7;
+overflow-x:hidden;
+}
 
-        .nav-btn {
-            background: #ff9800;
-            color: white !important;
-            padding: 10px 20px;
-            border-radius: 25px;
-        }
+/* NAVBAR */
 
-        /* --- LANGUAGE SELECTOR --- */
-        .lang-selector {
-            padding: 8px 15px;
-            border-radius: 20px;
-            border: 2px solid #2e7d32;
-            background: white;
-            color: #2e7d32;
-            font-weight: 600;
-            cursor: pointer;
-            outline: none;
-            transition: 0.3s;
-        }
+.navbar{
+background:rgba(25,135,84,.95);
+backdrop-filter:blur(10px);
+box-shadow:0 3px 15px rgba(0,0,0,.15);
+}
 
-        .lang-selector:hover {
-            background: #2e7d32;
-            color: white;
-        }
+.navbar-brand{
+font-weight:700;
+font-size:1.4rem;
+}
 
-        /* --- HERO SECTION WITH CSS ANIMATED FARMER --- */
-        #hero {
-            position: relative;
-            height: 100vh;
-            background: linear-gradient(to bottom, #87CEEB 0%, #e0f7fa 60%, #81c784 60%, #2e7d32 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            padding-top: 80px;
-        }
+/* HERO SECTION */
 
-        .sun {
-            position: absolute;
-            top: 15%;
-            right: 10%;
-            width: 100px;
-            height: 100px;
-            background: #FFD700;
-            border-radius: 50%;
-            box-shadow: 0 0 50px #FFD700;
-            animation: pulseSun 4s infinite alternate;
-        }
+.hero{
+height:100vh;
+position:relative;
+overflow:hidden;
 
-        .cloud {
-            position: absolute;
-            background: white;
-            border-radius: 50px;
-            opacity: 0.8;
-            animation: moveClouds linear infinite;
-        }
-        .cloud::before, .cloud::after {
-            content: '';
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-        }
-        .c1 { width: 120px; height: 40px; top: 20%; left: -150px; animation-duration: 25s; }
-        .c1::before { width: 50px; height: 50px; top: -20px; left: 15px; }
-        .c1::after { width: 40px; height: 40px; top: -15px; right: 15px; }
-        
-        .c2 { width: 180px; height: 50px; top: 30%; left: -200px; animation-duration: 35s; animation-delay: 10s; }
-        .c2::before { width: 70px; height: 70px; top: -30px; left: 25px; }
-        .c2::after { width: 60px; height: 60px; top: -20px; right: 25px; }
+background:
+linear-gradient(
+rgba(0,0,0,.35),
+rgba(0,0,0,.45)
+),
 
-        .tractor-container {
-            position: absolute;
-            bottom: 25%;
-            left: -200px;
-            width: 150px;
-            height: 100px;
-            animation: driveTractor 15s linear infinite;
-            z-index: 2;
-        }
-        .tractor-body {
-            position: absolute;
-            bottom: 30px;
-            width: 90px;
-            height: 50px;
-            background: #d32f2f;
-            border-radius: 10px 10px 0 0;
-        }
-        .tractor-roof {
-            position: absolute;
-            bottom: 80px;
-            left: 10px;
-            width: 50px;
-            height: 40px;
-            background: #b71c1c;
-            border-radius: 5px 5px 0 0;
-        }
-        .tractor-exhaust {
-            position: absolute;
-            bottom: 80px;
-            right: 15px;
-            width: 5px;
-            height: 30px;
-            background: #555;
-        }
-        .smoke {
-            position: absolute;
-            bottom: 115px;
-            right: 10px;
-            width: 15px;
-            height: 15px;
-            background: rgba(100,100,100,0.5);
-            border-radius: 50%;
-            animation: smokeRise 2s infinite;
-        }
-        .wheel-back {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 50px;
-            background: #222;
-            border-radius: 50%;
-            border: 4px solid #fff;
-            animation: spinWheel 2s linear infinite;
-        }
-        .wheel-front {
-            position: absolute;
-            bottom: 0;
-            right: 50px;
-            width: 35px;
-            height: 35px;
-            background: #222;
-            border-radius: 50%;
-            border: 3px solid #fff;
-            animation: spinWheel 2s linear infinite;
-        }
+url('https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=1800&q=80');
 
-        .hero-text {
-            position: relative;
-            z-index: 10;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 50px;
-            border-radius: 20px;
-            text-align: center;
-            max-width: 800px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-            backdrop-filter: blur(5px);
-        }
+background-size:cover;
+background-position:center;
 
-        .hero-text h1 {
-            font-size: 3.5rem;
-            color: #1b5e20;
-            margin-bottom: 20px;
-        }
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+color:white;
+}
 
-        .hero-text p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            color: #555;
-        }
+/* floating clouds */
 
-        .btn-main {
-            display: inline-block;
-            padding: 15px 40px;
-            background: #2e7d32;
-            color: white;
-            text-decoration: none;
-            font-size: 1.1rem;
-            font-weight: 600;
-            border-radius: 30px;
-            transition: 0.3s;
-        }
+.cloud{
+position:absolute;
+background:white;
+opacity:.7;
+border-radius:50px;
+}
 
-        .btn-main:hover {
-            background: #1b5e20;
-            transform: translateY(-5px);
-        }
+.cloud::before,
+.cloud::after{
+content:"";
+position:absolute;
+background:white;
+border-radius:50%;
+}
 
-        /* --- CONTENT SECTIONS --- */
-        .section-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 100px 20px;
-        }
+.cloud1{
+width:120px;
+height:40px;
+top:100px;
+left:-150px;
+animation:cloudMove 50s linear infinite;
+}
 
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            color: #2e7d32;
-            margin-bottom: 50px;
-        }
+.cloud1::before{
+width:50px;
+height:50px;
+top:-20px;
+left:20px;
+}
 
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-        }
+.cloud1::after{
+width:60px;
+height:60px;
+top:-30px;
+right:20px;
+}
 
-        .card {
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            border-bottom: 5px solid #2e7d32;
-        }
+.cloud2{
+width:180px;
+height:50px;
+top:200px;
+left:-200px;
+animation:cloudMove 75s linear infinite;
+}
 
-        .card h3 {
-            font-size: 1.5rem;
-            color: #1b5e20;
-            margin-bottom: 15px;
-        }
+.cloud2::before{
+width:60px;
+height:60px;
+top:-25px;
+left:30px;
+}
 
-        .card ul {
-            list-style: none;
-            margin-top: 20px;
-        }
+.cloud2::after{
+width:80px;
+height:80px;
+top:-35px;
+right:30px;
+}
 
-        .card ul li {
-            margin-bottom: 10px;
-            padding-left: 25px;
-            position: relative;
-        }
+/* birds */
 
-        .card ul li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: #2e7d32;
-            font-weight: bold;
-        }
+.bird{
+position:absolute;
+font-size:22px;
+animation:birdFly 20s linear infinite;
+opacity:.9;
+}
 
-        /* --- AI SPECIFICATIONS SECTION --- */
-        #ai-specs {
-            background: #111827;
-            color: #e5e7eb;
-            padding: 100px 20px;
-        }
+.bird1{
+top:120px;
+left:-50px;
+}
 
-        #ai-specs .section-title {
-            color: #10b981;
-            margin-bottom: 60px;
-        }
+.bird2{
+top:180px;
+left:-300px;
+animation-delay:6s;
+}
 
-        .ai-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+.bird3{
+top:150px;
+left:-500px;
+animation-delay:12s;
+}
 
-        .ai-card {
-            background: #1f2937;
-            padding: 35px;
-            border-radius: 15px;
-            border-left: 4px solid #10b981;
-        }
+/* hero content */
 
-        .ai-icon { font-size: 2.5rem; margin-bottom: 15px; }
+.hero-content{
+position:relative;
+z-index:20;
+animation:floatContent 4s ease-in-out infinite;
+}
 
-        .ai-card h3 {
-            color: #f3f4f6;
-            font-size: 1.4rem;
-            margin-bottom: 15px;
-        }
+.hero-content h1{
+font-size:4rem;
+font-weight:700;
+text-shadow:2px 2px 12px rgba(0,0,0,.4);
+}
 
-        .tech-spec {
-            display: inline-block;
-            background: rgba(16, 185, 129, 0.1);
-            color: #10b981;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-right: 5px;
-            margin-bottom: 5px;
-        }
+.hero-content p{
+font-size:1.2rem;
+margin:20px 0;
+}
 
-        /* --- CONTACT SECTION --- */
-        #contact {
-            background: #e8f5e9;
-            padding: 80px 20px;
-            text-align: center;
-        }
+.glass-btn{
+background:rgba(255,255,255,.2);
+border:1px solid rgba(255,255,255,.3);
+color:white;
+padding:12px 30px;
+border-radius:50px;
+backdrop-filter:blur(8px);
+transition:.3s;
+text-decoration:none;
+font-weight:600;
+}
 
-        .contact-form {
-            max-width: 600px;
-            margin: 0 auto;
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
+.glass-btn:hover{
+background:white;
+color:#198754;
+}
 
-        .contact-form input, .contact-form textarea {
-            width: 100%;
-            padding: 15px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 1rem;
-        }
+/* ANIMATIONS */
 
-        .contact-form button {
-            width: 100%;
-            padding: 15px;
-            background: #ff9800;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            cursor: pointer;
-        }
+@keyframes cloudMove{
+0%{
+transform:translateX(0);
+}
+100%{
+transform:translateX(2200px);
+}
+}
 
-        /* Animations */
-        @keyframes pulseSun { 0% { transform: scale(1); } 100% { transform: scale(1.05); } }
-        @keyframes moveClouds { 0% { left: -200px; } 100% { left: 100vw; } }
-        @keyframes driveTractor { 0% { left: -200px; } 100% { left: 100vw; } }
-        @keyframes spinWheel { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        @keyframes smokeRise { 0% { opacity: 0.8; transform: translateY(0) scale(1); } 100% { opacity: 0; transform: translateY(-30px) scale(2); } }
+@keyframes birdFly{
+0%{
+transform:translateX(0) translateY(0);
+}
+50%{
+transform:translateX(1200px) translateY(-40px);
+}
+100%{
+transform:translateX(2400px) translateY(0);
+}
+}
 
-    </style>
+@keyframes floatContent{
+0%,100%{
+transform:translateY(0);
+}
+50%{
+transform:translateY(-10px);
+}
+}
+
+/* COMMON */
+
+.section-title{
+text-align:center;
+font-weight:700;
+color:#198754;
+margin-bottom:40px;
+}
+
+.card{
+border:none;
+border-radius:20px;
+overflow:hidden;
+transition:.4s;
+box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
+
+.card:hover{
+transform:translateY(-10px);
+}
+
+.counter-box{
+background:white;
+padding:30px;
+border-radius:20px;
+box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
+
+.counter{
+font-size:40px;
+font-weight:700;
+color:#198754;
+}
+
+.about-img{
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,.15);
+}
+
+/* recommendation */
+
+.result-box{
+background:#fff;
+padding:20px;
+border-radius:15px;
+margin-top:20px;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+/* weather cards */
+
+.weather-card{
+background:white;
+padding:25px;
+border-radius:20px;
+box-shadow:0 5px 20px rgba(0,0,0,.08);
+text-align:center;
+}
+
+/* footer */
+
+footer{
+background:#198754;
+color:white;
+text-align:center;
+padding:30px;
+margin-top:50px;
+}
+
+/* responsive */
+
+@media(max-width:768px){
+
+.hero-content h1{
+font-size:2.4rem;
+}
+
+.hero-content p{
+font-size:1rem;
+}
+
+}
+
+</style>
 </head>
+
 <body>
 
-    <nav>
-        <h2>OrganicPro</h2>
-        <ul class="nav-links">
-            <li><a href="#hero" data-lang="nav_home">Home</a></li>
-            <li><a href="#curriculum" data-lang="nav_curr">Curriculum</a></li>
-            <li><a href="#ai-specs" data-lang="nav_ai">AI & Smart Tech</a></li>
-            <li><a href="#contact" class="nav-btn" data-lang="nav_call">Call Me</a></li>
-            <li>
-                <select class="lang-selector" onchange="changeLanguage(this.value)">
-                    <option value="en">English</option>
-                    <option value="es">Español</option>
-                    <option value="hi">हिन्दी</option>
-                </select>
-            </li>
-        </ul>
-    </nav>
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+<div class="container">
 
-    <section id="hero">
-        <div class="sun"></div>
-        <div class="cloud c1"></div>
-        <div class="cloud c2"></div>
-        <div class="tractor-container">
-            <div class="smoke"></div>
-            <div class="tractor-exhaust"></div>
-            <div class="tractor-roof"></div>
-            <div class="tractor-body"></div>
-            <div class="wheel-back"></div>
-            <div class="wheel-front"></div>
-        </div>
+<a class="navbar-brand" href="#">
+🌱 Organic Farming
+</a>
 
-        <div class="hero-text">
-            <h1 data-lang="hero_title">Master Organic Farming</h1>
-            <p data-lang="hero_sub">Your complete journey from planting your first organic seed to designing highly advanced, AI-automated permaculture ecosystems.</p>
-            <a href="#curriculum" class="btn-main" data-lang="hero_btn">Start Exploring</a>
-        </div>
+<button
+class="navbar-toggler"
+type="button"
+data-bs-toggle="collapse"
+data-bs-target="#menu">
+
+<span class="navbar-toggler-icon"></span>
+
+</button>
+
+<div class="collapse navbar-collapse" id="menu">
+
+<ul class="navbar-nav ms-auto">
+
+<li class="nav-item">
+<a class="nav-link" href="#home">Home</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="#about">About</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="#products">Products</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="#recommend">Recommendation</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="#calculator">Calculator</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="#weather">Weather</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="#faq">FAQ</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="#contact">Contact</a>
+</li>
+
+</ul>
+
+</div>
+
+</div>
+</nav>
+
+<section class="hero" id="home">
+
+<div class="cloud cloud1"></div>
+<div class="cloud cloud2"></div>
+
+<div class="bird bird1">🕊️</div>
+<div class="bird bird2">🕊️</div>
+<div class="bird bird3">🕊️</div>
+
+<div class="hero-content">
+
+<h1>
+Smart Organic Farming
+Management System
+</h1>
+
+<p>
+Promoting Sustainable Agriculture Through Technology
+</p>
+
+<a href="#about" class="glass-btn">
+Explore Project
+</a>
+
+</div>
+
     </section>
+    <!-- ABOUT SECTION -->
 
-    <section id="curriculum" class="section-container">
-        <h2 class="section-title" data-lang="curr_title">Step-by-Step Growth</h2>
-        <div class="grid-3">
-            <div class="card">
-                <h3 data-lang="lvl1_title">Level 1: The Scratch Base</h3>
-                <p data-lang="lvl1_desc">Perfect for absolute beginners starting with bare land.</p>
-                <ul>
-                    <li data-lang="l1_1">Soil pH testing and natural amendments</li>
-                    <li data-lang="l1_2">Building thermophilic compost piles</li>
-                    <li data-lang="l1_3">Sourcing heirloom, non-GMO seeds</li>
-                </ul>
-            </div>
-            <div class="card">
-                <h3 data-lang="lvl2_title">Level 2: Intermediate Growth</h3>
-                <p data-lang="lvl2_desc">Transitioning into a sustainable biological ecosystem.</p>
-                <ul>
-                    <li data-lang="l2_1">Companion planting & crop rotation</li>
-                    <li data-lang="l2_2">Introducing beneficial predatory insects</li>
-                    <li data-lang="l2_3">Rainwater harvesting systems</li>
-                </ul>
-            </div>
-            <div class="card">
-                <h3 data-lang="lvl3_title">Level 3: Expert Cultivation</h3>
-                <p data-lang="lvl3_desc">Maximizing yield through holistic farm design.</p>
-                <ul>
-                    <li data-lang="l3_1">Permaculture food forest design</li>
-                    <li data-lang="l3_2">Silvopasture & holistic animal grazing</li>
-                    <li data-lang="l3_3">Mycorrhizal fungi inoculation</li>
-                </ul>
-            </div>
-        </div>
-    </section>
+<section id="about" class="container py-5">
 
-    <section id="ai-specs">
-        <h2 class="section-title" data-lang="ai_title">AI Specifications in Organic AgTech</h2>
-        <div class="ai-grid">
-            <div class="ai-card">
-                <div class="ai-icon">👁️</div>
-                <h3 data-lang="ai_1_title">Computer Vision Weed Detection</h3>
-                <p data-lang="ai_1_desc">Utilizing high-speed cameras to differentiate between crops and weeds, allowing targeted removal.</p>
-                <div><span class="tech-spec">YOLOv8</span> <span class="tech-spec">Edge Computing</span></div>
-            </div>
-            <div class="ai-card">
-                <div class="ai-icon">🤖</div>
-                <h3 data-lang="ai_2_title">Autonomous Farm Rovers</h3>
-                <p data-lang="ai_2_desc">Self-driving rovers that perform soil sampling and micro-dosing of organic compost teas.</p>
-                <div><span class="tech-spec">LiDAR</span> <span class="tech-spec">ROS 2</span></div>
-            </div>
-            <div class="ai-card">
-                <div class="ai-icon">📈</div>
-                <h3 data-lang="ai_3_title">Predictive ML Models</h3>
-                <p data-lang="ai_3_desc">Algorithms that ingest historical yield data and IoT sensor metrics to predict optimal harvest.</p>
-                <div><span class="tech-spec">Random Forest</span> <span class="tech-spec">IoT</span></div>
-            </div>
-        </div>
-    </section>
+<h2 class="section-title">
+About Organic Farming
+</h2>
 
-    <section id="contact">
-        <div class="section-container" style="padding: 0;">
-            <h2 class="section-title" data-lang="contact_title">Ready to Transform Your Land?</h2>
-            <div class="contact-form">
-                <form id="callMeForm" onsubmit="handleFormSubmit(event)">
-                    <input type="text" placeholder="Your Full Name" required>
-                    <input type="tel" placeholder="Your Phone Number" required>
-                    <button type="submit" data-lang="contact_btn">Request a Call Now</button>
-                </form>
-            </div>
-        </div>
-    </section>
+<div class="row align-items-center">
 
-    <footer style="background: #1b5e20; color: white; text-align: center; padding: 20px;">
-        <p>&copy; 2026 Advanced Organic Farming Academy.</p>
-    </footer>
+<div class="col-lg-6">
 
-    <script>
-        // Dictionary containing all translations
-        const translations = {
-            en: {
-                nav_home: "Home", nav_curr: "Curriculum", nav_ai: "AI & Smart Tech", nav_call: "Call Me",
-                hero_title: "Master Organic Farming", hero_sub: "Your complete journey from planting your first organic seed to designing highly advanced, AI-automated permaculture ecosystems.", hero_btn: "Start Exploring",
-                curr_title: "Step-by-Step Growth",
-                lvl1_title: "Level 1: The Scratch Base", lvl1_desc: "Perfect for absolute beginners starting with bare land.",
-                l1_1: "Soil pH testing and natural amendments", l1_2: "Building thermophilic compost piles", l1_3: "Sourcing heirloom, non-GMO seeds",
-                lvl2_title: "Level 2: Intermediate Growth", lvl2_desc: "Transitioning into a sustainable biological ecosystem.",
-                l2_1: "Companion planting & crop rotation", l2_2: "Introducing beneficial predatory insects", l2_3: "Rainwater harvesting systems",
-                lvl3_title: "Level 3: Expert Cultivation", lvl3_desc: "Maximizing yield through holistic farm design.",
-                l3_1: "Permaculture food forest design", l3_2: "Silvopasture & holistic animal grazing", l3_3: "Mycorrhizal fungi inoculation",
-                ai_title: "AI Specifications in Organic AgTech",
-                ai_1_title: "Computer Vision Weed Detection", ai_1_desc: "Utilizing high-speed cameras to differentiate between crops and weeds, allowing targeted removal.",
-                ai_2_title: "Autonomous Farm Rovers", ai_2_desc: "Self-driving rovers that perform soil sampling and micro-dosing of organic compost teas.",
-                ai_3_title: "Predictive ML Models", ai_3_desc: "Algorithms that ingest historical yield data and IoT sensor metrics to predict optimal harvest.",
-                contact_title: "Ready to Transform Your Land?", contact_btn: "Request a Call Now"
-            },
-            es: {
-                nav_home: "Inicio", nav_curr: "Plan de estudios", nav_ai: "IA y Tecnología", nav_call: "Llámame",
-                hero_title: "Domina la Agricultura Orgánica", hero_sub: "Tu viaje completo desde plantar tu primera semilla hasta diseñar ecosistemas automatizados por IA.", hero_btn: "Empezar a Explorar",
-                curr_title: "Crecimiento Paso a Paso",
-                lvl1_title: "Nivel 1: Desde Cero", lvl1_desc: "Perfecto para principiantes absolutos.",
-                l1_1: "Pruebas de pH y enmiendas naturales", l1_2: "Construcción de compost termofílico", l1_3: "Semillas orgánicas tradicionales",
-                lvl2_title: "Nivel 2: Intermedio", lvl2_desc: "Transición a un ecosistema biológico sostenible.",
-                l2_1: "Rotación de cultivos y asociación", l2_2: "Introducción de insectos benéficos", l2_3: "Sistemas de recolección de lluvia",
-                lvl3_title: "Nivel 3: Cultivo Experto", lvl3_desc: "Maximizando el rendimiento con diseño holístico.",
-                l3_1: "Diseño de bosque de alimentos", l3_2: "Silvopastoreo y pastoreo holístico", l3_3: "Inoculación de hongos micorrícicos",
-                ai_title: "Especificaciones de IA en AgTech Orgánica",
-                ai_1_title: "Visión por Computadora", ai_1_desc: "Uso de cámaras de alta velocidad para diferenciar cultivos de malezas.",
-                ai_2_title: "Rovers Agrícolas Autónomos", ai_2_desc: "Rovers autónomos que realizan muestreo de suelo y microdosificación.",
-                ai_3_title: "Modelos Predictivos", ai_3_desc: "Algoritmos que analizan datos históricos y sensores IoT para predecir cosechas.",
-                contact_title: "¿Listo para Transformar tu Tierra?", contact_btn: "Solicitar una Llamada"
-            },
-            hi: {
-                nav_home: "होम", nav_curr: "पाठ्यक्रम", nav_ai: "एआई तकनीक", nav_call: "कॉल करें"
-              hero_title: "जैविक खेती में महारत", hero_sub: "पहला बीज बोने से लेकर उन्नत एआई-स्वचालित पारिस्थितिकी तंत्र डिजाइन करने तक की आपकी पूरी यात्रा।", hero_btn: "खोज शुरू करें",
-                curr_title: "चरण-दर-चरण विकास",
-                lvl1_title: "स्तर 1: बुनियादी ढांचा", lvl1_desc: "बिल्कुल नए लोगों के लिए एकदम सही।",
-                l1_1: "मिट्टी पीएच परीक्षण और प्राकृतिक सुधार", l1_2: "कम्पोस्ट बनाना", l1_3: "गैर-जीएमओ बीज प्राप्त करना",
-                lvl2_title: "स्तर 2: मध्यवर्ती विकास", lvl2_desc: "एक स्थायी जैविक पारिस्थितिकी तंत्र में संक्रमण।",
-                l2_1: "साथी रोपण और फसल चक्र", l2_2: "लाभकारी कीड़ों का परिचय", l2_3: "वर्षा जल संचयन प्रणाली",
-                lvl3_title: "स्तर 3: विशेषज्ञ खेती", lvl3_desc: "समग्र फार्म डिजाइन के माध्यम से उपज को अधिकतम करना।",
-                l3_1: "खाद्य वन डिजाइन", l3_2: "सिल्वोपाश्चर और पशु चराई", l3_3: "कवक टीकाकरण",
-                ai_title: "जैविक कृषि में एआई",
-                ai_1_title: "कंप्यूटर विजन से खरपतवार का पता लगाना", ai_1_desc: "फसलों और खरपतवारों के बीच अंतर करने के लिए हाई-स्पीड कैमरे।",
-                ai_2_title: "स्वायत्त फार्म रोवर्स", ai_2_desc: "स्वयं चलने वाले रोवर्स जो मिट्टी के नमूने लेते हैं।",
-                ai_3_title: "भविष्यवाणी करने वाले एआई मॉडल", ai_3_desc: "इष्टतम फसल की भविष्यवाणी करने के लिए सेंसर मेट्रिक्स एल्गोरिदम।",
-                contact_title: "क्या आप अपनी भूमि बदलने के लिए तैयार हैं?", contact_btn: "कॉल का अनुरोध करें"
-            }
-        };
+<img
+src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=1200&q=80"
+class="img-fluid about-img"
+alt="Organic Farming">
 
-        // Function to change language dynamically
-        function changeLanguage(lang) {
-            const elements = document.querySelectorAll('[data-lang]');
-            elements.forEach(el => {
-                const key = el.getAttribute('data-lang');
-                if (translations[lang] && translations[lang][key]) {
-                    el.innerText = translations[lang][key];
-                }
-            });
-        }
+</div>
 
-        // Simple form submission handler
-        function handleFormSubmit(event) {
-            event.preventDefault();
-            alert("Thank you! Your request has been received. Our expert farmers will call you shortly.");
-            document.getElementById("callMeForm").reset();
-        }
-    </script>
+<div class="col-lg-6 mt-4 mt-lg-0">
+
+<h3 class="mb-3 text-success">
+Building a Sustainable Future
+</h3>
+
+<p>
+Organic farming is an agricultural method that avoids
+synthetic fertilizers and pesticides while promoting
+soil health, biodiversity, and environmental balance.
+</p>
+
+<p>
+This Smart Organic Farming Management System helps
+farmers and students understand crop selection,
+cost estimation, and sustainable farming practices
+through a modern web platform.
+</p>
+
+<p>
+The project demonstrates the application of web
+technologies in agriculture and serves as a foundation
+for future AI-powered farming systems.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- STATISTICS -->
+
+<section class="py-5 bg-light">
+
+<div class="container">
+
+<h2 class="section-title">
+Project Impact
+</h2>
+
+<div class="row g-4">
+
+<div class="col-md-3">
+
+<div class="counter-box text-center">
+
+<div class="counter">
+500+
+</div>
+
+<p class="mt-2">
+Acres Managed
+</p>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="counter-box text-center">
+
+<div class="counter">
+50+
+</div>
+
+<p class="mt-2">
+Organic Crops
+</p>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="counter-box text-center">
+
+<div class="counter">
+1000+
+</div>
+
+<p class="mt-2">
+Farmers Supported
+</p>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="counter-box text-center">
+
+<div class="counter">
+10+
+</div>
+
+<p class="mt-2">
+Years Experience
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- PRODUCTS -->
+
+<section id="products" class="container py-5">
+
+<h2 class="section-title">
+Organic Products
+</h2>
+
+<div class="row g-4">
+
+<div class="col-md-4">
+
+<div class="card h-100">
+
+<img
+src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=900&q=80"
+class="card-img-top">
+
+<div class="card-body">
+
+<h5>
+Organic Vegetables
+</h5>
+
+<p>
+Fresh vegetables grown without harmful chemicals.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="card h-100">
+
+<img
+src="https://images.unsplash.com/photo-1619566636858-adf3ef46400b?auto=format&fit=crop&w=900&q=80"
+class="card-img-top">
+
+<div class="card-body">
+
+<h5>
+Organic Fruits
+</h5>
+
+<p>
+Naturally cultivated fruits with rich nutrition.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="card h-100">
+
+<img
+src="https://images.unsplash.com/photo-1471193945509-9ad0617afabf?auto=format&fit=crop&w=900&q=80"
+class="card-img-top">
+
+<div class="card-body">
+
+<h5>
+Medicinal Herbs
+</h5>
+
+<p>
+Organic herbs used for natural wellness and health.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- CROP RECOMMENDATION -->
+
+<section id="recommend" class="py-5 bg-light">
+
+<div class="container">
+
+<h2 class="section-title">
+Crop Recommendation System
+</h2>
+
+<div class="row">
+
+<div class="col-lg-6 mx-auto">
+
+<div class="card p-4">
+
+<label class="mb-2">
+Select Soil Type
+</label>
+
+<select id="soil" class="form-select mb-3">
+
+<option>Loamy</option>
+<option>Sandy</option>
+<option>Black</option>
+<option>Red</option>
+
+</select>
+
+<label class="mb-2">
+Select Season
+</label>
+
+<select id="season" class="form-select mb-3">
+
+<option>Summer</option>
+<option>Winter</option>
+<option>Monsoon</option>
+
+</select>
+
+<button
+class="btn btn-success"
+onclick="recommendCrop()">
+
+Recommend Crop
+
+</button>
+
+<div id="cropResult" class="result-box">
+
+Recommended crop will appear here.
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- COST CALCULATOR -->
+
+<section id="calculator" class="container py-5">
+
+<h2 class="section-title">
+Farming Cost Calculator
+</h2>
+
+<div class="row">
+
+<div class="col-lg-6 mx-auto">
+
+<div class="card p-4">
+
+<input
+type="number"
+id="seed"
+class="form-control mb-3"
+placeholder="Seed Cost">
+
+<input
+type="number"
+id="fertilizer"
+class="form-control mb-3"
+placeholder="Fertilizer Cost">
+
+<input
+type="number"
+id="labor"
+class="form-control mb-3"
+placeholder="Labor Cost">
+
+<button
+class="btn btn-success"
+onclick="calculateCost()">
+
+Calculate Total Cost
+
+</button>
+
+<div id="costResult" class="result-box">
+
+Total cost will appear here.
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- WEATHER -->
+
+<section id="weather" class="py-5 bg-light">
+
+<div class="container">
+
+<h2 class="section-title">
+Weather Dashboard
+</h2>
+
+<div class="row g-4">
+
+<div class="col-md-4">
+
+<div class="weather-card">
+
+<h5>
+Temperature
+</h5>
+
+<h2 class="text-success">
+29°C
+</h2>
+
+<p>
+Suitable for crop growth.
+</p>
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="weather-card">
+
+<h5>
+Humidity
+</h5>
+
+<h2 class="text-success">
+70%
+</h2>
+
+<p>
+Moderate moisture conditions.
+</p>
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="weather-card">
+
+<h5>
+Rain Forecast
+</h5>
+
+<h2 class="text-success">
+40%
+</h2>
+
+<p>
+Chance of light rainfall.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+<!-- FAQ SECTION -->
+
+<section id="faq" class="container py-5">
+
+<h2 class="section-title">
+Frequently Asked Questions
+</h2>
+
+<div class="accordion" id="faqAccordion">
+
+<div class="accordion-item">
+
+<h2 class="accordion-header">
+
+<button
+class="accordion-button"
+type="button"
+data-bs-toggle="collapse"
+data-bs-target="#faq1">
+
+What is Organic Farming?
+
+</button>
+
+</h2>
+
+<div
+id="faq1"
+class="accordion-collapse collapse show">
+
+<div class="accordion-body">
+
+Organic farming is a method of agriculture that uses
+natural fertilizers and avoids synthetic chemicals,
+promoting environmental sustainability.
+
+</div>
+
+</div>
+
+</div>
+
+<div class="accordion-item">
+
+<h2 class="accordion-header">
+
+<button
+class="accordion-button collapsed"
+type="button"
+data-bs-toggle="collapse"
+data-bs-target="#faq2">
+
+Why is Organic Farming Important?
+
+</button>
+
+</h2>
+
+<div
+id="faq2"
+class="accordion-collapse collapse">
+
+<div class="accordion-body">
+
+It improves soil fertility, protects biodiversity,
+reduces pollution, and produces healthier food.
+
+</div>
+
+</div>
+
+</div>
+
+<div class="accordion-item">
+
+<h2 class="accordion-header">
+
+<button
+class="accordion-button collapsed"
+type="button"
+data-bs-toggle="collapse"
+data-bs-target="#faq3">
+
+How Does the Crop Recommendation Work?
+
+</button>
+
+</h2>
+
+<div
+id="faq3"
+class="accordion-collapse collapse">
+
+<div class="accordion-body">
+
+The current system uses rule-based logic based on
+soil type and season. Future versions can use
+machine learning algorithms for more accurate
+predictions.
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- CONTACT SECTION -->
+
+<section id="contact" class="py-5 bg-light">
+
+<div class="container">
+
+<h2 class="section-title">
+Contact Us
+</h2>
+
+<div class="row">
+
+<div class="col-lg-6 mx-auto">
+
+<div class="card p-4">
+
+<input
+type="text"
+class="form-control mb-3"
+placeholder="Your Name">
+
+<input
+type="email"
+class="form-control mb-3"
+placeholder="Your Email">
+
+<textarea
+class="form-control mb-3"
+rows="5"
+placeholder="Your Message"></textarea>
+
+<button
+class="btn btn-success"
+onclick="sendMessage()">
+
+Submit
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+
+<h5>
+🌱 Smart Organic Farming Management System
+</h5>
+
+<p>
+CSE (AI & ML) Team Project
+</p>
+
+<p>
+Designed using HTML, CSS, JavaScript and Bootstrap
+</p>
+
+<p>
+© 2026 All Rights Reserved
+</p>
+
+</footer>
+
+<!-- JAVASCRIPT -->
+
+<script>
+
+function recommendCrop(){
+
+let soil =
+document.getElementById("soil").value;
+
+let season =
+document.getElementById("season").value;
+
+let crop = "";
+
+if(soil==="Loamy" && season==="Monsoon"){
+crop="Rice";
+}
+else if(soil==="Sandy" && season==="Summer"){
+crop="Groundnut";
+}
+else if(soil==="Black"){
+crop="Cotton";
+}
+else if(soil==="Red"){
+crop="Millets";
+}
+else{
+crop="Vegetables";
+}
+
+document.getElementById("cropResult").innerHTML=
+`
+<h4 class="text-success">
+Recommended Crop: ${crop}
+</h4>
+
+<p>
+Based on selected soil type and season.
+</p>
+`;
+
+}
+
+function calculateCost(){
+
+let seed =
+Number(document.getElementById("seed").value);
+
+let fertilizer =
+Number(document.getElementById("fertilizer").value);
+
+let labor =
+Number(document.getElementById("labor").value);
+
+let total =
+seed + fertilizer + labor;
+
+document.getElementById("costResult").innerHTML=
+`
+<h4 class="text-success">
+Estimated Cost: ₹${total}
+</h4>
+
+<p>
+Seed + Fertilizer + Labor
+</p>
+`;
+
+}
+
+function sendMessage(){
+
+alert(
+"Thank you! Your message has been submitted successfully."
+);
+
+}
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
