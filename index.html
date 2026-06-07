@@ -1,338 +1,262 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AgriNova AI | Organic Farming Platform</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>Organic Farming AI Platform</title>
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Poppins', sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
 
-body{
-  background:#050b07;
-  color:white;
-  overflow-x:hidden;
+body {
+  color: white;
+  overflow-x: hidden;
+  background: #0b1a0f;
 }
 
-/* BACKGROUND CANVAS */
-#bg{
-  position:fixed;
-  top:0;
-  left:0;
-  z-index:-3;
+/* ===== Animated Background Canvas ===== */
+#farmCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
 }
 
-/* NAVBAR */
-nav{
-  position:fixed;
-  top:0;
-  width:100%;
-  padding:15px 30px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  background:rgba(0,0,0,0.4);
-  backdrop-filter:blur(12px);
-  border-bottom:1px solid rgba(255,255,255,0.08);
-  z-index:100;
+/* ===== Header ===== */
+header {
+  padding: 20px;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(8px);
 }
 
-.logo{
-  font-size:20px;
-  font-weight:700;
-  color:#7CFC00;
+header h1 {
+  font-size: 22px;
+  color: #7CFC00;
 }
 
-.controls{
-  display:flex;
-  gap:10px;
-  align-items:center;
+/* ===== Search ===== */
+.search-box input {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  width: 250px;
 }
 
-input,select{
-  padding:8px 10px;
-  border:none;
-  border-radius:8px;
-  background:rgba(255,255,255,0.08);
-  color:white;
-  outline:none;
+/* ===== Buttons ===== */
+button {
+  padding: 8px 12px;
+  margin-left: 5px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #2ecc71;
+  color: white;
 }
 
-button{
-  padding:8px 12px;
-  border:none;
-  border-radius:8px;
-  background:linear-gradient(135deg,#2ecc71,#27ae60);
-  color:white;
-  cursor:pointer;
-  transition:0.3s;
+/* ===== Sections ===== */
+section {
+  padding: 20px;
+  margin: 15px;
+  background: rgba(0,0,0,0.55);
+  border-radius: 12px;
+  backdrop-filter: blur(5px);
 }
 
-button:hover{
-  transform:scale(1.05);
+h2 {
+  color: #7CFC00;
+  margin-bottom: 10px;
 }
 
-/* HERO */
-.hero{
-  height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:20px;
+/* ===== Grid ===== */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 10px;
 }
 
-.hero-box{
-  max-width:800px;
-  padding:40px;
-  background:rgba(255,255,255,0.05);
-  border-radius:20px;
-  backdrop-filter:blur(15px);
-  border:1px solid rgba(255,255,255,0.08);
-  box-shadow:0 0 40px rgba(0,255,100,0.12);
+/* ===== Cards ===== */
+.card {
+  padding: 15px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 10px;
 }
 
-.hero-box h1{
-  font-size:42px;
-  color:#7CFC00;
-  margin-bottom:10px;
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
-.hero-box p{
-  opacity:0.8;
-  line-height:1.6;
+th, td {
+  padding: 10px;
+  border-bottom: 1px solid #444;
 }
 
-/* SECTIONS */
-section{
-  padding:80px 10%;
+/* Crop Detector */
+.detector {
+  text-align: center;
 }
 
-.title{
-  font-size:26px;
-  margin-bottom:20px;
-  color:#7CFC00;
-}
-
-/* GRID CARDS */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:20px;
-}
-
-.card{
-  background:rgba(255,255,255,0.05);
-  padding:20px;
-  border-radius:15px;
-  border:1px solid rgba(255,255,255,0.08);
-  backdrop-filter:blur(10px);
-  transition:0.3s;
-}
-
-.card:hover{
-  transform:translateY(-8px);
-  box-shadow:0 10px 30px rgba(0,255,100,0.15);
-}
-
-/* PRICE */
-.price{
-  display:flex;
-  justify-content:space-between;
-  padding:8px 0;
-  border-bottom:1px solid rgba(255,255,255,0.08);
-}
-
-/* TRACTOR */
-.tractor{
-  position:absolute;
-  bottom:40px;
-  width:140px;
-  animation:move 18s linear infinite;
-  z-index:1;
-}
-
-@keyframes move{
-  from{left:-200px;}
-  to{left:110%;}
-}
-
-/* FOOTER */
-footer{
-  text-align:center;
-  padding:30px;
-  opacity:0.6;
-  border-top:1px solid rgba(255,255,255,0.08);
+input[type="file"] {
+  margin-top: 10px;
 }
 </style>
 </head>
 
 <body>
 
-<canvas id="bg"></canvas>
+<canvas id="farmCanvas"></canvas>
 
-<!-- NAV -->
-<nav>
-  <div class="logo">🌿 AgriNova AI</div>
+<header>
+  <h1 id="title">🌱 Organic Farming AI Platform</h1>
 
-  <div class="controls">
-    <input id="search" placeholder="Search topics...">
-
-    <select id="lang" onchange="translateText()">
-      <option value="en">EN</option>
-      <option value="hi">HI</option>
-    </select>
-
-    <button onclick="voice()">🎙</button>
+  <div class="search-box">
+    <input type="text" id="search" placeholder="Search farming topics..." onkeyup="searchContent()">
   </div>
-</nav>
 
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-box">
-    <h1>Smart Organic Farming Platform</h1>
-    <p>
-      Learn organic farming from basics to advanced level with AI tools,
-      crop detection, and real-time agricultural insights.
-    </p>
+  <div>
+    <button onclick="startVoice()">🎤 Voice</button>
+    <button onclick="toggleLang()">🌐 Language</button>
   </div>
-</div>
+</header>
 
-<!-- LEARNING -->
-<section>
-  <div class="title">🌱 Farming Knowledge Levels</div>
-
+<!-- BASICS -->
+<section class="content">
+  <h2>Basics of Organic Farming</h2>
   <div class="grid">
+    <div class="card">No chemical fertilizers</div>
+    <div class="card">Use compost & manure</div>
+    <div class="card">Crop rotation system</div>
+    <div class="card">Natural pest control</div>
+  </div>
+</section>
 
-    <div class="card topic">
-      <h3>Basic Farming</h3>
-      <p>Soil preparation, composting, natural fertilizers.</p>
-    </div>
-
-    <div class="card topic">
-      <h3>Intermediate</h3>
-      <p>Pest control, irrigation systems, crop rotation.</p>
-    </div>
-
-    <div class="card topic">
-      <h3>Advanced Farming</h3>
-      <p>AI monitoring, precision farming, smart agriculture systems.</p>
-    </div>
-
+<!-- ADVANCED -->
+<section class="content">
+  <h2>Advanced Organic Farming</h2>
+  <div class="card">
+    Precision soil monitoring, AI-based irrigation, drone farming, and bio-fertilizer optimization systems.
   </div>
 </section>
 
 <!-- PRICES -->
-<section>
-  <div class="title">🛒 Organic Market Prices</div>
-
-  <div class="card">
-    <div class="price"><span>Rice</span><span>₹90/kg</span></div>
-    <div class="price"><span>Wheat</span><span>₹60/kg</span></div>
-    <div class="price"><span>Tomato</span><span>₹30/kg</span></div>
-    <div class="price"><span>Milk</span><span>₹65/L</span></div>
-  </div>
+<section class="content">
+  <h2>Organic Product Prices</h2>
+  <table>
+    <tr><th>Product</th><th>Price (₹/kg)</th></tr>
+    <tr><td>Organic Rice</td><td>80</td></tr>
+    <tr><td>Organic Wheat</td><td>60</td></tr>
+    <tr><td>Organic Vegetables</td><td>50</td></tr>
+    <tr><td>Organic Fruits</td><td>120</td></tr>
+  </table>
 </section>
 
-<!-- AI DETECTOR -->
-<section>
-  <div class="title">🤖 Crop Health Detector</div>
-
-  <div class="card">
-    <input type="file" onchange="detectCrop()">
-    <p id="result" style="margin-top:10px;opacity:0.8;">
-      Upload crop image for analysis
-    </p>
-  </div>
+<!-- CROP DETECTOR -->
+<section class="content detector">
+  <h2>Crop Detector (Prototype)</h2>
+  <p>Upload crop image (demo UI only)</p>
+  <input type="file">
+  <br><br>
+  <button onclick="alert('AI Model not connected. This is UI prototype.')">Detect Crop</button>
 </section>
 
-<footer>
-  © 2026 AgriNova AI | Smart Organic Farming System
-</footer>
-
-<!-- Tractor -->
-<img src="https://i.imgur.com/4NJlQ6U.png" class="tractor">
+<!-- MULTILINGUAL CONTENT -->
+<section class="content">
+  <h2 id="aboutTitle">About Organic Farming</h2>
+  <p id="aboutText">
+    Organic farming is an agricultural system that uses natural methods to grow crops without chemicals.
+  </p>
+</section>
 
 <script>
+let lang = "en";
 
-/* SEARCH */
-document.getElementById("search").addEventListener("input",e=>{
-  document.querySelectorAll(".topic").forEach(c=>{
-    c.style.display = c.innerText.toLowerCase().includes(e.target.value.toLowerCase())
-    ? "block":"none";
-  });
-});
-
-/* VOICE */
-function voice(){
-  let msg = new SpeechSynthesisUtterance(
-    "Welcome to AgriNova AI smart organic farming platform."
-  );
-  speechSynthesis.speak(msg);
-}
-
-/* LANGUAGE */
-function translateText(){
-  let lang = document.getElementById("lang").value;
-  let p = document.querySelectorAll(".topic p");
-
-  if(lang==="hi"){
-    p[0].innerText="मिट्टी तैयार करना और जैविक खाद।";
-    p[1].innerText="कीट नियंत्रण और सिंचाई।";
-    p[2].innerText="एआई आधारित स्मार्ट खेती तकनीक।";
+function toggleLang() {
+  if (lang === "en") {
+    lang = "hi";
+    document.getElementById("title").innerText = "🌱 जैविक खेती प्लेटफॉर्म";
+    document.getElementById("aboutTitle").innerText = "जैविक खेती के बारे में";
+    document.getElementById("aboutText").innerText =
+      "जैविक खेती प्राकृतिक तरीकों से बिना रसायनों के खेती करने की प्रणाली है।";
+  } else {
+    lang = "en";
+    location.reload();
   }
 }
 
-/* CROP DETECTOR (MOCK AI) */
-function detectCrop(){
-  let res=[
-    "Healthy Crop 🌿",
-    "Pest Attack Detected 🐛",
-    "Low Soil Moisture 💧",
-    "Nitrogen Deficiency ⚠️"
-  ];
-  document.getElementById("result").innerText =
-    res[Math.floor(Math.random()*res.length)];
-}
+/* ===== Search Filter ===== */
+function searchContent() {
+  let input = document.getElementById("search").value.toLowerCase();
+  let sections = document.querySelectorAll(".content");
 
-/* BACKGROUND ANIMATION */
-const canvas=document.getElementById("bg");
-const ctx=canvas.getContext("2d");
-
-canvas.width=innerWidth;
-canvas.height=innerHeight;
-
-let dots=[];
-for(let i=0;i<90;i++){
-  dots.push({
-    x:Math.random()*canvas.width,
-    y:Math.random()*canvas.height
+  sections.forEach(sec => {
+    if (sec.innerText.toLowerCase().includes(input)) {
+      sec.style.display = "block";
+    } else {
+      sec.style.display = "none";
+    }
   });
 }
 
-function animate(){
+/* ===== Voice Assistant ===== */
+function startVoice() {
+  let recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+  recognition.lang = "en-US";
+
+  recognition.onresult = function(event) {
+    let command = event.results[0][0].transcript.toLowerCase();
+    alert("You said: " + command);
+
+    if (command.includes("prices")) {
+      document.querySelectorAll("section")[2].scrollIntoView({behavior:"smooth"});
+    }
+    if (command.includes("basics")) {
+      document.querySelectorAll("section")[0].scrollIntoView({behavior:"smooth"});
+    }
+  };
+
+  recognition.start();
+}
+
+/* ===== Animated Farm Background ===== */
+const canvas = document.getElementById("farmCanvas");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let tractorX = 0;
+
+function drawFarm() {
   ctx.clearRect(0,0,canvas.width,canvas.height);
-  ctx.fillStyle="rgba(0,255,120,0.25)";
 
-  dots.forEach(d=>{
-    ctx.beginPath();
-    ctx.arc(d.x,d.y,2,0,Math.PI*2);
-    ctx.fill();
-    d.y+=0.6;
-    if(d.y>canvas.height)d.y=0;
-  });
+  // sky
+  ctx.fillStyle = "#1e3c1e";
+  ctx.fillRect(0,0,canvas.width,canvas.height);
 
-  requestAnimationFrame(animate);
+  // fields
+  ctx.fillStyle = "#2e7d32";
+  ctx.fillRect(0, canvas.height/2, canvas.width, canvas.height/2);
+
+  // moving tractor
+  ctx.fillStyle = "red";
+  ctx.fillRect(tractorX, canvas.height/2 + 50, 60, 30);
+
+  tractorX += 2;
+  if (tractorX > canvas.width) tractorX = -60;
+
+  requestAnimationFrame(drawFarm);
 }
-animate();
 
+drawFarm();
 </script>
 
 </body>
