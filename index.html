@@ -3,14 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AgroAI - Smart Farming Platform</title>
+<title>AgroAI - Smart Organic Farming Platform</title>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
 :root{
     --primary:#2ecc71;
-    --bg:#07150f;
     --card:rgba(255,255,255,0.06);
 }
 
@@ -96,65 +95,51 @@ body{
     color:white;
 }
 
-/* SECTION SYSTEM (IMPORTANT UPGRADE) */
+/* SECTION SYSTEM */
 section{
     padding:80px 10%;
 }
 
 .section-title{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    margin-bottom:25px;
+    margin-bottom:20px;
 }
 
 .section-title h2{
-    font-size:1.6rem;
+    font-size:1.7rem;
 }
 
 .badge{
+    display:inline-block;
+    padding:4px 10px;
     background:rgba(46,204,113,0.15);
     color:#7dffb2;
-    padding:4px 10px;
     border-radius:20px;
     font-size:12px;
+    margin-top:6px;
 }
 
 /* CARDS */
-.grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-    gap:16px;
-}
-
 .card{
     background:var(--card);
     padding:16px;
     border-radius:12px;
+    margin-top:10px;
     border:1px solid rgba(255,255,255,0.06);
-    transition:0.25s;
 }
 
-.card:hover{
-    transform:translateY(-5px);
-    border-color:rgba(46,204,113,0.4);
+/* GRID */
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:15px;
 }
 
-/* SPECIAL BOX */
+/* BOX */
 .box{
     background:rgba(255,255,255,0.04);
     padding:18px;
     border-radius:12px;
     border:1px solid rgba(255,255,255,0.06);
-}
-
-/* INPUT */
-input, select{
-    padding:10px;
-    border-radius:8px;
-    border:none;
-    width:100%;
-    margin-top:8px;
 }
 
 /* FOOTER */
@@ -171,151 +156,138 @@ footer{
 
 <!-- NAV -->
 <div class="navbar">
-    <h2>🌿 AgroAI</h2>
-    <div>
-        <input id="searchInput" placeholder="Search system...">
-        <button onclick="searchSection()">Search</button>
-    </div>
+<h2>🌿 AgroAI</h2>
+<div>
+<input id="searchInput" placeholder="Search...">
+<button onclick="searchSection()">Search</button>
+</div>
 </div>
 
 <!-- HERO -->
 <div class="hero">
 <div class="hero-content">
-    <h1>Smart Organic Farming Platform</h1>
-    <p>AI • Weather • Soil • Market Intelligence</p>
-    <button class="btn" onclick="scrollToSection('ai')">Start</button>
+<h1>Smart Organic Farming System</h1>
+<p>Learn • Implement • Grow • Profit</p>
 </div>
 </div>
 
-<!-- ================= INTELLIGENCE LAYER ================= -->
-
+<!-- ================= INTELLIGENCE ================= -->
 <section id="ai">
 <div class="section-title">
-<h2>🤖 AI Farming Intelligence</h2>
-<span class="badge">Core AI System</span>
+<h2>🤖 AI Farming Assistant</h2>
+<span class="badge">Smart Guidance System</span>
 </div>
-
 <div class="box">
-<input id="msg" placeholder="Ask farming question...">
-<button class="btn" onclick="sendMsg()">Ask AI</button>
+<input id="msg" placeholder="Ask farming question">
+<button class="btn" onclick="sendMsg()">Ask</button>
 <div id="chatlog"></div>
 </div>
 </section>
 
-<section id="crop">
+<!-- ================= HISTORY SECTION (NEW) ================= -->
+<section id="history">
 <div class="section-title">
-<h2>🧠 Crop Recommendation Engine</h2>
-<span class="badge">Decision System</span>
+<h2>📜 Organic Farming: Ancient → Modern Evolution</h2>
+<span class="badge">Knowledge Base</span>
 </div>
 
 <div class="box">
-<select id="soil">
-<option>Clay</option><option>Sandy</option><option>Loamy</option>
-</select>
 
-<select id="season">
-<option>Summer</option><option>Rainy</option><option>Winter</option>
-</select>
+<div class="card">
+<b>🌱 Ancient Farming (Before Chemicals)</b><br>
+Farmers used natural compost, cow dung, crop rotation, and rain-dependent farming.
+Soil fertility was maintained naturally without synthetic inputs.
+</div>
 
-<button class="btn" onclick="recommendCrop()">Get Recommendation</button>
-<p id="cropResult"></p>
+<div class="card">
+<b>🏺 Traditional Era (India, Egypt, China)</b><br>
+Mixed cropping, seasonal farming, and organic manure systems were widely used.
+Knowledge was passed through generations based on observation.
+</div>
+
+<div class="card">
+<b>⚙️ Green Revolution Era</b><br>
+Chemical fertilizers and high-yield seeds increased production but reduced soil health over time.
+Dependency on external inputs increased.
+</div>
+
+<div class="card">
+<b>🤖 Modern AI Farming Era</b><br>
+Today farming uses AI, sensors, drones, and data analytics to optimize yield while returning to organic sustainability.
+</div>
+
 </div>
 </section>
 
-<section id="soil">
+<!-- ================= ADVANCED TECHNIQUES (NEW IMPLEMENTATION STYLE) ================= -->
+<section id="advanced">
 <div class="section-title">
-<h2>🧪 Soil Intelligence System</h2>
-<span class="badge">Analysis Layer</span>
+<h2>🚀 Advanced Farming Techniques (How to Apply)</h2>
+<span class="badge">Practical Guide</span>
 </div>
 
-<div class="box">
-<input id="ph" placeholder="Soil pH">
-<input id="moisture" placeholder="Moisture %">
-<button class="btn" onclick="analyzeSoil()">Analyze</button>
-<p id="soilResult"></p>
+<div class="grid">
+
+<div class="card">
+<b>📡 Precision Farming</b><br>
+👉 Use soil sensors or apps to measure moisture and nutrients.<br>
+👉 Apply water/fertilizer only where needed.<br>
+✔ Saves cost + increases yield.
+</div>
+
+<div class="card">
+<b>🌾 Regenerative Agriculture</b><br>
+👉 Rotate crops every season.<br>
+👉 Add compost and avoid chemical fertilizers.<br>
+✔ Restores soil naturally over time.
+</div>
+
+<div class="card">
+<b>💧 Smart Irrigation</b><br>
+👉 Water crops early morning or evening.<br>
+👉 Use drip irrigation if possible.<br>
+✔ Reduces water waste by 50%.
+</div>
+
+<div class="card">
+<b>🧪 Bio-Fertilizers</b><br>
+👉 Use neem cake, vermicompost, cow dung compost.<br>
+👉 Mix into soil before planting.<br>
+✔ Improves soil microbes.
+</div>
+
+<div class="card">
+<b>🛰️ Drone Farming</b><br>
+👉 Use drones to detect crop health issues early.<br>
+👉 Spray pesticides only on affected areas.<br>
+✔ Reduces chemical use.
+</div>
+
 </div>
 </section>
 
-<!-- ================= ENVIRONMENT LAYER ================= -->
-
-<section id="weather">
-<div class="section-title">
-<h2>🌦️ Weather Intelligence</h2>
-<span class="badge">Environmental Data</span>
-</div>
-
-<div class="box">
-<p>Temp: 28°C</p>
-<p>Rain Chance: 40%</p>
-<p>Advice: Suitable for irrigation</p>
-</div>
-</section>
-
-<section id="alerts">
-<div class="section-title">
-<h2>🔔 Smart Alerts</h2>
-<span class="badge">Risk System</span>
-</div>
-
-<div class="box">
-No alerts — conditions stable 🌿
-</div>
-</section>
-
-<!-- ================= BUSINESS LAYER ================= -->
-
+<!-- ================= MARKET ================= -->
 <section id="market">
 <div class="section-title">
 <h2>📊 Market Intelligence</h2>
-<span class="badge">Price System</span>
 </div>
 
-<div class="box">
 <canvas id="chart"></canvas>
-</div>
 </section>
 
-<section id="shop">
-<div class="section-title">
-<h2>🛒 Organic Marketplace</h2>
-<span class="badge">Commerce</span>
-</div>
-
-<div class="grid">
-<div class="card">Organic Rice - ₹60/kg</div>
-<div class="card">Tomatoes - ₹40/kg</div>
-<div class="card">Bio Fertilizer - ₹120</div>
-</div>
-</section>
-
-<!-- ================= MANAGEMENT LAYER ================= -->
-
-<section id="dashboard">
-<div class="section-title">
-<h2>📈 Farmer Dashboard</h2>
-<span class="badge">Analytics</span>
-</div>
-
-<div class="grid">
-<div class="card">Yield Tracking</div>
-<div class="card">Profit Analytics</div>
-<div class="card">Crop History</div>
-</div>
-</section>
-
+<!-- ================= COMMUNITY ================= -->
 <section id="community">
 <div class="section-title">
 <h2>👨‍🌾 Farmer Community</h2>
-<span class="badge">Network</span>
 </div>
 
 <div class="box">
-Share knowledge, ask questions, and grow together 🌱
+Share farming experience, ask questions, and learn from other farmers 🌱
 </div>
 </section>
 
 <footer>
-© 2026 AgroAI Platform
+© 2026 AgroAI Farming Platform
 </footer>
 
 <script>
@@ -337,46 +309,20 @@ let chat=document.getElementById("chatlog");
 
 chat.innerHTML+=`<div><b>You:</b> ${msg}</div>`;
 
-let reply="Use organic compost + crop rotation.";
+let reply="Use compost + natural farming methods.";
 
-if(msg.includes("rice")) reply="Rice needs clay soil + water.";
-if(msg.includes("pest")) reply="Use neem oil bio pesticide.";
+if(msg.includes("rice")) reply="Rice needs water-rich soil.";
+if(msg.includes("pest")) reply="Use neem oil spray.";
 
 chat.innerHTML+=`<div><b>AI:</b> ${reply}</div>`;
-}
-
-/* CROP */
-function recommendCrop(){
-let soil=document.getElementById("soil").value;
-let season=document.getElementById("season").value;
-
-let res="Wheat";
-
-if(soil==="Clay"&&season==="Rainy") res="Rice";
-if(soil==="Sandy") res="Groundnut";
-
-document.getElementById("cropResult").innerText=res;
-}
-
-/* SOIL */
-function analyzeSoil(){
-let ph=document.getElementById("ph").value;
-let m=document.getElementById("moisture").value;
-
-let res="Good soil";
-
-if(ph<5.5) res="Add lime";
-if(m<30) res="Increase water";
-
-document.getElementById("soilResult").innerText=res;
 }
 
 /* CHART */
 new Chart(document.getElementById("chart"),{
 type:"line",
 data:{
-labels:["Rice","Wheat","Corn","Tomato"],
-datasets:[{data:[30,28,35,40]}]
+labels:["Rice","Wheat","Corn","Tomato","Potato"],
+datasets:[{data:[30,28,35,40,25]}]
 },
 options:{plugins:{legend:{display:false}}}
 });
