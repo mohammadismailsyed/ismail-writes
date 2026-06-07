@@ -3,139 +3,268 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Organic AI Farming Platform</title>
+<title>Organic Farming AI - Advanced Platform</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
-body{background:#071a12;color:white}
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#061b12;
+    color:white;
+    overflow-x:hidden;
+}
+
+/* FIXED BACKGROUND ANIMATION */
+.background{
+    position:fixed;
+    width:100%;
+    height:100%;
+    z-index:-1;
+    background:linear-gradient(-45deg,#0b2e1b,#05301d,#0c3d25,#062016);
+    background-size:400% 400%;
+    animation:gradientBG 12s ease infinite;
+}
+
+@keyframes gradientBG{
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+/* floating particles */
+.particle{
+    position:absolute;
+    width:6px;
+    height:6px;
+    background:#2ecc71;
+    border-radius:50%;
+    opacity:0.5;
+    animation:floatUp 10s linear infinite;
+}
+
+@keyframes floatUp{
+    from{transform:translateY(100vh); opacity:0;}
+    to{transform:translateY(-10vh); opacity:1;}
+}
 
 /* NAVBAR */
 .navbar{
-position:fixed;top:0;width:100%;
-display:flex;justify-content:space-between;
-padding:12px 6%;
-background:rgba(0,0,0,0.4);
-backdrop-filter:blur(10px);z-index:1000
+    position:fixed;
+    top:0;
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:12px 8%;
+    background:rgba(0,0,0,0.35);
+    backdrop-filter:blur(10px);
+    z-index:1000;
 }
-.navbar h2{color:#7dffb2}
-.navbar input{
-padding:6px;border-radius:20px;border:none;width:180px
+
+.navbar h2{
+    color:#7dffb2;
 }
-.navbar button{
-padding:6px 10px;border:none;border-radius:20px;
-background:#2ecc71;color:white;cursor:pointer
+
+.search-box{
+    display:flex;
+    gap:8px;
+}
+
+.search-box input{
+    padding:7px;
+    border-radius:20px;
+    border:none;
+    width:180px;
+}
+
+.search-box button{
+    padding:7px 10px;
+    border:none;
+    border-radius:20px;
+    background:#2ecc71;
+    color:white;
+    cursor:pointer;
 }
 
 /* HERO */
 .hero{
-height:100vh;
-display:flex;flex-direction:column;
-justify-content:center;align-items:center;
-text-align:center;
-background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
-url('https://images.unsplash.com/photo-1501004318641-b39e6451bec6');
-background-size:cover
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
 }
-.hero h1{font-size:3rem}
+
+.hero h1{
+    font-size:3rem;
+}
+
+.hero p{
+    color:#bfffd3;
+    margin:10px;
+}
+
 .btn{
-padding:10px 20px;margin:5px;
-border:none;border-radius:25px;
-background:#2ecc71;color:white;cursor:pointer
+    padding:10px 18px;
+    border:none;
+    border-radius:25px;
+    background:#2ecc71;
+    color:white;
+    cursor:pointer;
+    margin:5px;
 }
 
 /* SECTIONS */
-section{padding:80px 8%}
-.title{text-align:center;color:#7dffb2;margin-bottom:30px}
+section{
+    padding:90px 10%;
+}
 
-/* GRID */
-.grid{display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:15px}
+.title{
+    text-align:center;
+    font-size:2rem;
+    margin-bottom:30px;
+    color:#7dffb2;
+}
 
-/* CARDS */
+/* GRID CARDS */
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:15px;
+}
+
 .card{
-background:rgba(255,255,255,0.06);
-padding:15px;border-radius:12px;
-backdrop-filter:blur(10px)
+    background:rgba(255,255,255,0.06);
+    padding:18px;
+    border-radius:15px;
+    backdrop-filter:blur(10px);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-6px);
 }
 
 /* CHAT */
-.chatbox{background:rgba(255,255,255,0.06);
-padding:15px;border-radius:12px}
-.chatlog{height:150px;overflow:auto;margin-bottom:10px}
+.chatbox{
+    background:rgba(255,255,255,0.06);
+    padding:15px;
+    border-radius:15px;
+}
 
-/* INPUT */
-input,select{
-padding:8px;border:none;border-radius:10px;margin:5px
+.chatlog{
+    height:160px;
+    overflow-y:auto;
+    margin-bottom:10px;
+}
+
+/* INPUTS */
+input, select{
+    padding:8px;
+    border:none;
+    border-radius:10px;
+    margin:5px 0;
+    width:100%;
 }
 
 /* FOOTER */
-footer{text-align:center;padding:20px;background:#06140d}
+footer{
+    text-align:center;
+    padding:20px;
+    background:#04110b;
+}
 </style>
 </head>
 
 <body>
 
-<!-- NAV -->
+<div class="background"></div>
+
+<!-- particles -->
+<script>
+for(let i=0;i<25;i++){
+    let p=document.createElement("div");
+    p.className="particle";
+    p.style.left=Math.random()*100+"vw";
+    p.style.animationDuration=(5+Math.random()*10)+"s";
+    document.body.appendChild(p);
+}
+</script>
+
+<!-- NAVBAR -->
 <div class="navbar">
-<h2>🌿 Organic AI Farm</h2>
-<div>
-<input id="search" placeholder="Search...">
-<button onclick="searchPage()">Go</button>
-<button onclick="startVoice()">🎤</button>
-</div>
+    <h2>🌿 Organic AI Farm</h2>
+
+    <div class="search-box">
+        <input id="searchInput" placeholder="Search section...">
+        <button onclick="searchSection()">Go</button>
+        <button onclick="startVoice()">🎤</button>
+    </div>
 </div>
 
 <!-- HERO -->
 <div class="hero" id="home">
-<h1>Smart Organic Farming Platform</h1>
-<p>AI + Weather + Market + Soil Intelligence</p>
-<button class="btn" onclick="scrollTo('advanced')">Explore System</button>
+    <h1>Future of Organic Farming</h1>
+    <p>AI • Weather • Smart Farming • Market Intelligence</p>
+    <button class="btn" onclick="scrollToSection('weather')">Weather</button>
+    <button class="btn" onclick="scrollToSection('advanced')">Advanced Tech</button>
 </div>
 
 <!-- WEATHER -->
 <section id="weather">
-<h2 class="title">🌧️ Live Weather Intelligence</h2>
-<div class="card">
-<p id="weatherData">Loading weather...</p>
+<h2 class="title">🌦️ Smart Weather System</h2>
+<div class="card" id="weatherBox">
+Loading weather...
 </div>
 </section>
 
-<!-- AI ASSISTANT -->
+<!-- AI -->
 <section id="ai">
 <h2 class="title">🤖 AI Farming Assistant</h2>
 <div class="chatbox">
-<div class="chatlog" id="chat"></div>
-<input id="msg" placeholder="Ask anything about farming">
-<button onclick="send()">Send</button>
-<button onclick="voiceInput()">🎤 Speak</button>
+<div class="chatlog" id="chatlog"></div>
+<input id="msg" placeholder="Ask farming question...">
+<button onclick="sendMsg()">Send</button>
+<button class="btn" onclick="startVoice()">🎤 Voice</button>
 </div>
 </section>
 
-<!-- CROP RECOMMENDATION -->
+<!-- CROP RECOMMENDER -->
 <section id="crop">
-<h2 class="title">🌱 Crop Recommendation Engine</h2>
+<h2 class="title">🧠 Crop Recommendation Engine</h2>
 <div class="card">
+<select id="soil">
+<option>Clay</option>
+<option>Sandy</option>
+<option>Loamy</option>
+</select>
+
 <select id="season">
 <option>Summer</option>
 <option>Rainy</option>
 <option>Winter</option>
 </select>
 
-<input id="soil" placeholder="Soil type (clay/sandy/loam)">
-<button onclick="recommendCrop()">Suggest Crop</button>
-<p id="cropResult"></p>
+<button class="btn" onclick="recommendCrop()">Recommend</button>
+<p id="result"></p>
 </div>
 </section>
 
 <!-- SOIL ANALYZER -->
-<section id="soil">
+<section id="soilsec">
 <h2 class="title">🧪 Soil Health Analyzer</h2>
 <div class="card">
-<input id="ph" placeholder="pH level">
+<input id="ph" placeholder="Soil pH (e.g. 6.5)">
 <input id="moisture" placeholder="Moisture %">
-<button onclick="analyzeSoil()">Analyze</button>
+<button class="btn" onclick="analyzeSoil()">Analyze</button>
 <p id="soilResult"></p>
 </div>
 </section>
@@ -146,131 +275,122 @@ footer{text-align:center;padding:20px;background:#06140d}
 <canvas id="chart"></canvas>
 </section>
 
+<!-- ADVANCED -->
+<section id="advanced">
+<h2 class="title">🚀 Advanced Farming Techniques</h2>
+<div class="grid">
+<div class="card">Precision Farming using AI sensors</div>
+<div class="card">Drone crop monitoring system</div>
+<div class="card">Regenerative soil restoration</div>
+<div class="card">Smart irrigation automation</div>
+</div>
+</section>
+
 <!-- MARKETPLACE -->
 <section id="shop">
 <h2 class="title">🛒 Organic Marketplace</h2>
 <div class="grid">
-<div class="card">🥕 Organic Carrot - ₹40/kg</div>
-<div class="card">🍅 Organic Tomato - ₹30/kg</div>
-<div class="card">🌾 Organic Rice - ₹60/kg</div>
-<div class="card">🥦 Organic Broccoli - ₹80/kg</div>
+<div class="card">Organic Rice - ₹60/kg</div>
+<div class="card">Natural Tomatoes - ₹40/kg</div>
+<div class="card">Bio Fertilizer - ₹120</div>
 </div>
 </section>
 
-<!-- ALERTS -->
-<section>
-<h2 class="title">🔔 Smart Alerts</h2>
-<div class="card" id="alerts">Checking alerts...</div>
-</section>
-
-<!-- ADVANCED -->
-<section id="advanced">
-<h2 class="title">🚜 Advanced Farming Techniques</h2>
-<div class="grid">
-<div class="card">🌿 Precision Farming with AI sensors</div>
-<div class="card">🛰️ Drone crop monitoring</div>
-<div class="card">💧 Smart irrigation automation</div>
-<div class="card">🧪 Bio-fertilizers technology</div>
-<div class="card">📊 Data-driven agriculture</div>
-<div class="card">🌱 Regenerative farming systems</div>
+<!-- COMMUNITY -->
+<section id="community">
+<h2 class="title">👨‍🌾 Farmer Community</h2>
+<div class="card">
+Share farming tips, ask questions, and connect with farmers worldwide 🌍
 </div>
 </section>
 
-<!-- FOOTER -->
-<footer>© 2026 Organic AI Farming Platform</footer>
+<footer>
+© 2026 Organic AI Farming Platform 🌿
+</footer>
 
 <script>
 
-/* NAV SCROLL */
-function scrollTo(id){
-document.getElementById(id).scrollIntoView({behavior:"smooth"})
-}
-
 /* SEARCH */
-function searchPage(){
-let val=document.getElementById("search").value.toLowerCase();
-document.querySelectorAll("section").forEach(s=>{
-if(s.innerText.toLowerCase().includes(val)) s.scrollIntoView({behavior:"smooth"})
-})
+function searchSection(){
+    let v=document.getElementById("searchInput").value.toLowerCase();
+    document.querySelectorAll("section").forEach(s=>{
+        if(s.innerText.toLowerCase().includes(v)){
+            s.scrollIntoView({behavior:"smooth"});
+        }
+    });
 }
 
-/* VOICE INPUT */
-function voiceInput(){
-let r=new (window.SpeechRecognition||window.webkitSpeechRecognition)();
-r.lang="en-US";
-r.onresult=e=>{
-document.getElementById("msg").value=e.results[0][0].transcript;
-send();
-}
-r.start();
+/* SCROLL */
+function scrollToSection(id){
+    document.getElementById(id).scrollIntoView({behavior:"smooth"});
 }
 
-/* SPEECH OUTPUT */
-function speak(text){
-let s=new SpeechSynthesisUtterance(text);
-speechSynthesis.speak(s);
+/* CHAT AI */
+function sendMsg(){
+    let msg=document.getElementById("msg").value;
+    let chat=document.getElementById("chatlog");
+
+    chat.innerHTML+=`<p><b>You:</b> ${msg}</p>`;
+
+    let reply="Use organic compost + crop rotation for best yield 🌱";
+
+    if(msg.includes("rice")) reply="Rice needs high water + clay soil 🌾";
+    if(msg.includes("pest")) reply="Use neem oil + bio pesticides 🐛";
+
+    chat.innerHTML+=`<p><b>AI:</b> ${reply}</p>`;
+    document.getElementById("msg").value="";
 }
 
-/* AI CHAT */
-function send(){
-let msg=document.getElementById("msg").value;
-let chat=document.getElementById("chat");
-
-let reply="Use compost and organic manure for better yield 🌱";
-
-if(msg.includes("rice")) reply="Rice needs water-rich soil and warm climate 🌾";
-if(msg.includes("weather")) reply="Weather affects irrigation and crop cycles 🌧️";
-
-chat.innerHTML+=`<p><b>You:</b> ${msg}</p>`;
-chat.innerHTML+=`<p><b>AI:</b> ${reply}</p>`;
-speak(reply);
+/* VOICE */
+function startVoice(){
+    let r=new (window.SpeechRecognition||window.webkitSpeechRecognition)();
+    r.lang="en-US";
+    r.start();
+    r.onresult=e=>{
+        document.getElementById("msg").value=e.results[0][0].transcript;
+        sendMsg();
+    };
 }
 
-/* CROP RECOMMEND */
+/* CROP RECOMMENDER */
 function recommendCrop(){
-let season=document.getElementById("season").value;
-let soil=document.getElementById("soil").value;
+    let soil=document.getElementById("soil").value;
+    let season=document.getElementById("season").value;
+    let res="";
 
-let result="Wheat is recommended";
+    if(soil=="Clay" && season=="Rainy") res="Rice, Sugarcane";
+    else if(soil=="Sandy") res="Groundnut, Watermelon";
+    else res="Wheat, Vegetables";
 
-if(season=="Rainy") result="Rice + Sugarcane recommended 🌾";
-if(soil.includes("sandy")) result="Groundnut + Millets recommended 🌱";
-
-document.getElementById("cropResult").innerText=result;
+    document.getElementById("result").innerText="Best Crops: "+res;
 }
 
 /* SOIL ANALYZER */
 function analyzeSoil(){
-let ph=document.getElementById("ph").value;
-let m=document.getElementById("moisture").value;
+    let ph=parseFloat(document.getElementById("ph").value);
+    let m=parseFloat(document.getElementById("moisture").value);
 
-let result="Soil is balanced 🌱";
+    let msg="Good soil condition 🌱";
 
-if(ph<6) result="Soil is acidic - add lime 🧪";
-if(ph>8) result="Soil is alkaline - add compost 🌿";
+    if(ph<5.5) msg="Soil too acidic - add lime";
+    if(m<30) msg="Low moisture - need irrigation";
 
-document.getElementById("soilResult").innerText=result;
+    document.getElementById("soilResult").innerText=msg;
 }
 
-/* WEATHER MOCK */
-document.getElementById("weatherData").innerText=
-"🌧️ Today: 28°C | Humidity: 70% | Rain expected tomorrow";
+/* WEATHER (SIMULATED) */
+document.getElementById("weatherBox").innerHTML=
+"🌡️ Temp: 28°C<br>🌧️ Rain: 40% chance<br>💨 Wind: Moderate";
 
-/* ALERT SYSTEM */
-document.getElementById("alerts").innerText=
-"⚠️ Heavy rain expected this week. Delay fertilizer spraying.";
-
-/* MARKET CHART */
+/* CHART */
 new Chart(document.getElementById("chart"),{
 type:"line",
 data:{
 labels:["Rice","Wheat","Corn","Tomato"],
-datasets:[{
-data:[30,28,25,40],
-borderWidth:2
-}]
+datasets:[{data:[30,28,35,40]}]
 }
 });
+
 </script>
 
 </body>
