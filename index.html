@@ -2,52 +2,110 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>AI Farming Platform</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Organic Farming Pro Dashboard</title>
+
+<!-- 📊 CHART LIBRARY -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-body {
+* {
   margin:0;
-  font-family: Arial;
-  background:#081b0f;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial;
+}
+
+body {
+  background:#06150e;
   color:white;
   overflow-x:hidden;
 }
 
-canvas {
+/* 🌿 BACKGROUND CANVAS */
+canvas#bg {
   position:fixed;
   top:0;
   left:0;
+  z-index:-2;
+}
+
+/* DARK GLOW OVERLAY */
+body::before {
+  content:"";
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:radial-gradient(circle at top,#2ecc7130,transparent 60%),
+             radial-gradient(circle at bottom,#00a86b20,transparent 60%);
   z-index:-1;
 }
 
+/* HEADER */
 header {
-  padding:20px;
-  text-align:center;
-  background:rgba(0,0,0,0.4);
-}
-
-h1 { margin:0; }
-
-section {
-  margin:15px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
   padding:15px;
-  background:rgba(255,255,255,0.05);
-  border-radius:12px;
+  background:rgba(18,53,36,0.6);
+  backdrop-filter:blur(10px);
 }
 
-input, button, select {
-  padding:10px;
-  margin:5px;
-  border-radius:8px;
-  border:none;
+/* GRID */
+.container {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+  padding:20px;
 }
 
+/* CARDS */
 .card {
+  background:rgba(22,61,42,0.75);
+  padding:15px;
+  border-radius:12px;
+  transition:0.3s;
+  box-shadow:0 8px 20px rgba(0,0,0,0.4);
+}
+
+.card:hover {
+  transform:translateY(-5px);
+}
+
+/* FULL WIDTH */
+.full {
+  grid-column:span 2;
+}
+
+/* BUTTONS */
+button {
+  padding:8px;
+  background:#2ecc71;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+/* CHAT BOX */
+#chatBox {
+  height:120px;
+  overflow:auto;
   background:rgba(0,0,0,0.3);
-  padding:10px;
-  margin:5px 0;
+  padding:8px;
+  border-radius:8px;
+  margin-top:10px;
+}
+
+/* CANVAS CHARTS */
+canvas.chart {
+  background:rgba(0,0,0,0.2);
   border-radius:10px;
+  padding:10px;
+}
+
+/* RESPONSIVE */
+@media(max-width:800px){
+  .container{grid-template-columns:1fr;}
 }
 </style>
 </head>
@@ -57,82 +115,78 @@ input, button, select {
 <canvas id="bg"></canvas>
 
 <header>
-  <h1>🌱 AI Farming Platform (All-in-One)</h1>
-
-  <input id="search" placeholder="Search farming..." oninput="search()">
-
-  <button onclick="startVoice()">🎤 Voice</button>
-
-  <select onchange="lang(this.value)">
-    <option value="en">English</option>
-    <option value="hi">Hindi</option>
-    <option value="te">Telugu</option>
-  </select>
+  <h2>🌱 AI Farming Pro Dashboard</h2>
 </header>
 
-<!-- WEATHER -->
-<section>
-<h2>🌤 Weather</h2>
-<p id="weather">Loading...</p>
-</section>
+<div class="container">
 
-<!-- CHATBOT -->
-<section>
-<h2>🤖 AI Farming Chatbot</h2>
-<input id="msg" placeholder="Ask farming question">
-<button onclick="chat()">Ask</button>
-<p id="reply"></p>
-</section>
+  <!-- WEATHER -->
+  <div class="card">
+    <h3>🌦 Weather</h3>
+    <p id="weather">Loading...</p>
+  </div>
 
-<!-- CROP -->
-<section>
-<h2>🌾 Crop Recommendation</h2>
-<input id="soil" placeholder="soil type (black/red/alluvial)">
-<input id="season" placeholder="season (summer/winter/rainy)">
-<input id="water" placeholder="water (high/low)">
-<button onclick="crop()">Get Crops</button>
-<p id="cropOut"></p>
-</section>
+  <!-- MARKET -->
+  <div class="card">
+    <h3>💰 Market Prices</h3>
+    <p>Tomato: ₹20-45</p>
+    <p>Rice: ₹40-90</p>
+    <p>Wheat: ₹25-55</p>
+  </div>
 
-<!-- DISEASE -->
-<section>
-<h2>🦠 Disease Checker (AI Simulated)</h2>
-<input id="plant" placeholder="plant name (tomato/rice)">
-<button onclick="disease()">Check</button>
-<p id="diseaseOut"></p>
-</section>
+  <!-- CHATBOT -->
+  <div class="card full">
+    <h3>🤖 AI Chatbot</h3>
+    <input id="msg" placeholder="Ask farming question">
+    <button onclick="chat()">Ask</button>
+    <div id="chatBox"></div>
+  </div>
 
-<!-- MARKET -->
-<section>
-<h2>💰 Market Prices (India Avg)</h2>
-<div class="card">Tomato: ₹20 - ₹45</div>
-<div class="card">Rice: ₹40 - ₹90</div>
-<div class="card">Wheat: ₹25 - ₹55</div>
-<div class="card">Millets: ₹35 - ₹80</div>
-</section>
+  <!-- CROP -->
+  <div class="card">
+    <h3>🌾 Crop AI</h3>
+    <input id="soil" placeholder="soil">
+    <input id="season" placeholder="season">
+    <input id="water" placeholder="water">
+    <button onclick="crop()">Suggest</button>
+    <p id="cropOut"></p>
+  </div>
 
-<!-- GUIDE -->
-<section>
-<h2>🌾 Organic Farming Guide</h2>
-<div class="card">Soil testing → Compost → Natural fertilizers</div>
-<div class="card">Avoid chemicals → Use neem spray</div>
-<div class="card">Drip irrigation for water saving</div>
-<div class="card">Crop rotation improves yield</div>
-</section>
+  <!-- ANALYTICS -->
+  <div class="card">
+    <h3>📊 Farming Analytics</h3>
+    <canvas id="analyticsChart"></canvas>
+  </div>
+
+  <!-- PRICE CHART -->
+  <div class="card">
+    <h3>💰 Price Trends</h3>
+    <canvas id="priceChart"></canvas>
+  </div>
+
+  <!-- WEATHER CHART -->
+  <div class="card full">
+    <h3>🌡 Weather Trend</h3>
+    <canvas id="weatherChart"></canvas>
+  </div>
+
+</div>
 
 <script>
-// ================= BACKGROUND =================
+
+/* ================= BACKGROUND ANIMATION ================= */
 const canvas = document.getElementById("bg");
 const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 let particles = [];
+
 for(let i=0;i<100;i++){
   particles.push({
     x:Math.random()*canvas.width,
     y:Math.random()*canvas.height,
-    r:Math.random()*3,
+    r:Math.random()*2,
     dx:(Math.random()-0.5),
     dy:(Math.random()-0.5)
   });
@@ -140,6 +194,7 @@ for(let i=0;i<100;i++){
 
 function animate(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
+
   particles.forEach(p=>{
     p.x+=p.dx;
     p.y+=p.dy;
@@ -149,107 +204,94 @@ function animate(){
 
     ctx.beginPath();
     ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx.fillStyle="rgba(0,255,100,0.5)";
+    ctx.fillStyle="rgba(46,204,113,0.5)";
     ctx.fill();
   });
+
   requestAnimationFrame(animate);
 }
 animate();
 
-// ================= WEATHER =================
+/* ================= WEATHER ================= */
 navigator.geolocation.getCurrentPosition(async pos=>{
   let url=`https://api.open-meteo.com/v1/forecast?latitude=${pos.coords.latitude}&longitude=${pos.coords.longitude}&current_weather=true`;
+
   let res=await fetch(url);
   let data=await res.json();
+
   document.getElementById("weather").innerText=
-    `Temp: ${data.current_weather.temperature}°C | Wind: ${data.current_weather.windspeed} km/h`;
+  `Temp: ${data.current_weather.temperature}°C`;
 });
 
-// ================= CHATBOT =================
+/* ================= CHATBOT ================= */
 function chat(){
   let m=document.getElementById("msg").value.toLowerCase();
-  let r="Ask about crops, pests, soil, fertilizer.";
+  let r="Ask farming questions.";
 
-  if(m.includes("pest")) r="Use neem oil + garlic spray.";
-  if(m.includes("fertilizer")) r="Use compost, cow dung, vermicompost.";
-  if(m.includes("crop")) r="Tell me soil + season for best crop suggestion.";
+  if(m.includes("pest")) r="Use neem oil spray.";
+  if(m.includes("fertilizer")) r="Use compost & organic manure.";
 
-  document.getElementById("reply").innerText=r;
+  document.getElementById("chatBox").innerHTML +=
+  `<p><b>You:</b> ${m}</p><p><b>AI:</b> ${r}</p>`;
 }
 
-// ================= CROP ENGINE =================
+/* ================= CROP ================= */
 function crop(){
-  let soil=document.getElementById("soil").value.toLowerCase();
-  let season=document.getElementById("season").value.toLowerCase();
-  let water=document.getElementById("water").value.toLowerCase();
+  let soil=document.getElementById("soil").value;
+  let season=document.getElementById("season").value;
+  let water=document.getElementById("water").value;
 
   let crops=[];
+  if(soil.includes("black")) crops.push("Cotton");
+  if(season==="summer") crops.push("Maize");
+  if(water==="low") crops.push("Millets");
 
-  if(soil.includes("black")) crops.push("Cotton","Soybean");
-  if(season==="summer") crops.push("Groundnut","Maize");
-  if(water==="low") crops.push("Millets","Bajra");
-
-  document.getElementById("cropOut").innerText=
-    "Recommended: "+[...new Set(crops)].join(", ");
+  document.getElementById("cropOut").innerText=crops.join(", ");
 }
 
-// ================= DISEASE AI =================
-function disease(){
-  let plant=document.getElementById("plant").value.toLowerCase();
+/* ================= CHARTS ================= */
 
-  let diseases=[
-    "Leaf Blight",
-    "Powdery Mildew",
-    "Rust Disease",
-    "Healthy Plant"
-  ];
+// Farming Analytics
+new Chart(document.getElementById("analyticsChart"), {
+  type:"bar",
+  data:{
+    labels:["Rice","Wheat","Maize","Millets"],
+    datasets:[{
+      label:"Yield (tons)",
+      data:[30,25,20,35],
+      backgroundColor:"#2ecc71"
+    }]
+  }
+});
 
-  let result=diseases[Math.floor(Math.random()*diseases.length)];
+// Price Chart
+new Chart(document.getElementById("priceChart"), {
+  type:"line",
+  data:{
+    labels:["Jan","Feb","Mar","Apr","May"],
+    datasets:[{
+      label:"Tomato Price",
+      data:[20,25,30,40,35],
+      borderColor:"#2ecc71",
+      fill:false
+    }]
+  }
+});
 
-  let treatment=
-    result==="Healthy Plant"
-    ?"No treatment needed"
-    :"Neem oil spray + remove infected leaves";
+// Weather Chart
+new Chart(document.getElementById("weatherChart"), {
+  type:"line",
+  data:{
+    labels:["Mon","Tue","Wed","Thu","Fri"],
+    datasets:[{
+      label:"Temperature",
+      data:[30,32,31,33,29],
+      borderColor:"#00ff88",
+      fill:false
+    }]
+  }
+});
 
-  document.getElementById("diseaseOut").innerText=
-    result+" → "+treatment;
-}
-
-// ================= VOICE AI =================
-function startVoice(){
-  let SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;
-  let rec=new SpeechRecognition();
-  rec.lang="en-IN";
-  rec.start();
-
-  rec.onresult=function(e){
-    let text=e.results[0][0].transcript;
-    alert("You said: "+text);
-
-    if(text.includes("weather")) chatSpeak("Checking weather now");
-    else if(text.includes("pest")) chatSpeak("Use neem oil for pests");
-    else chatSpeak("Ask about crops or soil");
-  };
-}
-
-function chatSpeak(t){
-  let s=new SpeechSynthesisUtterance(t);
-  speechSynthesis.speak(s);
-}
-
-// ================= SEARCH =================
-function search(){
-  let val=document.getElementById("search").value.toLowerCase();
-  document.querySelectorAll(".card, section").forEach(el=>{
-    el.style.display=el.innerText.toLowerCase().includes(val)?"block":"none";
-  });
-}
-
-// ================= LANGUAGE =================
-function lang(l){
-  if(l==="hi") document.body.style.background="#0d2b14";
-  if(l==="te") document.body.style.background="#123";
-}
 </script>
 
 </body>
