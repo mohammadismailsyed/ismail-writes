@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AgroAI - Smart Farming SaaS Platform</title>
+<title>AgroAI - Smart Farming Platform</title>
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
@@ -17,12 +18,12 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:system-ui, Arial;
+    font-family:system-ui;
     scroll-behavior:smooth;
 }
 
 body{
-    background:linear-gradient(to bottom, #0b1f14, #06130d);
+    background:linear-gradient(to bottom,#0b1f14,#06130d);
     color:#eaf7ee;
 }
 
@@ -35,14 +36,12 @@ body{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    background:rgba(0,0,0,0.4);
+    background:rgba(0,0,0,0.45);
     backdrop-filter:blur(10px);
     z-index:1000;
 }
 
-.navbar h2{
-    color:#7dffb2;
-}
+.navbar h2{ color:#7dffb2; }
 
 .navbar input{
     padding:8px;
@@ -57,21 +56,18 @@ body{
     border-radius:8px;
     background:var(--primary);
     color:white;
-    cursor:pointer;
 }
 
 /* HERO */
 .hero{
     height:100vh;
     display:flex;
-    flex-direction:column;
-    justify-content:center;
     align-items:center;
+    justify-content:center;
     text-align:center;
     padding:0 10%;
     background:url("https://images.unsplash.com/photo-1500595046743-cd271d694d30?auto=format&fit=crop&w=1600&q=60");
     background-size:cover;
-    background-position:center;
     position:relative;
 }
 
@@ -87,14 +83,9 @@ body{
     z-index:2;
 }
 
-.hero h1{
-    font-size:3rem;
-}
+.hero h1{ font-size:3rem; }
 
-.hero p{
-    margin-top:10px;
-    color:#cfe9d6;
-}
+.hero p{ color:#cfe9d6; margin-top:10px; }
 
 .btn{
     margin-top:15px;
@@ -103,25 +94,37 @@ body{
     border-radius:8px;
     background:var(--primary);
     color:white;
-    cursor:pointer;
 }
 
-/* SECTIONS */
+/* SECTION SYSTEM (IMPORTANT UPGRADE) */
 section{
-    padding:90px 10%;
+    padding:80px 10%;
 }
 
-.title{
-    font-size:1.8rem;
+.section-title{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
     margin-bottom:25px;
-    color:#bfffd6;
 }
 
-/* GRID */
+.section-title h2{
+    font-size:1.6rem;
+}
+
+.badge{
+    background:rgba(46,204,113,0.15);
+    color:#7dffb2;
+    padding:4px 10px;
+    border-radius:20px;
+    font-size:12px;
+}
+
+/* CARDS */
 .grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:18px;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:16px;
 }
 
 .card{
@@ -129,19 +132,29 @@ section{
     padding:16px;
     border-radius:12px;
     border:1px solid rgba(255,255,255,0.06);
+    transition:0.25s;
 }
 
-/* CHAT */
-.chatbox{
-    background:var(--card);
-    padding:15px;
+.card:hover{
+    transform:translateY(-5px);
+    border-color:rgba(46,204,113,0.4);
+}
+
+/* SPECIAL BOX */
+.box{
+    background:rgba(255,255,255,0.04);
+    padding:18px;
     border-radius:12px;
+    border:1px solid rgba(255,255,255,0.06);
 }
 
-.chatlog{
-    height:180px;
-    overflow:auto;
-    margin-bottom:10px;
+/* INPUT */
+input, select{
+    padding:10px;
+    border-radius:8px;
+    border:none;
+    width:100%;
+    margin-top:8px;
 }
 
 /* FOOTER */
@@ -158,10 +171,9 @@ footer{
 
 <!-- NAV -->
 <div class="navbar">
-    <h2>🌿 AgroAI SaaS</h2>
-
+    <h2>🌿 AgroAI</h2>
     <div>
-        <input id="searchInput" placeholder="Search...">
+        <input id="searchInput" placeholder="Search system...">
         <button onclick="searchSection()">Search</button>
     </div>
 </div>
@@ -169,38 +181,40 @@ footer{
 <!-- HERO -->
 <div class="hero">
 <div class="hero-content">
-    <h1>AI-Powered Smart Farming Platform</h1>
-    <p>Plan • Analyze • Grow • Sell — All in one system</p>
-    <button class="btn" onclick="scrollToSection('ai')">Start with AI</button>
+    <h1>Smart Organic Farming Platform</h1>
+    <p>AI • Weather • Soil • Market Intelligence</p>
+    <button class="btn" onclick="scrollToSection('ai')">Start</button>
 </div>
 </div>
 
-<!-- 1. AI ASSISTANT -->
+<!-- ================= INTELLIGENCE LAYER ================= -->
+
 <section id="ai">
-<h2 class="title">🤖 AI Farming Assistant</h2>
+<div class="section-title">
+<h2>🤖 AI Farming Intelligence</h2>
+<span class="badge">Core AI System</span>
+</div>
 
-<div class="chatbox">
-<div class="chatlog" id="chatlog"></div>
+<div class="box">
 <input id="msg" placeholder="Ask farming question...">
-<button class="btn" onclick="sendMsg()">Send</button>
+<button class="btn" onclick="sendMsg()">Ask AI</button>
+<div id="chatlog"></div>
 </div>
 </section>
 
-<!-- 2. CROP RECOMMENDATION -->
 <section id="crop">
-<h2 class="title">🧠 Crop Recommendation System</h2>
+<div class="section-title">
+<h2>🧠 Crop Recommendation Engine</h2>
+<span class="badge">Decision System</span>
+</div>
 
-<div class="card">
+<div class="box">
 <select id="soil">
-<option>Clay</option>
-<option>Sandy</option>
-<option>Loamy</option>
+<option>Clay</option><option>Sandy</option><option>Loamy</option>
 </select>
 
 <select id="season">
-<option>Summer</option>
-<option>Rainy</option>
-<option>Winter</option>
+<option>Summer</option><option>Rainy</option><option>Winter</option>
 </select>
 
 <button class="btn" onclick="recommendCrop()">Get Recommendation</button>
@@ -208,39 +222,64 @@ footer{
 </div>
 </section>
 
-<!-- 3. WEATHER -->
-<section id="weather">
-<h2 class="title">🌦️ Weather Intelligence</h2>
-
-<div class="card">
-<p>🌡️ Temp: 28°C</p>
-<p>🌧️ Rain Chance: 40%</p>
-<p>💨 Wind: Moderate</p>
-<p>⚠️ Advice: Suitable for irrigation today</p>
-</div>
-</section>
-
-<!-- 4. SOIL ANALYZER -->
 <section id="soil">
-<h2 class="title">🧪 Soil Health Analyzer</h2>
+<div class="section-title">
+<h2>🧪 Soil Intelligence System</h2>
+<span class="badge">Analysis Layer</span>
+</div>
 
-<div class="card">
-<input id="ph" placeholder="pH level">
+<div class="box">
+<input id="ph" placeholder="Soil pH">
 <input id="moisture" placeholder="Moisture %">
 <button class="btn" onclick="analyzeSoil()">Analyze</button>
 <p id="soilResult"></p>
 </div>
 </section>
 
-<!-- 5. MARKET -->
-<section id="market">
-<h2 class="title">📊 Market Intelligence</h2>
-<canvas id="chart"></canvas>
+<!-- ================= ENVIRONMENT LAYER ================= -->
+
+<section id="weather">
+<div class="section-title">
+<h2>🌦️ Weather Intelligence</h2>
+<span class="badge">Environmental Data</span>
+</div>
+
+<div class="box">
+<p>Temp: 28°C</p>
+<p>Rain Chance: 40%</p>
+<p>Advice: Suitable for irrigation</p>
+</div>
 </section>
 
-<!-- 6. MARKETPLACE -->
+<section id="alerts">
+<div class="section-title">
+<h2>🔔 Smart Alerts</h2>
+<span class="badge">Risk System</span>
+</div>
+
+<div class="box">
+No alerts — conditions stable 🌿
+</div>
+</section>
+
+<!-- ================= BUSINESS LAYER ================= -->
+
+<section id="market">
+<div class="section-title">
+<h2>📊 Market Intelligence</h2>
+<span class="badge">Price System</span>
+</div>
+
+<div class="box">
+<canvas id="chart"></canvas>
+</div>
+</section>
+
 <section id="shop">
-<h2 class="title">🛒 Organic Marketplace</h2>
+<div class="section-title">
+<h2>🛒 Organic Marketplace</h2>
+<span class="badge">Commerce</span>
+</div>
 
 <div class="grid">
 <div class="card">Organic Rice - ₹60/kg</div>
@@ -249,107 +288,97 @@ footer{
 </div>
 </section>
 
-<!-- 7. DASHBOARD -->
+<!-- ================= MANAGEMENT LAYER ================= -->
+
 <section id="dashboard">
-<h2 class="title">📈 Farmer Dashboard</h2>
+<div class="section-title">
+<h2>📈 Farmer Dashboard</h2>
+<span class="badge">Analytics</span>
+</div>
 
 <div class="grid">
-<div class="card">Yield Tracking System</div>
+<div class="card">Yield Tracking</div>
 <div class="card">Profit Analytics</div>
-<div class="card">Crop History Records</div>
+<div class="card">Crop History</div>
 </div>
 </section>
 
-<!-- 8. ALERTS -->
-<section id="alerts">
-<h2 class="title">🔔 Smart Alerts</h2>
-
-<div class="card">
-⚠️ No alerts right now — Conditions stable
-</div>
-</section>
-
-<!-- 9. COMMUNITY -->
 <section id="community">
-<h2 class="title">👨‍🌾 Farmer Community</h2>
+<div class="section-title">
+<h2>👨‍🌾 Farmer Community</h2>
+<span class="badge">Network</span>
+</div>
 
-<div class="card">
-Ask questions, share knowledge, and grow together 🌱
+<div class="box">
+Share knowledge, ask questions, and grow together 🌱
 </div>
 </section>
 
 <footer>
-© 2026 AgroAI SaaS Platform
+© 2026 AgroAI Platform
 </footer>
 
 <script>
 
-/* NAV SCROLL */
-function scrollToSection(id){
-    document.getElementById(id).scrollIntoView({behavior:"smooth"});
-}
-
 /* SEARCH */
 function searchSection(){
-    let v=document.getElementById("searchInput").value.toLowerCase();
-    document.querySelectorAll("section").forEach(s=>{
-        if(s.innerText.toLowerCase().includes(v)){
-            s.scrollIntoView({behavior:"smooth"});
-        }
-    });
+let v=document.getElementById("searchInput").value.toLowerCase();
+document.querySelectorAll("section").forEach(s=>{
+if(s.innerText.toLowerCase().includes(v)){
+s.scrollIntoView({behavior:"smooth"});
+}
+});
 }
 
-/* AI CHAT */
+/* AI */
 function sendMsg(){
-    let msg=document.getElementById("msg").value;
-    let chat=document.getElementById("chatlog");
+let msg=document.getElementById("msg").value;
+let chat=document.getElementById("chatlog");
 
-    chat.innerHTML+=`<div><b>You:</b> ${msg}</div>`;
+chat.innerHTML+=`<div><b>You:</b> ${msg}</div>`;
 
-    let reply="Use organic compost and crop rotation for best yield.";
+let reply="Use organic compost + crop rotation.";
 
-    if(msg.includes("rice")) reply="Rice needs high water and clay soil.";
-    if(msg.includes("pest")) reply="Use neem oil bio pesticides.";
+if(msg.includes("rice")) reply="Rice needs clay soil + water.";
+if(msg.includes("pest")) reply="Use neem oil bio pesticide.";
 
-    chat.innerHTML+=`<div><b>AI:</b> ${reply}</div>`;
+chat.innerHTML+=`<div><b>AI:</b> ${reply}</div>`;
 }
 
 /* CROP */
 function recommendCrop(){
-    let soil=document.getElementById("soil").value;
-    let season=document.getElementById("season").value;
+let soil=document.getElementById("soil").value;
+let season=document.getElementById("season").value;
 
-    let res="Wheat, Vegetables";
+let res="Wheat";
 
-    if(soil==="Clay" && season==="Rainy") res="Rice, Sugarcane";
-    if(soil==="Sandy") res="Groundnut, Watermelon";
+if(soil==="Clay"&&season==="Rainy") res="Rice";
+if(soil==="Sandy") res="Groundnut";
 
-    document.getElementById("cropResult").innerText="Best Crops: "+res;
+document.getElementById("cropResult").innerText=res;
 }
 
 /* SOIL */
 function analyzeSoil(){
-    let ph=parseFloat(document.getElementById("ph").value);
-    let m=parseFloat(document.getElementById("moisture").value);
+let ph=document.getElementById("ph").value;
+let m=document.getElementById("moisture").value;
 
-    let res="Soil is healthy";
+let res="Good soil";
 
-    if(ph<5.5) res="Add lime to reduce acidity";
-    if(m<30) res="Increase irrigation";
+if(ph<5.5) res="Add lime";
+if(m<30) res="Increase water";
 
-    document.getElementById("soilResult").innerText=res;
+document.getElementById("soilResult").innerText=res;
 }
 
 /* CHART */
 new Chart(document.getElementById("chart"),{
 type:"line",
 data:{
-labels:["Rice","Wheat","Corn","Tomato","Potato"],
-datasets:[{data:[30,28,35,40,25]}]
+labels:["Rice","Wheat","Corn","Tomato"],
+datasets:[{data:[30,28,35,40]}]
 },
-options:{
-plugins:{legend:{display:false}}
-}
+options:{plugins:{legend:{display:false}}}
 });
 
 </script>
