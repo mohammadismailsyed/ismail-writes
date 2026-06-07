@@ -2,111 +2,52 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<title>AI Farming Platform</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AgriSmart Startup OS</title>
 
 <style>
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    overflow: hidden;
-    color: white;
+  margin:0;
+  font-family: Arial;
+  background:#081b0f;
+  color:white;
+  overflow-x:hidden;
 }
 
-/* 🌄 BACKGROUND */
-#bg {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
+canvas {
+  position:fixed;
+  top:0;
+  left:0;
+  z-index:-1;
 }
 
-/* LAYOUT */
-.container {
-    display: flex;
-    height: 100vh;
+header {
+  padding:20px;
+  text-align:center;
+  background:rgba(0,0,0,0.4);
 }
 
-/* SIDEBAR */
-.sidebar {
-    width: 220px;
-    background: rgba(0,0,0,0.65);
-    padding: 15px;
+h1 { margin:0; }
+
+section {
+  margin:15px;
+  padding:15px;
+  background:rgba(255,255,255,0.05);
+  border-radius:12px;
 }
 
-.sidebar h2 {
-    color: #22c55e;
-}
-
-.sidebar button {
-    width: 100%;
-    margin: 6px 0;
-    padding: 10px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    background: rgba(255,255,255,0.1);
-    color: white;
-}
-
-.sidebar button:hover {
-    background: #22c55e;
-    color: black;
-}
-
-/* MAIN */
-.main {
-    flex: 1;
-    padding: 15px;
-    overflow-y: auto;
-}
-
-.topbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-input {
-    width: 55%;
-    padding: 10px;
-    border-radius: 8px;
-    border: none;
-}
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 12px;
+input, button, select {
+  padding:10px;
+  margin:5px;
+  border-radius:8px;
+  border:none;
 }
 
 .card {
-    background: rgba(0,0,0,0.55);
-    padding: 12px;
-    border-radius: 10px;
-}
-
-/* CHAT */
-.chat {
-    height: 180px;
-    overflow-y: auto;
-    background: rgba(0,0,0,0.6);
-    padding: 8px;
-    border-radius: 8px;
-}
-
-.user { color: #38bdf8; }
-.bot { color: #22c55e; }
-
-button.action {
-    margin-top: 6px;
-    padding: 8px;
-    border: none;
-    border-radius: 6px;
-    background: #22c55e;
-    color: black;
-    font-weight: bold;
+  background:rgba(0,0,0,0.3);
+  padding:10px;
+  margin:5px 0;
+  border-radius:10px;
 }
 </style>
 </head>
@@ -115,284 +56,200 @@ button.action {
 
 <canvas id="bg"></canvas>
 
-<div class="container">
+<header>
+  <h1>🌱 AI Farming Platform (All-in-One)</h1>
 
-    <!-- SIDEBAR -->
-    <div class="sidebar">
-        <h2 id="title">🌱 AgriSmart</h2>
+  <input id="search" placeholder="Search farming..." oninput="search()">
 
-        <button onclick="setLang('en')">English</button>
-        <button onclick="setLang('hi')">हिंदी</button>
+  <button onclick="startVoice()">🎤 Voice</button>
 
-        <hr>
+  <select onchange="lang(this.value)">
+    <option value="en">English</option>
+    <option value="hi">Hindi</option>
+    <option value="te">Telugu</option>
+  </select>
+</header>
 
-        <button onclick="show('dashboard')">Dashboard</button>
-        <button onclick="show('weather')">Weather</button>
-        <button onclick="show('market')">Market</button>
-        <button onclick="show('ai')">AI</button>
-    </div>
+<!-- WEATHER -->
+<section>
+<h2>🌤 Weather</h2>
+<p id="weather">Loading...</p>
+</section>
 
-    <!-- MAIN -->
-    <div class="main">
+<!-- CHATBOT -->
+<section>
+<h2>🤖 AI Farming Chatbot</h2>
+<input id="msg" placeholder="Ask farming question">
+<button onclick="chat()">Ask</button>
+<p id="reply"></p>
+</section>
 
-        <div class="topbar">
-            <h3 id="subtitle">Startup Agri Dashboard</h3>
+<!-- CROP -->
+<section>
+<h2>🌾 Crop Recommendation</h2>
+<input id="soil" placeholder="soil type (black/red/alluvial)">
+<input id="season" placeholder="season (summer/winter/rainy)">
+<input id="water" placeholder="water (high/low)">
+<button onclick="crop()">Get Crops</button>
+<p id="cropOut"></p>
+</section>
 
-            <input id="search" placeholder="Search..." onkeyup="globalSearch()">
+<!-- DISEASE -->
+<section>
+<h2>🦠 Disease Checker (AI Simulated)</h2>
+<input id="plant" placeholder="plant name (tomato/rice)">
+<button onclick="disease()">Check</button>
+<p id="diseaseOut"></p>
+</section>
 
-            <button class="action" onclick="startVoice()">🎤</button>
-        </div>
+<!-- MARKET -->
+<section>
+<h2>💰 Market Prices (India Avg)</h2>
+<div class="card">Tomato: ₹20 - ₹45</div>
+<div class="card">Rice: ₹40 - ₹90</div>
+<div class="card">Wheat: ₹25 - ₹55</div>
+<div class="card">Millets: ₹35 - ₹80</div>
+</section>
 
-        <!-- DASHBOARD -->
-        <div id="dashboard">
-            <div class="grid">
-                <div class="card">🌾 Wheat Health: 82%</div>
-                <div class="card">🌱 Soil pH: 6.8</div>
-                <div class="card">💧 Irrigation: Efficient</div>
-            </div>
-        </div>
-
-        <!-- WEATHER -->
-        <div id="weather" style="display:none;">
-            <div class="card">
-                <h3>🌦️ Weather</h3>
-                <button class="action" onclick="getWeather()">Load</button>
-                <p id="w"></p>
-            </div>
-        </div>
-
-        <!-- MARKET -->
-        <div id="market" style="display:none;">
-            <div class="card">
-                <h3>📡 Market Prices</h3>
-                <button class="action" onclick="loadMarket()">Refresh</button>
-                <p id="status"></p>
-            </div>
-
-            <div class="grid" id="marketGrid"></div>
-        </div>
-
-        <!-- AI -->
-        <div id="ai" style="display:none;">
-            <div class="card">
-                <h3>🤖 Agri AI</h3>
-                <div class="chat" id="chat"></div>
-                <input id="msg" placeholder="Ask question...">
-                <button class="action" onclick="send()">Send</button>
-            </div>
-        </div>
-
-    </div>
-</div>
+<!-- GUIDE -->
+<section>
+<h2>🌾 Organic Farming Guide</h2>
+<div class="card">Soil testing → Compost → Natural fertilizers</div>
+<div class="card">Avoid chemicals → Use neem spray</div>
+<div class="card">Drip irrigation for water saving</div>
+<div class="card">Crop rotation improves yield</div>
+</section>
 
 <script>
+// ================= BACKGROUND =================
+const canvas = document.getElementById("bg");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-/* =========================
-   🌍 LANGUAGE SYSTEM
-========================= */
-
-let lang = "en";
-
-const dict = {
-    en: {
-        title: "🌱 AgriSmart",
-        subtitle: "Startup Agri Dashboard"
-    },
-    hi: {
-        title: "🌱 कृषि स्मार्ट",
-        subtitle: "स्टार्टअप कृषि डैशबोर्ड"
-    }
-};
-
-function setLang(l){
-    lang = l;
-    document.getElementById("title").innerText = dict[l].title;
-    document.getElementById("subtitle").innerText = dict[l].subtitle;
+let particles = [];
+for(let i=0;i<100;i++){
+  particles.push({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
+    r:Math.random()*3,
+    dx:(Math.random()-0.5),
+    dy:(Math.random()-0.5)
+  });
 }
 
-/* =========================
-   PAGE SWITCH
-========================= */
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles.forEach(p=>{
+    p.x+=p.dx;
+    p.y+=p.dy;
 
-function show(id){
-    document.querySelectorAll('.main > div').forEach(d=>d.style.display='none');
-    document.getElementById(id).style.display='block';
+    if(p.x<0||p.x>canvas.width) p.dx*=-1;
+    if(p.y<0||p.y>canvas.height) p.dy*=-1;
+
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle="rgba(0,255,100,0.5)";
+    ctx.fill();
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+
+// ================= WEATHER =================
+navigator.geolocation.getCurrentPosition(async pos=>{
+  let url=`https://api.open-meteo.com/v1/forecast?latitude=${pos.coords.latitude}&longitude=${pos.coords.longitude}&current_weather=true`;
+  let res=await fetch(url);
+  let data=await res.json();
+  document.getElementById("weather").innerText=
+    `Temp: ${data.current_weather.temperature}°C | Wind: ${data.current_weather.windspeed} km/h`;
+});
+
+// ================= CHATBOT =================
+function chat(){
+  let m=document.getElementById("msg").value.toLowerCase();
+  let r="Ask about crops, pests, soil, fertilizer.";
+
+  if(m.includes("pest")) r="Use neem oil + garlic spray.";
+  if(m.includes("fertilizer")) r="Use compost, cow dung, vermicompost.";
+  if(m.includes("crop")) r="Tell me soil + season for best crop suggestion.";
+
+  document.getElementById("reply").innerText=r;
 }
 
-/* =========================
-   🔎 GLOBAL SEARCH
-========================= */
+// ================= CROP ENGINE =================
+function crop(){
+  let soil=document.getElementById("soil").value.toLowerCase();
+  let season=document.getElementById("season").value.toLowerCase();
+  let water=document.getElementById("water").value.toLowerCase();
 
-function globalSearch(){
-    let q = document.getElementById("search").value.toLowerCase();
+  let crops=[];
 
-    document.querySelectorAll(".card").forEach(c=>{
-        c.style.display = c.innerText.toLowerCase().includes(q)
-        ? "block":"none";
-    });
+  if(soil.includes("black")) crops.push("Cotton","Soybean");
+  if(season==="summer") crops.push("Groundnut","Maize");
+  if(water==="low") crops.push("Millets","Bajra");
+
+  document.getElementById("cropOut").innerText=
+    "Recommended: "+[...new Set(crops)].join(", ");
 }
 
-/* =========================
-   🎤 VOICE SEARCH
-========================= */
+// ================= DISEASE AI =================
+function disease(){
+  let plant=document.getElementById("plant").value.toLowerCase();
 
+  let diseases=[
+    "Leaf Blight",
+    "Powdery Mildew",
+    "Rust Disease",
+    "Healthy Plant"
+  ];
+
+  let result=diseases[Math.floor(Math.random()*diseases.length)];
+
+  let treatment=
+    result==="Healthy Plant"
+    ?"No treatment needed"
+    :"Neem oil spray + remove infected leaves";
+
+  document.getElementById("diseaseOut").innerText=
+    result+" → "+treatment;
+}
+
+// ================= VOICE AI =================
 function startVoice(){
-    let SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  let SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;
+  let rec=new SpeechRecognition();
+  rec.lang="en-IN";
+  rec.start();
 
-    if(!SpeechRecognition){
-        alert("Voice not supported");
-        return;
-    }
+  rec.onresult=function(e){
+    let text=e.results[0][0].transcript;
+    alert("You said: "+text);
 
-    let rec = new SpeechRecognition();
-    rec.lang = lang === "hi" ? "hi-IN" : "en-IN";
-    rec.start();
-
-    rec.onresult = (e)=>{
-        let text = e.results[0][0].transcript;
-        document.getElementById("search").value = text;
-        globalSearch();
-    };
+    if(text.includes("weather")) chatSpeak("Checking weather now");
+    else if(text.includes("pest")) chatSpeak("Use neem oil for pests");
+    else chatSpeak("Ask about crops or soil");
+  };
 }
 
-/* =========================
-   🌦️ WEATHER
-========================= */
-
-function getWeather(){
-    navigator.geolocation.getCurrentPosition(async pos=>{
-        let url = `https://api.open-meteo.com/v1/forecast?latitude=${pos.coords.latitude}&longitude=${pos.coords.longitude}&current_weather=true`;
-        let r = await fetch(url);
-        let d = await r.json();
-
-        document.getElementById("w").innerText =
-        `Temp: ${d.current_weather.temperature}°C | Wind: ${d.current_weather.windspeed} km/h`;
-    });
+function chatSpeak(t){
+  let s=new SpeechSynthesisUtterance(t);
+  speechSynthesis.speak(s);
 }
 
-/* =========================
-   📡 MARKET API + FALLBACK
-========================= */
-
-const API = "https://api.example.com/crops";
-
-const fallback = [
-    {crop:"Wheat",price:2300,unit:"Quintal"},
-    {crop:"Rice",price:3100,unit:"Quintal"},
-    {crop:"Maize",price:1800,unit:"Quintal"}
-];
-
-async function loadMarket(){
-    let status = document.getElementById("status");
-    let grid = document.getElementById("marketGrid");
-
-    status.innerText = "Loading market...";
-
-    try{
-        let res = await fetch(API);
-        if(!res.ok) throw new Error();
-
-        let data = await res.json();
-        renderMarket(data);
-
-        status.innerText = "Live data loaded";
-
-    }catch(e){
-        status.innerText = "Fallback data loaded";
-        renderMarket(fallback);
-    }
+// ================= SEARCH =================
+function search(){
+  let val=document.getElementById("search").value.toLowerCase();
+  document.querySelectorAll(".card, section").forEach(el=>{
+    el.style.display=el.innerText.toLowerCase().includes(val)?"block":"none";
+  });
 }
 
-function renderMarket(data){
-    let grid = document.getElementById("marketGrid");
-    grid.innerHTML = "";
-
-    data.forEach(i=>{
-        grid.innerHTML += `
-        <div class="card">
-            <h3>🌾 ${i.crop}</h3>
-            <p>₹${i.price} / ${i.unit}</p>
-        </div>`;
-    });
+// ================= LANGUAGE =================
+function lang(l){
+  if(l==="hi") document.body.style.background="#0d2b14";
+  if(l==="te") document.body.style.background="#123";
 }
-
-/* =========================
-   🤖 AI CHAT
-========================= */
-
-function send(){
-    let m = document.getElementById("msg");
-    if(!m.value) return;
-
-    chat.innerHTML += `<div class='user'>You: ${m.value}</div>`;
-
-    let r =
-    m.value.includes("soil") ? "Keep pH 6-7.5"
-    : m.value.includes("pest") ? "Use neem oil"
-    : "Ask about crops, soil, market";
-
-    chat.innerHTML += `<div class='bot'>AI: ${r}</div>`;
-    m.value="";
-}
-
-/* =========================
-   🌄 REALISTIC FARM ANIMATION
-========================= */
-
-const c = document.getElementById("bg");
-const x = c.getContext("2d");
-
-c.width = window.innerWidth;
-c.height = window.innerHeight;
-
-let clouds = [{x:100,y:80},{x:300,y:120},{x:600,y:90}];
-let t = 0;
-
-function draw(){
-    x.clearRect(0,0,c.width,c.height);
-
-    let g = x.createLinearGradient(0,0,0,c.height);
-    g.addColorStop(0,"#0b3d91");
-    g.addColorStop(1,"#2e7d32");
-
-    x.fillStyle = g;
-    x.fillRect(0,0,c.width,c.height);
-
-    // sun
-    x.fillStyle="yellow";
-    x.beginPath();
-    x.arc(c.width-120,100,50,0,Math.PI*2);
-    x.fill();
-
-    // field waves
-    for(let i=0;i<c.width;i+=20){
-        let w = Math.sin((i+t)/50)*10;
-        x.fillStyle="#1b5e20";
-        x.fillRect(i,c.height-140+w,20,140);
-    }
-
-    // clouds
-    clouds.forEach(cl=>{
-        cl.x += 0.4;
-        if(cl.x>c.width+100) cl.x=-100;
-
-        x.fillStyle="rgba(255,255,255,0.7)";
-        x.beginPath();
-        x.arc(cl.x,cl.y,50,0,Math.PI*2);
-        x.fill();
-    });
-
-    t += 2;
-    requestAnimationFrame(draw);
-}
-
-draw();
-
-window.onresize=()=>{
-    c.width = window.innerWidth;
-    c.height = window.innerHeight;
-};
-
 </script>
 
 </body>
