@@ -4,8 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Organic Farming AI Platform</title>
-
-<!-- Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
@@ -14,12 +12,51 @@
     padding:0;
     box-sizing:border-box;
     font-family:Arial, sans-serif;
+    scroll-behavior:smooth;
 }
 
 body{
-    background:#0b1f14;
+    background:#071a12;
     color:white;
-    overflow-x:hidden;
+}
+
+/* NAVBAR */
+.navbar{
+    position:fixed;
+    top:0;
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 8%;
+    background:rgba(0,0,0,0.4);
+    backdrop-filter:blur(10px);
+    z-index:1000;
+}
+
+.navbar h2{
+    color:#7dffb2;
+}
+
+.search-box{
+    display:flex;
+    gap:10px;
+}
+
+.search-box input{
+    padding:8px;
+    border-radius:20px;
+    border:none;
+    width:200px;
+}
+
+.search-box button{
+    padding:8px 12px;
+    border:none;
+    border-radius:20px;
+    background:#2ecc71;
+    color:white;
+    cursor:pointer;
 }
 
 /* HERO */
@@ -38,34 +75,32 @@ body{
 
 .hero h1{
     font-size:3rem;
-    animation:fadeIn 2s ease-in;
 }
 
 .hero p{
     margin:15px;
-    font-size:1.2rem;
-    color:#c8ffd4;
+    color:#bfffd3;
 }
 
 .btn{
-    padding:12px 25px;
-    margin:10px;
+    padding:10px 20px;
+    margin:5px;
     border:none;
-    border-radius:30px;
-    cursor:pointer;
+    border-radius:25px;
     background:#2ecc71;
     color:white;
+    cursor:pointer;
     transition:0.3s;
 }
 
 .btn:hover{
-    transform:scale(1.1);
+    transform:scale(1.05);
     background:#27ae60;
 }
 
 /* SECTIONS */
 section{
-    padding:80px 10%;
+    padding:90px 10%;
 }
 
 .title{
@@ -75,15 +110,15 @@ section{
     color:#7dffb2;
 }
 
-/* ABOUT */
-.about{
+/* CARDS */
+.grid{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
     gap:20px;
 }
 
 .card{
-    background:rgba(255,255,255,0.05);
+    background:rgba(255,255,255,0.06);
     padding:20px;
     border-radius:15px;
     backdrop-filter:blur(10px);
@@ -91,53 +126,25 @@ section{
 }
 
 .card:hover{
-    transform:translateY(-10px);
+    transform:translateY(-8px);
 }
 
-/* CHATBOT */
+/* CHAT */
 .chatbox{
-    background:rgba(255,255,255,0.05);
+    background:rgba(255,255,255,0.06);
     padding:20px;
     border-radius:15px;
 }
 
 .chatlog{
-    height:200px;
+    height:180px;
     overflow-y:auto;
     margin-bottom:10px;
 }
 
-input{
-    width:80%;
-    padding:10px;
-    border:none;
-    border-radius:10px;
-}
-
-button{
-    padding:10px;
-    border:none;
-    background:#2ecc71;
-    color:white;
-    border-radius:10px;
-}
-
-/* CHART */
-canvas{
-    background:rgba(255,255,255,0.05);
-    padding:20px;
-    border-radius:15px;
-}
-
-/* COUNTERS */
-.counter{
-    display:flex;
-    justify-content:space-around;
-    text-align:center;
-}
-
-.counter div{
-    font-size:1.5rem;
+/* VOICE BUTTON */
+.voice{
+    margin-top:10px;
 }
 
 /* FOOTER */
@@ -147,126 +154,169 @@ footer{
     background:#06140d;
 }
 
-/* ANIMATION */
-@keyframes fadeIn{
-    from{opacity:0; transform:translateY(-20px);}
-    to{opacity:1; transform:translateY(0);}
+/* ADVANCED SECTION */
+.advanced{
+    background:linear-gradient(135deg,#0c2b1b,#071a12);
+    border-radius:20px;
+    padding:30px;
+}
+
+.badge{
+    display:inline-block;
+    padding:5px 10px;
+    border-radius:20px;
+    background:#2ecc71;
+    font-size:12px;
+    margin-bottom:10px;
 }
 </style>
 </head>
 
 <body>
 
+<!-- NAVBAR -->
+<div class="navbar">
+    <h2>🌿 Organic AI Farm</h2>
+
+    <div class="search-box">
+        <input id="searchInput" placeholder="Search section...">
+        <button onclick="searchSection()">Search</button>
+        <button onclick="startVoice()">🎤</button>
+    </div>
+</div>
+
 <!-- HERO -->
-<div class="hero">
-    <h1>Grow Naturally. Harvest Healthier.</h1>
-    <p>AI-powered Organic Farming Platform for a Sustainable Future</p>
-    <button class="btn">Explore Farming</button>
-    <button class="btn">Market Prices</button>
+<div class="hero" id="home">
+    <h1>Grow Naturally. Harvest Smarter.</h1>
+    <p>AI + Organic Farming Platform for Modern Agriculture</p>
+    <button class="btn" onclick="scrollToSection('about')">Explore</button>
+    <button class="btn" onclick="scrollToSection('advanced')">Advanced Techniques</button>
 </div>
 
 <!-- ABOUT -->
-<section>
+<section id="about">
 <h2 class="title">Why Organic Farming?</h2>
-<div class="about">
-    <div class="card">🌱 Chemical-free farming improves soil health.</div>
-    <div class="card">💧 Saves water and improves sustainability.</div>
-    <div class="card">🌍 Reduces pollution and carbon footprint.</div>
+<div class="grid">
+    <div class="card">🌱 Chemical-free farming improves soil health and biodiversity.</div>
+    <div class="card">💧 Reduces water pollution and improves retention.</div>
+    <div class="card">🌍 Supports long-term sustainable agriculture.</div>
 </div>
 </section>
 
-<!-- AI CHATBOT -->
-<section>
+<!-- CHATBOT -->
+<section id="ai">
 <h2 class="title">AI Farming Assistant</h2>
 <div class="chatbox">
     <div class="chatlog" id="chatlog"></div>
     <input id="msg" placeholder="Ask about crops, soil, fertilizers...">
     <button onclick="sendMsg()">Send</button>
+
+    <div class="voice">
+        <button class="btn" onclick="startVoice()">🎤 Speak to AI</button>
+    </div>
 </div>
 </section>
 
-<!-- MARKET -->
-<section>
-<h2 class="title">Crop Market Prices</h2>
-<canvas id="chart"></canvas>
-</section>
+<!-- ADVANCED TECHNIQUES -->
+<section id="advanced">
+<h2 class="title">🚀 Advanced Organic Farming Techniques</h2>
 
-<!-- COUNTERS -->
-<section>
-<h2 class="title">Sustainability Impact</h2>
-<div class="counter">
-    <div>
-        <div id="c1">0</div>
-        Farmers
-    </div>
-    <div>
-        <div id="c2">0</div>
-        Acres Saved
-    </div>
-    <div>
-        <div id="c3">0</div>
-        CO₂ Reduced
+<div class="advanced">
+    <span class="badge">Next-Gen Agriculture</span>
+
+    <div class="grid">
+        <div class="card">
+            🌿 <b>Precision Farming</b><br>
+            Uses AI + sensors to optimize water, fertilizer, and yield.
+        </div>
+
+        <div class="card">
+            🛰️ <b>Drone Monitoring</b><br>
+            Drones track crop health and detect diseases early.
+        </div>
+
+        <div class="card">
+            🌱 <b>Regenerative Farming</b><br>
+            Restores soil health using crop rotation and composting.
+        </div>
+
+        <div class="card">
+            💧 <b>Smart Irrigation</b><br>
+            Automated watering systems based on soil moisture data.
+        </div>
+
+        <div class="card">
+            🧪 <b>Bio-Fertilizers</b><br>
+            Microbial fertilizers that improve soil naturally.
+        </div>
+
+        <div class="card">
+            📊 <b>Data-Driven Farming</b><br>
+            Uses analytics to maximize yield and reduce waste.
+        </div>
     </div>
 </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-© 2026 Organic Farming AI | Built for Sustainability 🌿
+© 2026 Organic AI Farming Platform 🌿 | Built for Future Agriculture
 </footer>
 
 <script>
-// CHATBOT SIMPLE AI
+
+// SCROLL FUNCTION
+function scrollToSection(id){
+    document.getElementById(id).scrollIntoView({behavior:"smooth"});
+}
+
+// SEARCH FUNCTION
+function searchSection(){
+    let value = document.getElementById("searchInput").value.toLowerCase();
+    let sections = document.querySelectorAll("section");
+
+    sections.forEach(sec=>{
+        if(sec.innerText.toLowerCase().includes(value)){
+            sec.scrollIntoView({behavior:"smooth"});
+        }
+    });
+}
+
+// CHATBOT AI
 function sendMsg(){
     let msg = document.getElementById("msg").value;
     let chatlog = document.getElementById("chatlog");
 
-    chatlog.innerHTML += "<p><b>You:</b> " + msg + "</p>";
+    chatlog.innerHTML += `<p><b>You:</b> ${msg}</p>`;
 
-    let reply = "I recommend organic compost and crop rotation for better yield 🌱";
+    let reply = "Use compost, crop rotation, and organic manure for better yield 🌱";
 
     if(msg.toLowerCase().includes("rice")){
-        reply = "Rice grows best in clay soil with good water supply 🌾";
+        reply = "Rice grows best in clay soil with proper irrigation 🌾";
     }
     if(msg.toLowerCase().includes("soil")){
-        reply = "Use compost + cow dung manure for healthy soil 🌱";
+        reply = "Healthy soil = compost + vermicompost + zero chemicals 🌱";
     }
 
-    chatlog.innerHTML += "<p><b>AI:</b> " + reply + "</p>";
-
+    chatlog.innerHTML += `<p><b>AI:</b> ${reply}</p>`;
     document.getElementById("msg").value="";
     chatlog.scrollTop = chatlog.scrollHeight;
 }
 
-// CHART
-const ctx = document.getElementById('chart');
+// VOICE ASSISTANT
+function startVoice(){
+    let recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    recognition.lang = "en-US";
 
-new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: ['Rice', 'Wheat', 'Corn', 'Tomato', 'Potato'],
-        datasets: [{
-            label: 'Price (₹ per kg)',
-            data: [30, 28, 25, 40, 20],
-            borderWidth: 2
-        }]
-    }
-});
+    recognition.onresult = function(event){
+        let text = event.results[0][0].transcript;
+        document.getElementById("msg").value = text;
+        sendMsg();
+    };
 
-// COUNTERS ANIMATION
-function animate(id, end){
-    let el = document.getElementById(id);
-    let count = 0;
-    let interval = setInterval(()=>{
-        count++;
-        el.innerText = count;
-        if(count >= end) clearInterval(interval);
-    }, 20);
+    recognition.start();
 }
 
-animate("c1", 1200);
-animate("c2", 5400);
-animate("c3", 3200);
 </script>
 
 </body>
